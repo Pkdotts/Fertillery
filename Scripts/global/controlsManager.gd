@@ -8,64 +8,56 @@ const FASTTIME = 0.1
 
 func get_just_pressed_up() -> bool:
 	if Input.is_action_just_pressed("ui_up") \
-	or Input.is_action_just_pressed("ui_lstick_up") \
-	or Input.is_action_just_pressed("ui_rstick_up"):
+	or Input.is_action_just_pressed("ui_lstick_up"):
 		return true
 	else:
 		return false
 
 func get_just_pressed_down() -> bool:
 	if Input.is_action_just_pressed("ui_down") \
-	or Input.is_action_just_pressed("ui_lstick_down") \
-	or Input.is_action_just_pressed("ui_rstick_down"):
+	or Input.is_action_just_pressed("ui_lstick_down"):
 		return true
 	else:
 		return false
 
 func get_just_pressed_left() -> bool:
 	if Input.is_action_just_pressed("ui_left") \
-	or Input.is_action_just_pressed("ui_lstick_left") \
-	or Input.is_action_just_pressed("ui_rstick_left"):
+	or Input.is_action_just_pressed("ui_lstick_left"):
 		return true
 	else:
 		return false
 
 func get_just_pressed_right() -> bool:
 	if Input.is_action_just_pressed("ui_right") \
-	or Input.is_action_just_pressed("ui_lstick_right") \
-	or Input.is_action_just_pressed("ui_rstick_right"):
+	or Input.is_action_just_pressed("ui_lstick_right"):
 		return true
 	else:
 		return false
 
 func get_just_released_up() -> bool:
 	if Input.is_action_just_released("ui_up") \
-	or Input.is_action_just_released("ui_lstick_up") \
-	or Input.is_action_just_released("ui_rstick_up"):
+	or Input.is_action_just_released("ui_lstick_up"):
 		return true
 	else:
 		return false
 
 func get_just_released_down() -> bool:
 	if Input.is_action_just_released("ui_down") \
-	or Input.is_action_just_released("ui_lstick_down") \
-	or Input.is_action_just_released("ui_rstick_down"):
+	or Input.is_action_just_released("ui_lstick_down"):
 		return true
 	else:
 		return false
 
 func get_just_released_left() -> bool:
 	if Input.is_action_just_released("ui_left") \
-	or Input.is_action_just_released("ui_lstick_left") \
-	or Input.is_action_just_released("ui_rstick_left"):
+	or Input.is_action_just_released("ui_lstick_left"):
 		return true
 	else:
 		return false
 
 func get_just_released_right() -> bool:
 	if Input.is_action_just_released("ui_right") \
-	or Input.is_action_just_released("ui_lstick_right") \
-	or Input.is_action_just_released("ui_rstick_right"):
+	or Input.is_action_just_released("ui_lstick_right"):
 		return true
 	else:
 		return false
@@ -115,7 +107,6 @@ func get_controls_vector(discontinued = false) -> Vector2: #use discontinued for
 	#get the direction from all direction input types
 	inputVector = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	inputVector += Input.get_vector("ui_lstick_left", "ui_lstick_right", "ui_lstick_up", "ui_lstick_down")
-	inputVector += Input.get_vector("ui_rstick_left", "ui_rstick_right", "ui_rstick_up", "ui_rstick_down")
 	#reduce to unit vectors
 	inputVector = get_vector_sign(inputVector)
 	
