@@ -13,6 +13,13 @@ config_version=4
 config/name="GMTK GameJam"
 config/icon="res://icon.png"
 
+[autoload]
+
+AudioManager="*res://Scripts/global/audioManager.tscn"
+ControlsManager="*res://Scripts/global/controlsManager.tscn"
+Slowmo="*res://Scripts/global/Slowmo.tscn"
+Global="*res://Scripts/global/global.gd"
+
 [display]
 
 window/size/width=384
