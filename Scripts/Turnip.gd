@@ -6,7 +6,7 @@ enum States {IDLE, MOVING, HELD, THROWN}
 var state = States.IDLE
 
 func _ready():
-	set_size(size)
+	pass
 
 func _physics_process(delta):
 	match state:
@@ -41,5 +41,5 @@ func set_size(bigness):
 
 
 func _on_Hitbox_body_entered(body):
-	if body == global.player and global.player.state == global.player.States.DASHING:
+	if body == global.player and global.player.state == global.player.States.DASHING and !global.player.carrying:
 		set_state(States.HELD)

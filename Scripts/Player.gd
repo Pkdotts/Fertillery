@@ -3,7 +3,7 @@ extends KinematicBody2D
 enum States {MOVING, DASHING, PAUSED} 
 
 
-
+var moving = false
 var direction = Vector2.ZERO
 var inputVector = Vector2.ZERO
 var speed = 7000
@@ -12,12 +12,21 @@ var dash_speed = 12000
 var carrying = false
 var state = States.MOVING
 
+
+
 onready var CarryPosition = $CarryPosition
 onready var DashTimer = $DashTimer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	global.player = self
+	uiManager.create_reticle()
+	for i in global.trailPositions.size():
+		var randX = rand_range(-global.randomFollowerOffset, global.randomFollowerOffset)
+		var randY = rand_range(-global.randomFollowerOffset, global.randomFollowerOffset)
+		var randomOffset = Vector2(randX, randY)
+		global.trailPositions.push_front(position + randomOffset)
+		global.trailPositions.pop_back()
 
 
 func _input(event):
@@ -34,11 +43,30 @@ func _physics_process(delta):
 
 func move_state(delta):
 	controls()
-	move_and_slide(inputVector * speed * delta)
+	move(inputVector, speed, delta)
 
 func dash_state(delta):
 	controls()
-	move_and_slide(direction * dash_speed * delta)
+	move(direction, dash_speed, delta)
+
+func move(dir, spd, delta):
+	var oldPos = position
+	move_and_slide(dir * spd * delta)
+	
+	if position != oldPos:
+		moving = true
+		update_party_positions(oldPos, 1)
+
+func update_party_positions(oldpos, multiplier = 1):
+	var maxDist = round(max(abs(oldpos.x-self.position.x), abs(oldpos.y-self.position.y)) * multiplier)
+	for i in maxDist:
+		var randX = rand_range(-global.randomFollowerOffset, global.randomFollowerOffset)
+		var randY = rand_range(-global.randomFollowerOffset, global.randomFollowerOffset)
+		var randomOffset = Vector2(randX, randY)
+		global.trailPositions.push_front(lerp(oldpos, position.round(), (i+1)/maxDist) + randomOffset)
+		global.trailPositions.pop_back()
+
+
 
 func controls():
 	inputVector = controlsManager.get_controls_vector(false)
@@ -52,11 +80,12 @@ func start_dash():
 
 func start_carry():
 	carrying = true
-	uiManager.create_reticle()
 
 func stop_carry():
 	carrying = false
-	
+
+func throw_teenip(pos):
+	global.teenipsFollowing[0].throw(pos, 0.5)
 
 func _on_DashTimer_timeout():
 	if state == States.DASHING:

@@ -5,8 +5,19 @@ var winSize = 1
 var winDim = Vector2(384, 216)
 var player = null
 
+var randomFollowerOffset = 5
+var trailOffset = 10
+var trailSize = 255
+var trailPositions = []
+var teenipsFollowing = []
+
+func remove_teenip(idx = 0):
+	teenipsFollowing.remove(0)
+	for i in teenipsFollowing.size():
+		teenipsFollowing[i].idx = i + 1
 
 func _ready():
+	trailPositions.resize(trailSize)
 	increase_win_size(2)
 
 
