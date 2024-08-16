@@ -4,22 +4,32 @@
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 4.0
-height = 6.0
+radius = 9.0
+height = 14.0
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 2.98023e-08, -8 )
-scale = Vector2( 0.238281, 0.253906 )
+position = Vector2( 0, -19.9375 )
+scale = Vector2( 0.541016, 0.626953 )
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -4 )
+position = Vector2( 0, -10 )
 rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+
+[node name="CarryPosition" type="Position2D" parent="."]
+position = Vector2( 0, -46 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="DashTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]

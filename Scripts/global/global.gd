@@ -2,6 +2,9 @@ extends Node
 
 
 var winSize = 1
+var winDim = Vector2(384, 216)
+var player = null
+
 
 func _ready():
 	increase_win_size(2)
@@ -15,9 +18,9 @@ func increase_win_size(amount):
 	var newWinSize = winSize + amount
 
 	if newWinSize < 1:
-		newWinSize = int(OS.get_screen_size().x / 320)
+		newWinSize = int(OS.get_screen_size().x / winDim.x)
 
-	if OS.get_screen_size() < Vector2(320 * newWinSize, 180 * newWinSize):
+	if OS.get_screen_size() < Vector2(winDim.x * newWinSize, winDim.y * newWinSize):
 		newWinSize = 1
 	
 	set_win_size(newWinSize)
@@ -31,7 +34,7 @@ func set_win_size(newSizeNum, fullscreen = false):
 
 	if not fullscreen:
 		var oldSize = OS.window_size
-		var newSize = Vector2(320 * newSizeNum, 180 * newSizeNum)
+		var newSize = Vector2(winDim.x * newSizeNum, winDim.y * newSizeNum)
 		winSize = newSizeNum
 		if newSize != oldSize:
 			OS.window_borderless = false
