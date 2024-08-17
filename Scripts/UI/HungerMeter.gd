@@ -1,0 +1,15 @@
+extends Control
+
+onready var hungerBar = $ColorRect/HungerBar
+
+var initialSize = 0
+var initialPos = 0
+
+
+func _ready():
+	initialSize = hungerBar.rect_size.x
+	initialPos = hungerBar.rect_position.x
+
+func _process(_delta):
+	hungerBar.rect_size.x = round(initialSize - initialSize * global.hungerMeter/100)
+	hungerBar.rect_position.x = round(initialPos + initialSize * global.hungerMeter/100)

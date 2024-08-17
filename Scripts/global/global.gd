@@ -18,6 +18,7 @@ var maxDripCount = 10
 
 var turnipsEaten = 0
 var hungerMeter = 0
+var hungerSpeed = 3
 
 func increase_turnip_counter(num):
 	turnipsEaten += num
@@ -27,6 +28,12 @@ func decrease_hunger(amount):
 	hungerMeter -= amount
 	if hungerMeter < 0:
 		hungerMeter = 0
+
+func increase_hunger_speed(amount):
+	hungerSpeed += amount
+
+func set_hunger_speed(speed):
+	hungerSpeed = speed
 
 func remove_driplet(idx = 0):
 	dripletsFollowing.remove(0)
@@ -39,7 +46,7 @@ func _ready():
 
 func _physics_process(delta):
 	if hungerMeter < 100:
-		hungerMeter += delta * 2
+		hungerMeter += delta * hungerSpeed
 
 func _input(event):
 	if event.is_action_pressed("ui_winsize"):
