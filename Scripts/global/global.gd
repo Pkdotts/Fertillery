@@ -4,17 +4,20 @@ extends Node
 var winSize = 1
 var winDim = Vector2(384, 216)
 var player = null
+var currentCamera = null
 
 var randomFollowerOffset = 5
 var trailOffset = 10
 var trailSize = 255
 var trailPositions = []
-var teenipsFollowing = []
+var dripletsFollowing = []
 
-func remove_teenip(idx = 0):
-	teenipsFollowing.remove(0)
-	for i in teenipsFollowing.size():
-		teenipsFollowing[i].idx = i + 1
+
+
+func remove_driplet(idx = 0):
+	dripletsFollowing.remove(0)
+	for i in dripletsFollowing.size():
+		dripletsFollowing[i].idx = i + 1
 
 func _ready():
 	trailPositions.resize(trailSize)

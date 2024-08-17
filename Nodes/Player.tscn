@@ -8,6 +8,7 @@ radius = 9.0
 height = 14.0
 
 [node name="Player" type="KinematicBody2D"]
+collision_mask = 4097
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -30,6 +31,7 @@ position = Vector2( 0, -46 )
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.4
 one_shot = true
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]

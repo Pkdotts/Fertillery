@@ -40,10 +40,10 @@ func follow_state(delta):
 
 func throw(newPos, time):
 	animationPlayer.play("Idle")
-	global.remove_teenip(idx - 1)
+	global.remove_driplet(idx - 1)
 	set_state(States.THROWN)
 	tween.interpolate_property(self, "position", 
-		position, newPos, time)
+		global.player.position, newPos, time)
 	tween.interpolate_property(anchor, "position:y", 
 		anchor.position.y, throw_height, time/2,
 		Tween.TRANS_QUAD,Tween.EASE_OUT)
@@ -51,13 +51,22 @@ func throw(newPos, time):
 		throw_height, anchor.position.y, time/2,
 		Tween.TRANS_QUAD,Tween.EASE_IN, time/2)
 	tween.start()
-	tween.connect("tween_all_completed", self, "start_following", [], CONNECT_ONESHOT)
-	
+	tween.connect("tween_all_completed", self, "land", [], CONNECT_ONESHOT)
+	yield(get_tree().create_timer(time/3*2),"timeout")
+	$Anchor/Hitbox/CollisionShape2D.disabled = false
+
+func land():
+	start_following()
+	$Anchor/Hitbox/CollisionShape2D.disabled = true
+
+func die():
+	global.remove_driplet(idx)
+	queue_free()
 
 func set_state(newState):
 	state = newState
 
 func start_following():
-	global.teenipsFollowing.append(self)
-	idx = global.teenipsFollowing.size()
+	global.dripletsFollowing.append(self)
+	idx = global.dripletsFollowing.size()
 	set_state(States.FOLLOWING)

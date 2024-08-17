@@ -16,10 +16,12 @@ var shaking = false
 onready var anchor = get_node_or_null(anchor_path)
 
 func _ready():
+	global.currentCamera = self
 	offset = anchor_offset
 
 func _physics_process(_delta):
-	position = lerp(position, anchor.position, drag)
+	if anchor != null:
+		position = lerp(position, anchor.position, drag)
 
 
 func move_camera(position_x,position_y, time):

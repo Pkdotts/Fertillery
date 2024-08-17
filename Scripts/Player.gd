@@ -8,6 +8,7 @@ var direction = Vector2.ZERO
 var inputVector = Vector2.ZERO
 var speed = 7000
 var dash_speed = 12000
+var throwableDistance = 60
 
 var carrying = false
 var state = States.MOVING
@@ -46,7 +47,6 @@ func move_state(delta):
 	move(inputVector, speed, delta)
 
 func dash_state(delta):
-	controls()
 	move(direction, dash_speed, delta)
 
 func move(dir, spd, delta):
@@ -63,7 +63,7 @@ func update_party_positions(oldpos, multiplier = 1):
 		var randX = rand_range(-global.randomFollowerOffset, global.randomFollowerOffset)
 		var randY = rand_range(-global.randomFollowerOffset, global.randomFollowerOffset)
 		var randomOffset = Vector2(randX, randY)
-		global.trailPositions.push_front(lerp(oldpos, position.round(), (i+1)/maxDist) + randomOffset)
+		global.trailPositions.push_front(lerp(oldpos, position.round() + randomOffset, (i+1)/maxDist))
 		global.trailPositions.pop_back()
 
 
@@ -84,8 +84,9 @@ func start_carry():
 func stop_carry():
 	carrying = false
 
-func throw_teenip(pos):
-	global.teenipsFollowing[0].throw(pos, 0.5)
+func throw_driplet(pos):
+	if global.dripletsFollowing[0].position.distance_to(position) < throwableDistance:
+		global.dripletsFollowing[0].throw(pos, 0.5)
 
 func _on_DashTimer_timeout():
 	if state == States.DASHING:
