@@ -73,12 +73,13 @@ func land():
 	start_following()
 	$Anchor/Hitbox/CollisionShape2D.disabled = true
 
-func die():
+func die(sfx):
 	global.dripCount -= 1
 	set_physics_process(false)
 	hide()
-	$AudioStreamPlayer2.play()
-	yield($AudioStreamPlayer2,"finished")
+	$AudioStreamPlayer.stream = sfx
+	$AudioStreamPlayer.play()
+	yield($AudioStreamPlayer,"finished")
 	queue_free()
 
 func set_state(newState):

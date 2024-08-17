@@ -9,13 +9,16 @@ export var size = 1
 enum States {IDLE, MOVING, HELD, THROWN}
 var state = States.IDLE
 
+var sfx = {
+	"grow": preload("res://Audio/SFX/turnipgrow.wav"),
+	"maxgrow": preload("res://Audio/SFX/maxsize.wav")
+}
 
-var max_size = 5
+var max_size = 6
 var throw_height = -40
 var runAway = false
 var targetPosition = Vector2.ZERO
 var runningFrom = []
-
 
 onready var anchor = $Anchor
 onready var animationPlayer = $AnimationPlayer
@@ -103,9 +106,12 @@ func set_held():
 	$Hitbox/CollisionShape2D.set_deferred("disabled", true)
 
 func _on_Absorber_area_entered(area):
-	if size < 5:
+	if size < max_size:
 		var driplet = area.get_parent().get_parent()
-		driplet.die()
+		var sound = sfx["grow"]
+		if size == 5:
+			sound = sfx["maxgrow"]
+		driplet.die(sound)
 		grow()
 
 
