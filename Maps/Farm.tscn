@@ -28,7 +28,7 @@ extents = Vector2( 25, 101.5 )
 extents = Vector2( 228.5, 14.75 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 218, 16 )
+extents = Vector2( 211, 16 )
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 24, 112 )
@@ -179,7 +179,7 @@ collision_layer = 49
 collision_mask = 49
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D4"]
-position = Vector2( -188, -8 )
+position = Vector2( -181, -8 )
 shape = SubResource( 4 )
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D4"]

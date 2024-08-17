@@ -47,6 +47,7 @@ func follow_state(delta):
 
 
 func throw(newPos, time):
+	$AudioStreamPlayer.play(0.01)
 	if position.x > newPos.x:
 		$Anchor/Sprite.flip_h = true
 	elif position.x < newPos.x:

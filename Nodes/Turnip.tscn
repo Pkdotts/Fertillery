@@ -1,7 +1,9 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Sprites/Turnip.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Turnip.gd" type="Script" id=2]
+[ext_resource path="res://Shaders/Flash.tres" type="Material" id=3]
+[ext_resource path="res://Audio/SFX/powerUp.wav" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 14.5, 15 )
@@ -261,6 +263,110 @@ tracks/0/keys = {
 "values": [ 17, 18 ]
 }
 
+[sub_resource type="Animation" id=24]
+resource_name = "Grow"
+length = 0.333333
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/glow_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.0416667, 0.208333, 0.333333 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0, 1.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Anchor/GrowSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.125 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Anchor/GrowSprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Anchor/Sprite:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.0416667, 0.125, 0.208333 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1.2, 1.2 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=25]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/glow_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Anchor/GrowSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Anchor/GrowSprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Anchor/Sprite:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14, 7 )
 
@@ -280,20 +386,36 @@ radius = 41.0122
 radius = 79.0063
 
 [node name="Turnip" type="KinematicBody2D"]
+material = ExtResource( 3 )
 collision_layer = 16
 collision_mask = 16
 script = ExtResource( 2 )
 
 [node name="Anchor" type="Position2D" parent="."]
+use_parent_material = true
+
+[node name="GrowSprite" type="Sprite" parent="Anchor"]
+visible = false
+use_parent_material = true
+position = Vector2( 1, 0 )
+scale = Vector2( 1e-05, 1e-05 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, -32 )
+hframes = 4
+vframes = 5
+frame = 2
 
 [node name="Sprite" type="Sprite" parent="Anchor"]
-position = Vector2( 1, -32 )
+use_parent_material = true
+position = Vector2( 1, 0 )
 texture = ExtResource( 1 )
+offset = Vector2( 0, -32 )
 hframes = 4
 vframes = 5
 frame = 2
 
 [node name="Eatbox" type="Area2D" parent="Anchor"]
+visible = false
 collision_layer = 8
 collision_mask = 8
 
@@ -320,11 +442,17 @@ anims/Walk3 = SubResource( 18 )
 anims/Walk4 = SubResource( 19 )
 anims/Walk5 = SubResource( 20 )
 
+[node name="GrowAnim" type="AnimationPlayer" parent="."]
+anims/Grow = SubResource( 24 )
+anims/RESET = SubResource( 25 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0, -7 )
 shape = SubResource( 1 )
 
 [node name="Hitbox" type="Area2D" parent="."]
+visible = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
@@ -332,6 +460,7 @@ position = Vector2( 0.5, -14.5 )
 shape = SubResource( 7 )
 
 [node name="Absorber" type="Area2D" parent="."]
+visible = false
 modulate = Color( 0.258824, 1, 0, 1 )
 collision_layer = 2
 collision_mask = 0
@@ -344,6 +473,7 @@ shape = SubResource( 3 )
 [node name="Tween" type="Tween" parent="."]
 
 [node name="WanderRadius" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WanderRadius"]
 modulate = Color( 0.521569, 0, 1, 1 )
@@ -355,6 +485,7 @@ one_shot = true
 autostart = true
 
 [node name="FleeArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 32
 collision_mask = 32
 
@@ -364,11 +495,15 @@ position = Vector2( 2, -8 )
 shape = SubResource( 22 )
 
 [node name="SafeArea" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SafeArea"]
 modulate = Color( 0, 1, 0.462745, 1 )
 position = Vector2( 2, -8 )
 shape = SubResource( 23 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
 [connection signal="area_entered" from="Absorber" to="." method="_on_Absorber_area_entered"]

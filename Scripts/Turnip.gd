@@ -24,6 +24,9 @@ func _ready():
 	pass
 
 func _physics_process(delta):
+	$Anchor/GrowSprite.flip_h = $Anchor/Sprite.flip_h
+	if size > 1:
+		$Anchor/GrowSprite.frame = $Anchor/Sprite.frame - 4
 	match state:
 		States.IDLE:
 			idle_state()
@@ -43,7 +46,11 @@ func move_state(delta):
 	move_towards_target()
 
 func held_state():
-	global_position = global.player.CarryPosition.global_position
+	global_position = global.player.CarryPosition.global_position.round()
+	if global.player.direction.x < 0:
+		$Anchor/Sprite.flip_h = true
+	elif global.player.direction.x > 0:
+		$Anchor/Sprite.flip_h = false
 
 func thrown_state():
 	pass
@@ -52,6 +59,9 @@ func set_state(newState):
 	state = newState
 
 func grow():
+	$AudioStreamPlayer.play()
+	$GrowAnim.stop()
+	$GrowAnim.play("Grow")
 	size += 1
 	speed = round(150 / (1 + (size - 1) * 0.5))
 
@@ -123,8 +133,9 @@ func choose_random_position():
 		
 		var newPos = Vector2(16 * rng.randi_range(-1,1), 16 * rng.randi_range(-1,1))
 		
+		
+		
 		targetPosition += newPos
-	
 
 	set_state(States.MOVING)
 	
@@ -169,7 +180,7 @@ func move_towards_target():
 	var movement = direction * spd * get_process_delta_time()
 
 	if position.distance_to(targetPosition) > movement.length():
-		position += movement
+		move_and_collide(movement)
 	else:
 		position = targetPosition
 		set_state(States.IDLE)

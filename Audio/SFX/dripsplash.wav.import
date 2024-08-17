@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/dripsplash.wav-d554740f6e1b42937db651e9efcc78f5.sample"
+
+[deps]
+
+source_file="res://Audio/SFX/dripsplash.wav"
+dest_files=[ "res://.import/dripsplash.wav-d554740f6e1b42937db651e9efcc78f5.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
