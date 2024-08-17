@@ -39,7 +39,7 @@ func follow_state(delta):
 
 
 func throw(newPos, time):
-	animationPlayer.play("Idle")
+	animationPlayer.play("Thrown")
 	global.remove_driplet(idx - 1)
 	set_state(States.THROWN)
 	tween.interpolate_property(self, "position", 
@@ -60,7 +60,6 @@ func land():
 	$Anchor/Hitbox/CollisionShape2D.disabled = true
 
 func die():
-	global.remove_driplet(idx)
 	queue_free()
 
 func set_state(newState):

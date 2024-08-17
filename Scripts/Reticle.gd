@@ -14,5 +14,5 @@ func _process(delta):
 	
 
 func _input(event):
-	if event.is_action_pressed("left_click") and global.dripletsFollowing.size() > 0:
-		global.player.throw_driplet(position)
+	if event.is_action_pressed("left_click"):
+		global.player.throw(position)

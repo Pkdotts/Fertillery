@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 enum States {MOVING, DASHING, PAUSED} 
 
+var heldItem = null
 
 var moving = false
 var direction = Vector2.ZERO
@@ -78,14 +79,18 @@ func start_dash():
 	DashTimer.start()
 	state = States.DASHING
 
-func start_carry():
-	carrying = true
+func set_held_item(item = null):
+	heldItem = item
+	if item != null:
+		carrying = true
+	else:
+		carrying = false
 
-func stop_carry():
-	carrying = false
-
-func throw_driplet(pos):
-	if global.dripletsFollowing[0].position.distance_to(position) < throwableDistance:
+func throw(pos):
+	if carrying:
+		heldItem.throw(pos, 0.5)
+		set_held_item(null)
+	elif global.dripletsFollowing.size() > 0 and global.dripletsFollowing[0].position.distance_to(position) < throwableDistance:
 		global.dripletsFollowing[0].throw(pos, 0.5)
 
 func _on_DashTimer_timeout():

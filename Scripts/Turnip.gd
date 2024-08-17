@@ -5,6 +5,13 @@ export var size = 1
 enum States {IDLE, MOVING, HELD, THROWN}
 var state = States.IDLE
 
+var throw_height = -40
+
+onready var anchor = $Anchor
+onready var animationPlayer = $AnimationPlayer
+onready var tween = $Tween
+
+
 func _ready():
 	pass
 
@@ -39,12 +46,36 @@ func grow():
 	set_size(size)
 
 func set_size(bigness):
-	scale = Vector2(bigness, bigness)
+	var sizeness = 1 + 0.25 * bigness
+	scale = Vector2(sizeness, sizeness)
 
+func throw(newPos, time):
+	animationPlayer.play("Idle")
+	set_state(States.THROWN)
+	tween.interpolate_property(self, "position", 
+		global.player.position, newPos, time)
+	tween.interpolate_property(anchor, "position:y", 
+		anchor.position.y, throw_height, time/2,
+		Tween.TRANS_QUAD,Tween.EASE_OUT)
+	tween.interpolate_property(anchor, "position:y", 
+		throw_height, anchor.position.y, time/2,
+		Tween.TRANS_QUAD,Tween.EASE_IN, time/2)
+	tween.start()
+	tween.connect("tween_all_completed", self, "land", [], CONNECT_ONESHOT)
+	yield(get_tree().create_timer(time/3*2),"timeout")
+	$Anchor/Eatbox/CollisionShape2D.disabled = false
+
+func land():
+	$Anchor/Eatbox/CollisionShape2D.disabled = true
+
+func set_held():
+	set_state(States.HELD)
+	global.player.set_held_item(self)
+	
 
 func _on_Hitbox_body_entered(body):
 	if body == global.player and global.player.state == global.player.States.DASHING and !global.player.carrying:
-		set_state(States.HELD)
+		set_held()
 
 
 func _on_Absorber_area_entered(area):
