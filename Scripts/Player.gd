@@ -27,6 +27,7 @@ onready var AfterImageCreator = $AfterImageCreator
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$TackleArea/CollisionShape2D.disabled = true
 	global.player = self
 	uiManager.create_reticle()
 	for i in global.trailPositions.size():
@@ -63,6 +64,7 @@ func start_dash():
 	state = States.DASHING
 	speed = DASHSPEED
 	AfterImageCreator.start_creating()
+	$TackleArea/CollisionShape2D.disabled = false
 	
 
 func move(dir, spd, delta):
@@ -106,3 +108,11 @@ func _on_DashTimer_timeout():
 	if state == States.DASHING:
 		state = States.MOVING
 		AfterImageCreator.stop_creating()
+		$TackleArea/CollisionShape2D.disabled = true
+
+
+func _on_TackleArea_area_entered(area):
+	var parent = area.get_parent()
+	if !carrying and parent.has_method("set_held") and parent.state != parent.States.THROWN:
+		parent.set_held()
+		set_held_item(parent)

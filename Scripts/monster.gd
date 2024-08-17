@@ -29,3 +29,4 @@ func _on_Area2D_area_entered(area):
 	turnip.die()
 	global.increase_turnip_counter(turnip.size)
 	create_fertilizers(1)
+	$AudioStreamPlayer.play()

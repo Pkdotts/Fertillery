@@ -1,11 +1,11 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Nodes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Nodes/Camera.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Nodes/Decor/Shrub.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Nodes/Fertilizer.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Nodes/Reticle.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Nodes/Driplet.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Nodes/DripletSpawner.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Nodes/monster.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Nodes/camarea.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Sprites/Maps/City.png" type="Texture" id=9]
@@ -14,6 +14,9 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 384.5, 212 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 224, 180 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 24, 104 )
@@ -84,45 +87,6 @@ position = Vector2( -492, 38 )
 [node name="Shrub4" parent="Objects" instance=ExtResource( 3 )]
 position = Vector2( -432, 86 )
 
-[node name="Teenip" parent="Objects" instance=ExtResource( 6 )]
-position = Vector2( -124, -50 )
-
-[node name="Teenip2" parent="Objects" instance=ExtResource( 6 )]
-position = Vector2( -160, 39 )
-
-[node name="Teenip12" parent="Objects" instance=ExtResource( 6 )]
-position = Vector2( -312, 272 )
-
-[node name="Teenip13" parent="Objects" instance=ExtResource( 6 )]
-position = Vector2( -48, 272 )
-
-[node name="Teenip3" parent="Objects" instance=ExtResource( 6 )]
-position = Vector2( -72, 168 )
-
-[node name="Teenip4" parent="Objects" instance=ExtResource( 6 )]
-position = Vector2( -352, 88 )
-
-[node name="Teenip5" parent="Objects" instance=ExtResource( 6 )]
-position = Vector2( -512, 240 )
-
-[node name="Teenip6" parent="Objects" instance=ExtResource( 6 )]
-position = Vector2( -448, 152 )
-
-[node name="Teenip8" parent="Objects" instance=ExtResource( 6 )]
-position = Vector2( -424, -16 )
-
-[node name="Teenip14" parent="Objects" instance=ExtResource( 6 )]
-position = Vector2( -528, 96 )
-
-[node name="Teenip15" parent="Objects" instance=ExtResource( 6 )]
-position = Vector2( -496, -72 )
-
-[node name="Teenip16" parent="Objects" instance=ExtResource( 6 )]
-position = Vector2( -168, 232 )
-
-[node name="Teenip9" parent="Objects" instance=ExtResource( 6 )]
-position = Vector2( 112, 208 )
-
 [node name="Reticle" parent="." instance=ExtResource( 5 )]
 
 [node name="Camera" parent="." instance=ExtResource( 2 )]
@@ -134,58 +98,68 @@ anchor_path = NodePath("../Objects/Player")
 position = Vector2( -191.5, 100 )
 shape = SubResource( 1 )
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="DripletSpawner" parent="." instance=ExtResource( 6 )]
+newParentPath = NodePath("../Objects")
+
+[node name="CollisionShape2D" parent="DripletSpawner" index="1"]
+position = Vector2( -320, 100 )
+shape = SubResource( 9 )
+
+[node name="Collisions" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Collisions"]
 position = Vector2( 216, -128 )
 collision_layer = 49
 collision_mask = 49
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/StaticBody2D"]
 position = Vector2( 0, 88 )
 shape = SubResource( 2 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Collisions/StaticBody2D"]
 position = Vector2( -216, 0 )
 shape = SubResource( 5 )
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+[node name="StaticBody2D2" type="StaticBody2D" parent="Collisions"]
 position = Vector2( -600, 328 )
 collision_layer = 49
 collision_mask = 49
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D2"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Collisions/StaticBody2D2"]
 position = Vector2( 0, -117.5 )
 shape = SubResource( 3 )
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D2"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Collisions/StaticBody2D2"]
 position = Vector2( 203.5, -1.25 )
 shape = SubResource( 6 )
 
-[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+[node name="StaticBody2D3" type="StaticBody2D" parent="Collisions"]
 position = Vector2( -584, -128 )
 collision_layer = 49
 collision_mask = 49
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D3"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Collisions/StaticBody2D3"]
 position = Vector2( 178, 0 )
 shape = SubResource( 4 )
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D3"]
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Collisions/StaticBody2D3"]
 position = Vector2( -16, 128 )
 shape = SubResource( 7 )
 
-[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+[node name="StaticBody2D4" type="StaticBody2D" parent="Collisions"]
 position = Vector2( 224, 336 )
 collision_layer = 49
 collision_mask = 49
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D4"]
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Collisions/StaticBody2D4"]
 position = Vector2( -181, -8 )
 shape = SubResource( 4 )
 
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D4"]
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Collisions/StaticBody2D4"]
 position = Vector2( -8, -148 )
 shape = SubResource( 8 )
 
 [node name="HUD" parent="." instance=ExtResource( 10 )]
 
 [editable path="camarea"]
+[editable path="DripletSpawner"]

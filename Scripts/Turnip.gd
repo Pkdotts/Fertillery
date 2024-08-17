@@ -16,6 +16,7 @@ var runAway = false
 var targetPosition = Vector2.ZERO
 var runningFrom = []
 
+
 onready var anchor = $Anchor
 onready var animationPlayer = $AnimationPlayer
 onready var tween = $Tween
@@ -59,13 +60,17 @@ func set_state(newState):
 	state = newState
 
 func grow():
-	$AudioStreamPlayer.play()
 	$GrowAnim.stop()
 	$GrowAnim.play("Grow")
 	size += 1
 	speed = round(150 / (1 + (size - 1) * 0.5))
 
 func throw(newPos, time):
+	if newPos.x < position.x:
+		$Anchor/Sprite.flip_h = true
+	elif newPos.x > position.x:
+		$Anchor/Sprite.flip_h = false
+	
 	animationPlayer.play("Throw" + str(size))
 	set_state(States.THROWN)
 	tween.interpolate_property(self, "position", 
@@ -79,7 +84,7 @@ func throw(newPos, time):
 	tween.start()
 	tween.connect("tween_all_completed", self, "land", [], CONNECT_ONESHOT)
 	yield(get_tree().create_timer(time/3*2),"timeout")
-	$Anchor/Eatbox/CollisionShape2D.disabled = false
+	$Anchor/Eatbox/CollisionShape2D.set_deferred("disabled", false)
 
 func die():
 	if global.player.heldItem == self:
@@ -87,20 +92,15 @@ func die():
 	queue_free()
 
 func land():
-	$Anchor/Eatbox/CollisionShape2D.disabled = true
 	set_state(States.IDLE)
 	$MoveTime.start(0.5)
+	$Anchor/Eatbox/CollisionShape2D.set_deferred("disabled", true)
+	$Hitbox/CollisionShape2D.set_deferred("disabled", false)
 
 func set_held():
 	set_state(States.HELD)
-	global.player.set_held_item(self)
 	animationPlayer.play("Throw" + str(size))
-	
-
-func _on_Hitbox_body_entered(body):
-	if body == global.player and global.player.state == global.player.States.DASHING and !global.player.carrying:
-		set_held()
-
+	$Hitbox/CollisionShape2D.set_deferred("disabled", true)
 
 func _on_Absorber_area_entered(area):
 	if size < 5:
@@ -172,9 +172,9 @@ func move_towards_target():
 	
 	
 	
-	if direction.round().x == -1 or direction.round().y == -1:
+	if direction.x < 0:
 		$Anchor/Sprite.flip_h = true
-	else:
+	elif direction.x > 0:
 		$Anchor/Sprite.flip_h = false
 
 	var movement = direction * spd * get_process_delta_time()

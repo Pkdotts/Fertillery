@@ -124,6 +124,16 @@ left_click={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Driplet"
+2d_physics/layer_3="Tackle"
+2d_physics/layer_4="Monster"
+2d_physics/layer_5="Turnip"
+2d_physics/layer_6="ScaryStuff"
+2d_physics/layer_7="Fertilizer"
+
 [physics]
 
 common/enable_pause_aware_picking=true

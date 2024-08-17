@@ -18,6 +18,7 @@ func create_turnip():
 		turnip.position = position
 		newParent.call_deferred("add_child", turnip)
 		timer.start()
+		$AudioStreamPlayer.play()
 
 func close():
 	opened = false
@@ -29,8 +30,9 @@ func open():
 
 func _on_Area2D_area_entered(area):
 	var fertilizer = area.get_parent().get_parent()
-	fertilizer.die()
-	create_turnip()
+	if fertilizer.get("state") != null and fertilizer.state != fertilizer.States.HELD:
+		fertilizer.die()
+		create_turnip()
 	
 
 func _on_Timer_timeout():

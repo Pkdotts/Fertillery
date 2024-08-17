@@ -3,16 +3,18 @@ extends Node2D
 onready var tween = $Tween
 onready var anchor = $Anchor
 
-var held = false
+enum States {IDLE, HELD, THROWN}
+var state = States.IDLE
+
 var throw_height = -40
 
 
 func _physics_process(delta):
-	if held:
+	if state == States.HELD:
 		global_position = global.player.CarryPosition.global_position
 
 func throw(newPos, time):
-	held = false
+	state = States.THROWN
 	tween.interpolate_property(self, "position", 
 		position, newPos, time)
 	tween.interpolate_property(anchor, "position:y", 
@@ -24,7 +26,7 @@ func throw(newPos, time):
 	tween.start()
 	tween.connect("tween_all_completed", self, "land", [], CONNECT_ONESHOT)
 	yield(get_tree().create_timer(time/3*2),"timeout")
-	$Anchor/Area2D/CollisionShape2D.disabled = false
+	$Anchor/Area2D/CollisionShape2D.set_deferred("disabled", false)
 
 func die():
 	if global.player.heldItem == self:
@@ -32,12 +34,10 @@ func die():
 	queue_free()
 
 func land():
-	$Anchor/Area2D/CollisionShape2D.disabled = true
+	state = States.IDLE
+	$Anchor/Area2D/CollisionShape2D.set_deferred("disabled", true)
+	$Hitbox/CollisionShape2D.set_deferred("disabled", false)
 
 func set_held():
-	held = true
-	global.player.set_held_item(self)
-
-func _on_Hitbox_body_entered(body):
-	if body == global.player and global.player.state == global.player.States.DASHING and !global.player.carrying:
-		set_held()
+	state = States.HELD
+	$Hitbox/CollisionShape2D.set_deferred("disabled", true)

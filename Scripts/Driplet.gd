@@ -13,6 +13,7 @@ onready var tween = $Tween
 onready var anchor = $Anchor
 
 func _ready():
+	global.dripCount += 1
 	set_state(States.IDLE)
 	var randX = rand_range(-global.randomFollowerOffset, global.randomFollowerOffset)
 	var randY = rand_range(-global.randomFollowerOffset, global.randomFollowerOffset)
@@ -73,15 +74,21 @@ func land():
 	$Anchor/Hitbox/CollisionShape2D.disabled = true
 
 func die():
+	global.dripCount -= 1
+	set_physics_process(false)
+	hide()
+	$AudioStreamPlayer2.play()
+	yield($AudioStreamPlayer2,"finished")
 	queue_free()
 
 func set_state(newState):
 	state = newState
 
 func start_following():
-	global.dripletsFollowing.append(self)
-	idx = global.dripletsFollowing.size()
-	set_state(States.FOLLOWING)
+	if visible:
+		global.dripletsFollowing.append(self)
+		idx = global.dripletsFollowing.size()
+		set_state(States.FOLLOWING)
 
 
 func _on_ViewArea_body_entered(body):

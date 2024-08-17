@@ -13,6 +13,9 @@ var trailSize = 255
 var trailPositions = []
 var dripletsFollowing = []
 
+var dripCount = 0
+var maxDripCount = 10
+
 var turnipsEaten = 0
 
 func increase_turnip_counter(num):

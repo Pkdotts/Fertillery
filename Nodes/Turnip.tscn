@@ -3,7 +3,7 @@
 [ext_resource path="res://Sprites/Turnip.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Turnip.gd" type="Script" id=2]
 [ext_resource path="res://Shaders/Flash.tres" type="Material" id=3]
-[ext_resource path="res://Audio/SFX/powerUp.wav" type="AudioStream" id=4]
+[ext_resource path="res://Audio/SFX/sproutwattack.wav" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 14.5, 15 )
@@ -453,7 +453,9 @@ shape = SubResource( 1 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 visible = false
-monitorable = false
+collision_layer = 4
+collision_mask = 4
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( 0.5, -14.5 )
@@ -505,7 +507,6 @@ shape = SubResource( 23 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 
-[connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
 [connection signal="area_entered" from="Absorber" to="." method="_on_Absorber_area_entered"]
 [connection signal="timeout" from="MoveTime" to="." method="_on_MoveTime_timeout"]
 [connection signal="body_entered" from="FleeArea" to="." method="_on_FleeArea_body_entered"]
