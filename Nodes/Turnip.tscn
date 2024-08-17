@@ -280,8 +280,8 @@ radius = 41.0122
 radius = 79.0063
 
 [node name="Turnip" type="KinematicBody2D"]
-collision_layer = 0
-collision_mask = 0
+collision_layer = 16
+collision_mask = 16
 script = ExtResource( 2 )
 
 [node name="Anchor" type="Position2D" parent="."]
@@ -355,6 +355,8 @@ one_shot = true
 autostart = true
 
 [node name="FleeArea" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FleeArea"]
 modulate = Color( 0, 1, 0.462745, 1 )

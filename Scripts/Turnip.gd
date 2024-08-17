@@ -14,7 +14,7 @@ var max_size = 5
 var throw_height = -40
 var runAway = false
 var targetPosition = Vector2.ZERO
-
+var runningFrom = []
 
 onready var anchor = $Anchor
 onready var animationPlayer = $AnimationPlayer
@@ -140,9 +140,17 @@ func move_towards_target():
 	
 	var spd = speed
 	
-	if runAway:
+	if runAway and runningFrom != []:
 		animationPlayer.playback_speed = 2
-		direction = (position - global.player.position).normalized()
+		var runningTarget = runningFrom[0]
+		#turnip prioritizes running away from walls instead of player
+		for i in runningFrom:
+			runningTarget = i
+			if runningFrom.size() > 1 and runningTarget == global.player:
+				continue
+			else:
+				break
+		direction = (position - runningTarget.position).normalized()
 		spd = speed * 1.2
 		targetPosition = position + direction * ($FleeArea/CollisionShape2D.shape.radius * 2)  # RUN BITCH
 	
@@ -174,11 +182,11 @@ func move_towards_target():
 
 
 func _on_FleeArea_body_entered(body):
-	if body == global.player:
-		runAway = true
-		choose_random_position()
+	runAway = true
+	choose_random_position()
+	runningFrom.append(body)
 
 
 func _on_SafeArea_body_exited(body):
-	if body == global.player:
-		runAway = false  # stop acting like a pussy
+	runAway = false  # stop acting like a pussy
+	runningFrom.erase(body)

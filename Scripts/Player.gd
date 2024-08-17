@@ -84,7 +84,6 @@ func update_party_positions(oldpos, multiplier = 1):
 func controls():
 	inputVector = controlsManager.get_controls_vector(false)
 	if inputVector != Vector2.ZERO:
-		print(inputVector)
 		direction = inputVector
 
 
