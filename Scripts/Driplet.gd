@@ -6,6 +6,7 @@ var state = States.IDLE
 var speed = 7000
 var idx = -1
 var throw_height = -40
+var followPositionOffset = Vector2.ZERO
 
 onready var animationPlayer = $AnimationPlayer
 onready var tween = $Tween
@@ -13,6 +14,9 @@ onready var anchor = $Anchor
 
 func _ready():
 	set_state(States.IDLE)
+	var randX = rand_range(-global.randomFollowerOffset, global.randomFollowerOffset)
+	var randY = rand_range(-global.randomFollowerOffset, global.randomFollowerOffset)
+	followPositionOffset = Vector2(randX, randY).round()
 
 func _physics_process(delta):
 	match state:
@@ -27,7 +31,8 @@ func idle_state():
 	pass
 
 func follow_state(delta):
-	var newPosition = global.trailPositions[idx * global.trailOffset]
+	var oldPos = position
+	var newPosition = global.trailPositions[idx * global.trailOffset] + followPositionOffset
 	var difference = position - newPosition
 	if abs(difference.x) > 5 or abs(difference.y) > 5:
 		var direction = global_position.direction_to(newPosition)
@@ -35,10 +40,17 @@ func follow_state(delta):
 		animationPlayer.play("Walk")
 	else:
 		animationPlayer.play("Idle")
-
+	if oldPos.x > position.x:
+		$Anchor/Sprite.flip_h = true
+	elif oldPos.x < position.x:
+		$Anchor/Sprite.flip_h = false
 
 
 func throw(newPos, time):
+	if position.x > newPos.x:
+		$Anchor/Sprite.flip_h = true
+	elif position.x < newPos.x:
+		$Anchor/Sprite.flip_h = false
 	global.remove_driplet(idx - 1)
 	animationPlayer.play("Thrown")
 	set_state(States.THROWN)

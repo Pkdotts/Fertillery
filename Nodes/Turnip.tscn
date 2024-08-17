@@ -1,15 +1,15 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Sprites/Turnip.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Turnip.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 15, 8 )
+extents = Vector2( 14.5, 15 )
 
 [sub_resource type="Animation" id=4]
-resource_name = "Idle"
+resource_name = "Idle1"
 tracks/0/type = "value"
-tracks/0/path = NodePath("Anchor/Sprite:frame_coords")
+tracks/0/path = NodePath("Anchor/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -17,8 +17,68 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ) ]
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "Idle2"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Anchor/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 4 ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "Idle3"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Anchor/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 8 ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "Idle4"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Anchor/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 12 ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "Idle5"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Anchor/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 16 ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -36,8 +96,88 @@ tracks/0/keys = {
 "values": [ 2 ]
 }
 
+[sub_resource type="Animation" id=12]
+resource_name = "Throw1"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Anchor/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3 ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "Throw2"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Anchor/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 7 ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "Throw3"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Anchor/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 11 ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "Throw4"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Anchor/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 15 ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "Throw5"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Anchor/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 19 ]
+}
+
 [sub_resource type="Animation" id=6]
-resource_name = "Walk"
+resource_name = "Walk1"
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -53,8 +193,79 @@ tracks/0/keys = {
 "values": [ 1, 2 ]
 }
 
+[sub_resource type="Animation" id=17]
+resource_name = "Walk2"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Anchor/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 5, 6 ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "Walk3"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Anchor/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 9, 10 ]
+}
+
+[sub_resource type="Animation" id=19]
+resource_name = "Walk4"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Anchor/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 13, 14 ]
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "Walk5"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Anchor/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 17, 18 ]
+}
+
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14, 7 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 15.5, 15.5 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 13, 15.75 )
@@ -67,36 +278,52 @@ script = ExtResource( 2 )
 [node name="Anchor" type="Position2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="Anchor"]
-position = Vector2( 1, -27 )
+position = Vector2( 1, -32 )
 texture = ExtResource( 1 )
-hframes = 3
+hframes = 4
+vframes = 5
 frame = 2
-
-[node name="Hitbox" type="Area2D" parent="Anchor"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Anchor/Hitbox"]
-position = Vector2( 0, -7 )
-shape = SubResource( 2 )
 
 [node name="Eatbox" type="Area2D" parent="Anchor"]
 collision_layer = 8
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Anchor/Eatbox"]
-position = Vector2( 0, -7 )
+position = Vector2( 0.5, -14 )
 shape = SubResource( 2 )
 disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Idle = SubResource( 4 )
+anims/Idle1 = SubResource( 4 )
+anims/Idle2 = SubResource( 8 )
+anims/Idle3 = SubResource( 9 )
+anims/Idle4 = SubResource( 10 )
+anims/Idle5 = SubResource( 11 )
 anims/RESET = SubResource( 5 )
-anims/Walk = SubResource( 6 )
+anims/Throw1 = SubResource( 12 )
+anims/Throw2 = SubResource( 13 )
+anims/Throw3 = SubResource( 14 )
+anims/Throw4 = SubResource( 15 )
+anims/Throw5 = SubResource( 16 )
+anims/Walk1 = SubResource( 6 )
+anims/Walk2 = SubResource( 17 )
+anims/Walk3 = SubResource( 18 )
+anims/Walk4 = SubResource( 19 )
+anims/Walk5 = SubResource( 20 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -7 )
 shape = SubResource( 1 )
 
+[node name="Hitbox" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( 0.5, -14.5 )
+shape = SubResource( 7 )
+
 [node name="Absorber" type="Area2D" parent="."]
+modulate = Color( 0.258824, 1, 0, 1 )
 collision_layer = 2
 collision_mask = 0
 monitorable = false
@@ -107,5 +334,5 @@ shape = SubResource( 3 )
 
 [node name="Tween" type="Tween" parent="."]
 
-[connection signal="body_entered" from="Anchor/Hitbox" to="." method="_on_Hitbox_body_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
 [connection signal="area_entered" from="Absorber" to="." method="_on_Absorber_area_entered"]

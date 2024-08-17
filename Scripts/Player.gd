@@ -2,14 +2,19 @@ extends KinematicBody2D
 
 enum States {MOVING, DASHING, PAUSED} 
 
+const WALKSPEED = 6500
+const DASHSPEED = 20000
+const DECELERATION = 50000
+
 var heldItem = null
 
 var moving = false
 var direction = Vector2.ZERO
 var inputVector = Vector2.ZERO
 var speed = 6500
-var dash_speed = 20000
-var throwableDistance = 60
+var throwableDistance = 100
+
+
 
 var carrying = false
 var state = States.MOVING
@@ -18,21 +23,20 @@ var state = States.MOVING
 
 onready var CarryPosition = $CarryPosition
 onready var DashTimer = $DashTimer
+onready var AfterImageCreator = $AfterImageCreator
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	global.player = self
 	uiManager.create_reticle()
 	for i in global.trailPositions.size():
-		var randX = rand_range(-global.randomFollowerOffset, global.randomFollowerOffset)
-		var randY = rand_range(-global.randomFollowerOffset, global.randomFollowerOffset)
-		var randomOffset = Vector2(randX, randY)
-		global.trailPositions.push_front(position + randomOffset)
+		
+		global.trailPositions.push_front(position)
 		global.trailPositions.pop_back()
 
 
 func _input(event):
-	if event.is_action_pressed("ui_shift"):
+	if event.is_action_pressed("ui_shift") and !carrying:
 		start_dash()
 
 func _physics_process(delta):
@@ -45,10 +49,21 @@ func _physics_process(delta):
 
 func move_state(delta):
 	controls()
+	if speed > WALKSPEED:
+		speed -= DECELERATION * delta
+	else:
+		speed = WALKSPEED
 	move(inputVector, speed, delta)
 
 func dash_state(delta):
-	move(direction, dash_speed, delta)
+	move(direction, speed, delta)
+
+func start_dash():
+	DashTimer.start()
+	state = States.DASHING
+	speed = DASHSPEED
+	AfterImageCreator.start_creating()
+	
 
 func move(dir, spd, delta):
 	var oldPos = position
@@ -61,10 +76,7 @@ func move(dir, spd, delta):
 func update_party_positions(oldpos, multiplier = 1):
 	var maxDist = round(max(abs(oldpos.x-self.position.x), abs(oldpos.y-self.position.y)) * multiplier)
 	for i in maxDist:
-		var randX = rand_range(-global.randomFollowerOffset, global.randomFollowerOffset)
-		var randY = rand_range(-global.randomFollowerOffset, global.randomFollowerOffset)
-		var randomOffset = Vector2(randX, randY)
-		global.trailPositions.push_front(lerp(oldpos, position.round() + randomOffset, (i+1)/maxDist))
+		global.trailPositions.push_front(lerp(oldpos, position.round(), (i+1)/maxDist))
 		global.trailPositions.pop_back()
 
 
@@ -75,9 +87,7 @@ func controls():
 		print(inputVector)
 		direction = inputVector
 
-func start_dash():
-	DashTimer.start()
-	state = States.DASHING
+
 
 func set_held_item(item = null):
 	heldItem = item
@@ -96,3 +106,4 @@ func throw(pos):
 func _on_DashTimer_timeout():
 	if state == States.DASHING:
 		state = States.MOVING
+		AfterImageCreator.stop_creating()

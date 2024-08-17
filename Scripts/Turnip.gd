@@ -11,6 +11,8 @@ var state = States.IDLE
 var max_size = 5
 var throw_height = -40
 
+
+
 onready var anchor = $Anchor
 onready var animationPlayer = $AnimationPlayer
 onready var tween = $Tween
@@ -31,7 +33,7 @@ func _physics_process(delta):
 			thrown_state()
 
 func idle_state():
-	pass
+	animationPlayer.play("Idle" + str(size))
 
 func move_state():
 	pass
@@ -47,14 +49,9 @@ func set_state(newState):
 
 func grow():
 	size += 1
-	set_size(size)
-
-func set_size(bigness):
-	var sizeness = 1 + 0.25 * bigness
-	scale = Vector2(sizeness, sizeness)
 
 func throw(newPos, time):
-	animationPlayer.play("Idle")
+	animationPlayer.play("Throw" + str(size))
 	set_state(States.THROWN)
 	tween.interpolate_property(self, "position", 
 		position, newPos, time)
@@ -76,10 +73,12 @@ func die():
 
 func land():
 	$Anchor/Eatbox/CollisionShape2D.disabled = true
+	set_state(States.IDLE)
 
 func set_held():
 	set_state(States.HELD)
 	global.player.set_held_item(self)
+	animationPlayer.play("Throw" + str(size))
 	
 
 func _on_Hitbox_body_entered(body):

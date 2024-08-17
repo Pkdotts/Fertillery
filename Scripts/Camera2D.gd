@@ -17,11 +17,10 @@ onready var anchor = get_node_or_null(anchor_path)
 
 func _ready():
 	global.currentCamera = self
-	offset = anchor_offset
 
 func _physics_process(_delta):
 	if anchor != null:
-		position = lerp(position, anchor.position, drag)
+		position = lerp(position, anchor.position, drag) + anchor_offset
 
 
 func move_camera(position_x,position_y, time):
@@ -32,24 +31,24 @@ func move_camera(position_x,position_y, time):
 
 func move_offset(offset_x,offset_y, time):
 	var new_pos = global_position + Vector2(offset_x, offset_y)
-	if new_pos.y - 90 < limit_top and offset_y < 0:
-		if global_position.y - 90 > limit_top:
-			offset_y = limit_top - global_position.x - 90
+	if new_pos.y - global.winDim.y/2 < limit_top and offset_y < 0:
+		if global_position.y - global.winDim.y/2 > limit_top:
+			offset_y = limit_top - global_position.x - global.winDim.y/2
 		else:
 			offset_y = 0
-	if new_pos.y + 90 > limit_bottom and offset_y > 0:
-		if global_position.y + 160 < limit_bottom:
-			offset_y =  limit_bottom - global_position.y - 90
+	if new_pos.y + global.winDim.y/2 > limit_bottom and offset_y > 0:
+		if global_position.y + global.winDim.y/2 < limit_bottom:
+			offset_y =  limit_bottom - global_position.y - global.winDim.y/2
 		else:
 			offset_y = 0
-	if new_pos.x - 160 < limit_left and offset_x < 0:
-		if global_position.x - 160 > limit_left:
-			offset_x = limit_left - global_position.x - 160
+	if new_pos.x - global.winDim.x/2 < limit_left and offset_x < 0:
+		if global_position.x - global.winDim.x/2 > limit_left:
+			offset_x = limit_left - global_position.x - global.winDim.x/2
 		else:
 			offset_x = 0
-	if new_pos.x + 160 > limit_right and offset_x > 0:
-		if global_position.x + 160 < limit_right:
-			offset_x =  limit_right - global_position.x - 160
+	if new_pos.x + global.winDim.x/2 > limit_right and offset_x > 0:
+		if global_position.x + global.winDim.x/2 < limit_right:
+			offset_x =  limit_right - global_position.x - global.winDim.x/2
 		else:
 			offset_x = 0
 	$Tween.interpolate_property(self,"offset",

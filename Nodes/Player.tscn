@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
+[ext_resource path="res://Nodes/Effects/AfterImageCreator.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 9.0
@@ -26,12 +27,15 @@ shape = SubResource( 1 )
 [node name="AnimationTree" type="AnimationTree" parent="."]
 
 [node name="CarryPosition" type="Position2D" parent="."]
-position = Vector2( 0, -46 )
+position = Vector2( 0, -36 )
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="DashTimer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
+
+[node name="AfterImageCreator" parent="." instance=ExtResource( 3 )]
+spritePath = NodePath("../Sprite")
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]
