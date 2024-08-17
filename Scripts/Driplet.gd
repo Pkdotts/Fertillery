@@ -12,7 +12,7 @@ onready var tween = $Tween
 onready var anchor = $Anchor
 
 func _ready():
-	start_following()
+	set_state(States.IDLE)
 
 func _physics_process(delta):
 	match state:
@@ -39,8 +39,8 @@ func follow_state(delta):
 
 
 func throw(newPos, time):
-	animationPlayer.play("Thrown")
 	global.remove_driplet(idx - 1)
+	animationPlayer.play("Thrown")
 	set_state(States.THROWN)
 	tween.interpolate_property(self, "position", 
 		global.player.position, newPos, time)
@@ -69,3 +69,8 @@ func start_following():
 	global.dripletsFollowing.append(self)
 	idx = global.dripletsFollowing.size()
 	set_state(States.FOLLOWING)
+
+
+func _on_ViewArea_body_entered(body):
+	if body == global.player and state == States.IDLE:
+		start_following()

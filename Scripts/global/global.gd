@@ -1,5 +1,6 @@
 extends Node
 
+signal updateTurnipCounter
 
 var winSize = 1
 var winDim = Vector2(384, 216)
@@ -12,7 +13,11 @@ var trailSize = 255
 var trailPositions = []
 var dripletsFollowing = []
 
+var turnipsEaten = 0
 
+func increase_turnip_counter(num):
+	turnipsEaten += num
+	emit_signal("updateTurnipCounter")
 
 func remove_driplet(idx = 0):
 	dripletsFollowing.remove(0)

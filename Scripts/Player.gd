@@ -7,8 +7,8 @@ var heldItem = null
 var moving = false
 var direction = Vector2.ZERO
 var inputVector = Vector2.ZERO
-var speed = 7000
-var dash_speed = 12000
+var speed = 6500
+var dash_speed = 20000
 var throwableDistance = 60
 
 var carrying = false

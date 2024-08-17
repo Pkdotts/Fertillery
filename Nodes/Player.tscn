@@ -31,7 +31,7 @@ position = Vector2( 0, -46 )
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="DashTimer" type="Timer" parent="."]
-wait_time = 0.4
+wait_time = 0.2
 one_shot = true
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]

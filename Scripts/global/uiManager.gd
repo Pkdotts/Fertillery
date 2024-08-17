@@ -1,5 +1,8 @@
 extends Node
 
+
+
+
 var reticleNode = preload("res://Nodes/Reticle.tscn")
 
 var reticle = null

@@ -2,9 +2,13 @@ extends KinematicBody2D
 
 export var size = 1
 
+
+
 enum States {IDLE, MOVING, HELD, THROWN}
 var state = States.IDLE
 
+
+var max_size = 5
 var throw_height = -40
 
 onready var anchor = $Anchor
@@ -53,7 +57,7 @@ func throw(newPos, time):
 	animationPlayer.play("Idle")
 	set_state(States.THROWN)
 	tween.interpolate_property(self, "position", 
-		global.player.position, newPos, time)
+		position, newPos, time)
 	tween.interpolate_property(anchor, "position:y", 
 		anchor.position.y, throw_height, time/2,
 		Tween.TRANS_QUAD,Tween.EASE_OUT)
@@ -64,6 +68,11 @@ func throw(newPos, time):
 	tween.connect("tween_all_completed", self, "land", [], CONNECT_ONESHOT)
 	yield(get_tree().create_timer(time/3*2),"timeout")
 	$Anchor/Eatbox/CollisionShape2D.disabled = false
+
+func die():
+	if global.player.heldItem == self:
+		global.player.set_held_item(null)
+	queue_free()
 
 func land():
 	$Anchor/Eatbox/CollisionShape2D.disabled = true
@@ -79,6 +88,7 @@ func _on_Hitbox_body_entered(body):
 
 
 func _on_Absorber_area_entered(area):
-	var driplet = area.get_parent().get_parent()
-	driplet.die()
-	grow()
+	if size < 5:
+		var driplet = area.get_parent().get_parent()
+		driplet.die()
+		grow()
