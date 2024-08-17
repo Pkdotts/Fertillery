@@ -25,3 +25,22 @@ margin_top = 13.0
 margin_right = 89.0
 margin_bottom = 27.0
 text = "0"
+
+[node name="Hunger" type="HBoxContainer" parent="Control"]
+margin_left = 295.0
+margin_top = 1.0
+margin_right = 384.0
+margin_bottom = 41.0
+
+[node name="Desc" type="Label" parent="Control/Hunger"]
+margin_top = 13.0
+margin_right = 50.0
+margin_bottom = 27.0
+text = "Hunger:"
+
+[node name="Label" type="Label" parent="Control/Hunger"]
+margin_left = 54.0
+margin_top = 13.0
+margin_right = 62.0
+margin_bottom = 27.0
+text = "0"

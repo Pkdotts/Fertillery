@@ -17,10 +17,16 @@ var dripCount = 0
 var maxDripCount = 10
 
 var turnipsEaten = 0
+var hungerMeter = 0
 
 func increase_turnip_counter(num):
 	turnipsEaten += num
 	emit_signal("updateTurnipCounter")
+
+func decrease_hunger(amount):
+	hungerMeter -= amount
+	if hungerMeter < 0:
+		hungerMeter = 0
 
 func remove_driplet(idx = 0):
 	dripletsFollowing.remove(0)
@@ -31,6 +37,9 @@ func _ready():
 	trailPositions.resize(trailSize)
 	increase_win_size(2)
 
+func _physics_process(delta):
+	if hungerMeter < 100:
+		hungerMeter += delta * 2
 
 func _input(event):
 	if event.is_action_pressed("ui_winsize"):

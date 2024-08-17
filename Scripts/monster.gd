@@ -28,5 +28,6 @@ func _on_Area2D_area_entered(area):
 	var turnip = area.get_parent().get_parent()
 	turnip.die()
 	global.increase_turnip_counter(turnip.size)
+	global.decrease_hunger(turnip.size * 10)
 	create_fertilizers(1)
 	$AudioStreamPlayer.play()

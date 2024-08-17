@@ -22,18 +22,31 @@ func create_turnip():
 
 func close():
 	opened = false
-	visible = false
+	$AnimationPlayer.play("Close")
 
 func open():
 	opened = true
-	visible = true
+	$AnimationPlayer.play("Open")
 
 func _on_Area2D_area_entered(area):
-	var fertilizer = area.get_parent().get_parent()
-	if fertilizer.get("state") != null and fertilizer.state != fertilizer.States.HELD:
-		fertilizer.die()
+	var parent = area.get_parent().get_parent()
+	if parent.get("state") != null and parent.state != parent.States.HELD:
+		parent.die()
+		$AnimationPlayer.play("GrowSprout")
+
+func _on_Absorber_area_entered(area):
+	var parent = area.get_parent().get_parent()
+	if $AnimationPlayer.current_animation == "GrowSprout":
+		parent.die()
+		$AnimationPlayer.play("Close")
 		create_turnip()
-	
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "GrowSprout":
+		$AnimationPlayer.play("Close")
+		create_turnip()
+
 
 func _on_Timer_timeout():
-	open()
+	$AnimationPlayer.play("Open")
