@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/fiendroar.wav-924b74e9bc9c2b14e114c089833ecb88.sample"
+
+[deps]
+
+source_file="res://Audio/SFX/fiendroar.wav"
+dest_files=[ "res://.import/fiendroar.wav-924b74e9bc9c2b14e114c089833ecb88.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -4,6 +4,8 @@ export var newParentPath : NodePath
 
 var fertilizerNode = preload("res://Nodes/Fertilizer.tscn")
 
+onready var cameraZoomPos = $CameraZoom
+
 const FERTILIZER_RANDOM_POSITION = 5
 
 onready var newParent = get_node_or_null(newParentPath)
@@ -28,6 +30,9 @@ func create_fertilizers(amount):
 			yield(get_tree(),"idle_frame")
 			fertilizer.throw(-100, newPos, 0.5)
 
+func inhale():
+	$AnimationPlayer.play("Inhale")
+
 func _on_Area2D_area_entered(area):
 	yield(get_tree().create_timer(0.1), "timeout")
 	var turnip = area.get_parent().get_parent()
@@ -36,14 +41,9 @@ func _on_Area2D_area_entered(area):
 	turnip.die()
 	global.increase_turnip_counter(turnip.size)
 	global.decrease_hunger(turnip.size * 10)
-	increase_difficulty()
+	global.increase_difficulty()
 	yield(get_tree().create_timer(1), "timeout")
 	create_fertilizers(1)
-
-func increase_difficulty():
-	global.increase_hunger_speed(0.2)
-	global.decrease_drip_delay(0.5)
-
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Chew":

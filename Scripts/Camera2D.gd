@@ -20,8 +20,17 @@ func _ready():
 
 func _physics_process(_delta):
 	if anchor != null:
-		position = lerp(position, anchor.position, drag) + anchor_offset
+		global_position = lerp(global_position, anchor.global_position, drag) + anchor_offset
 
+func set_anchor(newAnchor):
+	anchor = newAnchor
+
+func update_offset(newOffset, time):
+	$Tween.interpolate_property(self,"offset",
+		offset, newOffset, time)
+	$Tween.interpolate_property(self,"anchor_offset",
+		anchor_offset, Vector2(0, 0), time)
+	$Tween.start()
 
 func move_camera(position_x,position_y, time):
 	$Tween.interpolate_property(self,"global_position",
@@ -92,6 +101,11 @@ func return_offset(time = 1):
 func reset():
 	position = Vector2.ZERO
 	offset = Vector2.ZERO
+
+func zoom_in(time):
+	$Tween.interpolate_property(self, "zoom",
+		zoom, Vector2(0.01, 0.01), time)
+	$Tween.start()
 
 func shake_camera(magnitude = 1.0, time = 1.0, direction = Vector2.ONE):
 	if !$Tween.is_active():

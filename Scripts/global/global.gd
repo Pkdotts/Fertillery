@@ -59,14 +59,8 @@ func set_level(lvl):
 
 func increase_turnip_counter(num):
 	turnipsEaten += num
-	check_threshold()
 	emit_signal("updateTurnipCounter")
 
-func check_threshold():
-	if turnipsEaten >= nextThreshold:
-		change_scenes("res://Maps/Guts.tscn")
-		hungerMeter = 0
-		nextThreshold += THRESHOLDADDER
 
 func decrease_drip_delay(amount):
 	dripDelay -= amount
@@ -96,6 +90,10 @@ func remove_driplet(idx = 0):
 func reset_driplets():
 	dripCount = 0
 	dripletsFollowing.clear()
+
+func increase_difficulty():
+	increase_hunger_speed(0.2)
+	decrease_drip_delay(0.5)
 
 func _physics_process(delta):
 	if !uiManager.fading:

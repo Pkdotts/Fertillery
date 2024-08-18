@@ -17,7 +17,6 @@ var speed = 6500
 var throwableDistance = 100
 
 
-
 var carrying = false
 var state = States.MOVING
 
@@ -40,7 +39,7 @@ func _ready():
 
 
 func _input(event):
-	if event.is_action_pressed("ui_shift") and !carrying:
+	if event.is_action_pressed("ui_shift") and !carrying and state != States.PAUSED:
 		start_dash()
 
 func _physics_process(delta):
@@ -146,6 +145,9 @@ func hold_play(anim):
 			animationPlayer.play(anim + "Hold")
 		else:
 			animationPlayer.play(anim)
+
+func pause():
+	state = States.PAUSED
 
 func _on_DashTimer_timeout():
 	stop_dashing()
