@@ -12,7 +12,8 @@ func set_texture(sprite):
 	offset = sprite.offset
 	frame = sprite.frame
 	scale = sprite.scale
-	
+	flip_h = sprite.flip_h
+	flip_v = sprite.flip_v
 
 func _on_AnimationPlayer_animation_finished(_anim_name):
 	queue_free()

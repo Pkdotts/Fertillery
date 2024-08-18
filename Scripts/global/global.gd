@@ -7,10 +7,27 @@ var winSize = 1
 var winDim = Vector2(384, 216)
 var player = null
 var currentCamera = null
+var level = 1
 
-var randomFollowerOffset = 5
-var trailOffset = 10
-var trailSize = 255
+var music = {
+	"gameplay": "kevinthehonky (1).wav"
+}
+
+const LEVEL_STATS = {
+	1: {
+		"dripDelay": 2,
+		"minDripDelay": 2,
+		"maxDripCount": 10,
+		
+		"initHungerSpeed": 3,
+		"maxHungerSpeed": 100
+	}
+}
+
+
+const randomFollowerOffset = 5
+const trailOffset = 10
+const trailSize = 255
 var trailPositions = []
 var dripletsFollowing = []
 
@@ -19,15 +36,35 @@ var minDripDelay = 2
 var dripCount = 0
 var maxDripCount = 10
 
+const THRESHOLDADDER = 30
+var nextThreshold = 30
 var turnipsEaten = 0
 var hungerMeter = 0
 var hungerSpeed = 3
 var maxHungerSpeed = 100
 
 
+func _ready():
+	trailPositions.resize(trailSize)
+	increase_win_size(2)
+	uiManager.create_HUD()
+	#audioManager.play_music("", music["gameplay"])
+
+func increase_level(amt = 1):
+	level += amt
+
+func set_level(lvl):
+	level = lvl
+
 func increase_turnip_counter(num):
 	turnipsEaten += num
+	check_threshold()
 	emit_signal("updateTurnipCounter")
+
+func check_threshold():
+	if turnipsEaten >= nextThreshold:
+		change_scenes("res://Maps/Guts.tscn")
+		nextThreshold += THRESHOLDADDER
 
 func decrease_drip_delay(amount):
 	dripDelay -= amount
@@ -53,9 +90,9 @@ func remove_driplet(idx = 0):
 	for i in dripletsFollowing.size():
 		dripletsFollowing[i].idx = i + 1
 
-func _ready():
-	trailPositions.resize(trailSize)
-	increase_win_size(2)
+func reset_driplets():
+	dripCount = 0
+	dripletsFollowing.clear()
 
 func _physics_process(delta):
 	if hungerMeter < 100:
@@ -99,3 +136,13 @@ func set_win_size(newSizeNum, fullscreen = false):
 			OS.set_window_position(newPos)
 
 	global.emit_signal("settings_changed")
+
+func change_scenes(scene):
+	if uiManager.transition != null:
+		uiManager.transition.queue_free()
+		uiManager.transition = null
+	uiManager.fade_in()
+	yield(uiManager.transition, "transition_finished")
+	get_tree().change_scene(scene)
+	reset_driplets()
+	uiManager.fade_out()

@@ -6,6 +6,7 @@ const WALKSPEED = 6500
 const DASHSPEED = 20000
 const DECELERATION = 50000
 const FLIPHEIGHT = 32
+const THROWHEIGHT = -40
 
 var heldItem = null
 
@@ -67,7 +68,7 @@ func start_dash():
 	speed = DASHSPEED
 	AfterImageCreator.start_creating()
 	$TackleArea/CollisionShape2D.disabled = false
-	$AudioStreamPlayer.play()
+	$DashSound.play()
 	animationPlayer.play("Dash")
 	
 
@@ -117,7 +118,7 @@ func throw(pos):
 		#can't throw while item is in midair
 		if heldItem.state != heldItem.States.HELD:
 			return
-		heldItem.throw(pos, 0.5)
+		heldItem.throw(THROWHEIGHT, pos, 0.5)
 		set_held_item(null)
 		thrown = true
 	elif global.dripletsFollowing.size() > 0 and global.dripletsFollowing[0].position.distance_to(position) < throwableDistance:
@@ -126,6 +127,7 @@ func throw(pos):
 	
 	if thrown:
 		animationPlayer.play("Throw")
+		$ThrowSound.play()
 		if pos.x > position.x:
 			$Sprite.flip_h = false
 		elif pos.x < position.x:

@@ -20,7 +20,7 @@ audioManager="*res://Scripts/global/audioManager.tscn"
 controlsManager="*res://Scripts/global/controlsManager.tscn"
 Slowmo="*res://Scripts/global/Slowmo.tscn"
 global="*res://Scripts/global/global.gd"
-uiManager="*res://Scripts/global/uiManager.gd"
+uiManager="*res://Scripts/global/uiManager.tscn"
 
 [display]
 

@@ -22,7 +22,7 @@ func get_random_position():
 func spawn_driplet():
 	if global.dripCount < global.maxDripCount and newParent != null:
 		var driplet = dripletNode.instance()
-		driplet.position = get_random_position()
+		driplet.position = get_random_position().round()
 		newParent.call_deferred("add_child", driplet)
 
 func start_timer():

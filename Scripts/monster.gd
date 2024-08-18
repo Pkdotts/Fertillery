@@ -25,7 +25,7 @@ func create_fertilizers(amount):
 			var newPos = fertilizerPositions.get_child(i).global_position + randomOffset
 			newParent.call_deferred("add_child", fertilizer)
 			yield(get_tree(),"idle_frame")
-			fertilizer.throw(newPos, 1)
+			fertilizer.throw(-100, newPos, 0.5)
 
 func _on_Area2D_area_entered(area):
 	var turnip = area.get_parent().get_parent()

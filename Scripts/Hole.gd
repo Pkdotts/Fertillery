@@ -2,6 +2,7 @@ extends Node2D
 
 export var newParentPath : NodePath
 onready var newParent = get_node_or_null(newParentPath)
+
 onready var timer = $Timer
 
 var turnipNode = preload("res://Nodes/Turnip.tscn")

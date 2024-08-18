@@ -18,7 +18,6 @@ var sfx = {
 }
 
 var max_size = 6
-var throw_height = -40
 var runAway = false
 var targetPosition = Vector2.ZERO
 var runningFrom = []
@@ -28,7 +27,7 @@ onready var animationPlayer = $AnimationPlayer
 onready var tween = $Tween
 
 func _ready():
-	pass
+	material = material.duplicate()
 
 func _physics_process(delta):
 	$Anchor/GrowSprite.flip_h = $Anchor/Sprite.flip_h
@@ -76,8 +75,8 @@ func grow():
 	size += 1
 	speed = round(150 / (1 + (size - 1) * 0.5))
 
-func throw(newPos, time):
-	jump_to(newPos, time, throw_height)
+func throw(height, newPos, time):
+	jump_to(newPos, time, height)
 	tween.connect("tween_all_completed", self, "land", [], CONNECT_ONESHOT)
 	yield(get_tree().create_timer(time/3*2),"timeout")
 	$Anchor/Eatbox/CollisionShape2D.set_deferred("disabled", false)
