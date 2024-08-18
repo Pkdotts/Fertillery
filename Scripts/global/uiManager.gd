@@ -9,6 +9,8 @@ var reticle = null
 var hud = null
 var transition = null
 
+var fading = false
+
 
 func create_HUD():
 	if hud == null:
@@ -46,6 +48,7 @@ func fade_in():
 	add_child(transitionUI)
 	transition = transitionUI
 	transition.fadein()
+	fading = true
 
 func fade_out():
 	if transition != null:

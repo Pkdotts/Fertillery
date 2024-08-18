@@ -47,7 +47,8 @@ var maxHungerSpeed = 100
 func _ready():
 	trailPositions.resize(trailSize)
 	increase_win_size(2)
-	uiManager.create_HUD()
+	if get_tree().current_scene is Node2D:
+		uiManager.create_HUD()
 	#audioManager.play_music("", music["gameplay"])
 
 func increase_level(amt = 1):
@@ -77,6 +78,7 @@ func decrease_hunger(amount):
 	hungerMeter -= amount
 	if hungerMeter < 0:
 		hungerMeter = 0
+		
 
 func increase_hunger_speed(amount):
 	hungerSpeed += amount
@@ -96,13 +98,19 @@ func reset_driplets():
 	dripletsFollowing.clear()
 
 func _physics_process(delta):
-	if hungerMeter < 100:
-		if hungerMeter < 50:
-			hungerMeter += delta * hungerSpeed
-		elif hungerMeter < 80:
-			hungerMeter += delta * hungerSpeed * 0.85
+	if !uiManager.fading:
+		if hungerMeter < 100:
+			if hungerMeter < 50:
+				hungerMeter += delta * hungerSpeed
+			elif hungerMeter < 80:
+				hungerMeter += delta * hungerSpeed * 0.85
+			else:
+				hungerMeter += delta * hungerSpeed * 0.7
 		else:
-			hungerMeter += delta * hungerSpeed * 0.7
+			uiManager.erase_HUD()
+			change_scenes("res://Maps/gameOver.tscn")
+			hungerMeter = 0
+			
 
 func _input(event):
 	if event.is_action_pressed("ui_winsize"):
@@ -144,11 +152,19 @@ func set_win_size(newSizeNum, fullscreen = false):
 	global.emit_signal("settings_changed")
 
 func change_scenes(scene):
+	uiManager.fading = true
 	if uiManager.transition != null:
 		uiManager.transition.queue_free()
 		uiManager.transition = null
 	uiManager.fade_in()
 	yield(uiManager.transition, "transition_finished")
 	get_tree().change_scene(scene)
+	
 	reset_driplets()
 	uiManager.fade_out()
+	yield(uiManager.transition, "transition_finished")
+	if !get_tree().get_current_scene() is Control:
+		uiManager.create_HUD()
+	else:
+		uiManager.erase_HUD()
+	uiManager.fading = false
