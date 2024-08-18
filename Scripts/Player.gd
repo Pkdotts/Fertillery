@@ -120,6 +120,7 @@ func throw(pos):
 			return
 		heldItem.throw(THROWHEIGHT, pos, 0.5)
 		set_held_item(null)
+		$ThrowSound.play()
 		thrown = true
 	elif global.dripletsFollowing.size() > 0 and global.dripletsFollowing[0].position.distance_to(position) < throwableDistance:
 		global.dripletsFollowing[0].throw(pos, 0.5)
@@ -127,7 +128,6 @@ func throw(pos):
 	
 	if thrown:
 		animationPlayer.play("Throw")
-		$ThrowSound.play()
 		if pos.x > position.x:
 			$Sprite.flip_h = false
 		elif pos.x < position.x:
