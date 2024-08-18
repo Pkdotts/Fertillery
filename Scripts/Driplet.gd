@@ -55,9 +55,8 @@ func thrown_state(delta):
 	var velocity = throwDir * throwSpeed * delta
 	move_and_slide(velocity)
 
-func throw(height, newPos, time):
-	global_position = global.player.CarryPosition.global_position
-	jump_to(newPos, time, height)
+func throw(height, newPos, time, initHeight = 0):
+	jump_to(newPos, time, height, initHeight)
 	calculate_trajectory(newPos, time)
 	yield(get_tree().create_timer(time/3*2),"timeout")
 	$Anchor/Hitbox/CollisionShape2D.set_deferred("disabled", false)
@@ -67,7 +66,7 @@ func calculate_trajectory(newPos, time):
 	throwSpeed = (distance/time)/get_physics_process_delta_time()
 	throwDir = position.direction_to(newPos)
 
-func jump_to(newPos, time, height):
+func jump_to(newPos, time, height, initHeight = 0):
 	animationPlayer.play("Thrown")
 	play_throw_sfx()
 	if newPos.x < position.x:
@@ -75,9 +74,11 @@ func jump_to(newPos, time, height):
 	elif newPos.x > position.x:
 		$Anchor/Sprite.flip_h = false
 	
+	height += initHeight
+	
 	set_state(States.THROWN)
 	tween.interpolate_property(anchor, "position:y", 
-		anchor.position.y, height, time/2,
+		initHeight, height, time/2,
 		Tween.TRANS_QUAD,Tween.EASE_OUT)
 	tween.interpolate_property(anchor, "position:y", 
 		height, anchor.position.y, time/2,

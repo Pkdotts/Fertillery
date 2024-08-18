@@ -78,8 +78,8 @@ func grow():
 	size += 1
 	speed = round(150 / (1 + (size - 1) * 0.5))
 
-func throw(height, newPos, time):
-	jump_to(newPos, time, height)
+func throw(height, newPos, time, initHeight = 0):
+	jump_to(newPos, time, height, initHeight)
 	calculate_trajectory(newPos, time)
 	set_collision_layer_bit(3, false)
 	yield(get_tree().create_timer(time/3*2),"timeout")
@@ -91,18 +91,18 @@ func calculate_trajectory(newPos, time):
 	throwSpeed = (distance/time)/get_physics_process_delta_time()
 	throwDir = position.direction_to(newPos)
 
-func jump_to(newPos, time, height):
+func jump_to(newPos, time, height, initHeight = 0):
 	if newPos.x < position.x:
 		$Anchor/Sprite.flip_h = true
 	elif newPos.x > position.x:
 		$Anchor/Sprite.flip_h = false
 	
+	height += initHeight
+	
 	animationPlayer.play("Throw" + str(size))
 	set_state(States.THROWN)
-	#tween.interpolate_property(self, "position", 
-	#	position, newPos, time)
 	tween.interpolate_property(anchor, "position:y", 
-		anchor.position.y, height, time/2,
+		initHeight, height, time/2,
 		Tween.TRANS_QUAD,Tween.EASE_OUT)
 	tween.interpolate_property(anchor, "position:y", 
 		height, anchor.position.y, time/2,

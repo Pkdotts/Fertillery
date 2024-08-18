@@ -73,22 +73,25 @@ func start_dash():
 	
 
 func move(dir, spd, delta):
-	var oldPos = position
-	move_and_slide(dir * spd * delta)
-	
-	if position != oldPos:
-		moving = true
-		update_party_positions(oldPos, 1)
-		hold_play("Walk")
+	if !paused:
+		var oldPos = position
+		move_and_slide(dir * spd * delta)
+		
+		if position != oldPos:
+			moving = true
+			update_party_positions(oldPos, 1)
+			hold_play("Walk")
+		else:
+			moving = false
+			hold_play("Idle")
+		
+		if animationPlayer.current_animation != "Throw":
+			if round(oldPos.x) < round(position.x):
+				$Sprite.flip_h = false
+			elif round(oldPos.x) > round(position.x):
+				$Sprite.flip_h = true
 	else:
-		moving = false
 		hold_play("Idle")
-	
-	if animationPlayer.current_animation != "Throw":
-		if round(oldPos.x) < round(position.x):
-			$Sprite.flip_h = false
-		elif round(oldPos.x) > round(position.x):
-			$Sprite.flip_h = true
 
 func update_party_positions(oldpos, multiplier = 1):
 	var maxDist = round(max(abs(oldpos.x-self.position.x), abs(oldpos.y-self.position.y)) * multiplier)
@@ -120,12 +123,14 @@ func throw(pos):
 			#can't throw while item is in midair
 			if heldItem.state != heldItem.States.HELD:
 				return
-			heldItem.throw(THROWHEIGHT, pos, 0.5)
+			heldItem.global_position = global.player.global_position
+			heldItem.throw(THROWHEIGHT, pos, 0.5, CarryPosition.position.y)
 			set_held_item(null)
 			$ThrowSound.play()
 			thrown = true
 		elif global.dripletsFollowing.size() > 0 and global.dripletsFollowing[0].position.distance_to(position) < throwableDistance:
-			global.dripletsFollowing[0].throw(THROWHEIGHT, pos, 0.5)
+			global.dripletsFollowing[0].global_position = global.player.global_position
+			global.dripletsFollowing[0].throw(THROWHEIGHT, pos, 0.5, CarryPosition.position.y)
 			thrown = true
 		
 		if thrown:

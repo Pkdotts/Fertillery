@@ -1,6 +1,10 @@
 extends Control
 
 #func play_music()
+var musicVolume = 0
+
+func _ready():
+	$AudioPlayers/GameMusic.volume_db = musicVolume
 
 func play_game_music():
 	$AudioPlayers/GameMusic.play()
