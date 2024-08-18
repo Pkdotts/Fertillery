@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Nodes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Nodes/Camera.tscn" type="PackedScene" id=2]
@@ -10,12 +10,13 @@
 [ext_resource path="res://Nodes/camarea.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Sprites/Maps/stage1.png" type="Texture" id=9]
 [ext_resource path="res://Nodes/Cutscene.tscn" type="PackedScene" id=10]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 256.25, 212 )
+[ext_resource path="res://Nodes/Bin.tscn" type="PackedScene" id=11]
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 224, 98 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 256.25, 212 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 24, 72 )
@@ -44,8 +45,11 @@ extents = Vector2( 24, 60 )
 [node name="Tutorial" type="Node2D"]
 
 [node name="Cutscene" parent="." instance=ExtResource( 10 )]
+tutorial = true
 monsterPath = NodePath("../VoreMonster")
+binPath = NodePath("../BG/Bin")
 nextMap = "Guts"
+monsterDropPosition = 232
 
 [node name="BG" type="Node2D" parent="."]
 
@@ -54,12 +58,23 @@ position = Vector2( 112, 212 )
 texture = ExtResource( 9 )
 
 [node name="Hole" parent="BG" instance=ExtResource( 3 )]
-position = Vector2( 176, 288 )
+position = Vector2( 192, 288 )
 newParentPath = NodePath("../../Objects")
 
+[node name="Bin" parent="BG" instance=ExtResource( 11 )]
+position = Vector2( 448, 224 )
+
 [node name="VoreMonster" parent="." instance=ExtResource( 7 )]
-position = Vector2( 928, 192 )
+position = Vector2( 408, -608 )
 newParentPath = NodePath("../Objects")
+
+[node name="DripletSpawner" parent="." instance=ExtResource( 6 )]
+position = Vector2( 248, 224 )
+newParentPath = NodePath("../Objects")
+
+[node name="CollisionShape2D" parent="DripletSpawner" index="1"]
+position = Vector2( 0, 82 )
+shape = SubResource( 9 )
 
 [node name="Objects" type="YSort" parent="."]
 
@@ -82,14 +97,6 @@ position = Vector2( 384, 208 )
 [node name="CollisionShape2D" parent="camarea" index="0"]
 position = Vector2( -128.25, 0 )
 shape = SubResource( 1 )
-
-[node name="DripletSpawner" parent="." instance=ExtResource( 6 )]
-position = Vector2( 248, 224 )
-newParentPath = NodePath("../Objects")
-
-[node name="CollisionShape2D" parent="DripletSpawner" index="1"]
-position = Vector2( 0, 82 )
-shape = SubResource( 9 )
 
 [node name="Collisions" type="Node2D" parent="."]
 
@@ -145,5 +152,5 @@ shape = SubResource( 4 )
 position = Vector2( -8, -84 )
 shape = SubResource( 8 )
 
-[editable path="camarea"]
 [editable path="DripletSpawner"]
+[editable path="camarea"]

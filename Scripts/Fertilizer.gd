@@ -1,5 +1,9 @@
 extends KinematicBody2D
 
+signal grabbed
+signal thrown
+signal destroyed
+
 onready var tween = $Tween
 onready var anchor = $Anchor
 
@@ -36,6 +40,7 @@ func set_state(newState):
 	state = newState
 
 func throw(height, newPos, time, initHeight = 0):
+	emit_signal("thrown")
 	jump_to(newPos, time, height, initHeight)
 	calculate_trajectory(newPos, time)
 	yield(get_tree().create_timer(time * 0.9),"timeout")
@@ -67,6 +72,7 @@ func jump_to(newPos, time, height, initHeight = 0):
 func die():
 	if global.player.heldItem == self:
 		global.player.set_held_item(null)
+	emit_signal("destroyed")
 	queue_free()
 
 func land():
@@ -92,6 +98,7 @@ func flip(height, time):
 func set_held():
 	state = States.HELD
 	$Hitbox/CollisionShape2D.set_deferred("disabled", true)
+	emit_signal("grabbed")
 
 func set_collisions(enabled):
 	$CollisionShape2D.set_deferred("disabled", !enabled)

@@ -134,6 +134,7 @@ func throw(pos):
 			thrown = true
 		
 		if thrown:
+			animationPlayer.stop()
 			animationPlayer.play("Throw")
 			if pos.x > position.x:
 				$Sprite.flip_h = false
@@ -160,6 +161,8 @@ func pause():
 
 func unpause():
 	paused = false
+
+
 
 func _on_DashTimer_timeout():
 	stop_dashing()

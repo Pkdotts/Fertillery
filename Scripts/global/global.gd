@@ -8,7 +8,7 @@ var winDim = Vector2(384, 216)
 var player = null
 var currentCamera = null
 var level = 1
-var turnipCount = 1
+var turnipCount = 0
 var highScore = 0
 
 var music = {

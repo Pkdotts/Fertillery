@@ -152,6 +152,7 @@ anims/Shuffle = SubResource( 7 )
 position = Vector2( 2, -32 )
 collision_layer = 8
 collision_mask = 8
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( -18, 16 )
