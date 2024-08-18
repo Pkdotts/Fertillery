@@ -48,6 +48,7 @@ func follow_state(delta):
 
 
 func throw(newPos, time):
+	$AudioStreamPlayer.pitch_scale = rand_range(0.8, 1.2)
 	$AudioStreamPlayer.play(0.01)
 	if position.x > newPos.x:
 		$Anchor/Sprite.flip_h = true
@@ -78,6 +79,7 @@ func die(sfx = null):
 	set_physics_process(false)
 	hide()
 	if sfx != null:
+		$AudioStreamPlayer.pitch_scale = 1
 		$AudioStreamPlayer.stream = sfx
 		$AudioStreamPlayer.play()
 		yield($AudioStreamPlayer,"finished")

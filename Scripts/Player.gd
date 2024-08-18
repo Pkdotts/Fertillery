@@ -25,6 +25,7 @@ var state = States.MOVING
 onready var CarryPosition = $CarryPosition
 onready var DashTimer = $DashTimer
 onready var AfterImageCreator = $AfterImageCreator
+onready var animationPlayer = $AnimationPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -66,6 +67,8 @@ func start_dash():
 	speed = DASHSPEED
 	AfterImageCreator.start_creating()
 	$TackleArea/CollisionShape2D.disabled = false
+	$AudioStreamPlayer.play()
+	animationPlayer.play("Dash")
 	
 
 func move(dir, spd, delta):
@@ -75,6 +78,16 @@ func move(dir, spd, delta):
 	if position != oldPos:
 		moving = true
 		update_party_positions(oldPos, 1)
+		hold_play("Walk")
+	else:
+		moving = false
+		hold_play("Idle")
+	
+	if animationPlayer.current_animation != "Throw":
+		if round(oldPos.x) < round(position.x):
+			$Sprite.flip_h = false
+		elif round(oldPos.x) > round(position.x):
+			$Sprite.flip_h = true
 
 func update_party_positions(oldpos, multiplier = 1):
 	var maxDist = round(max(abs(oldpos.x-self.position.x), abs(oldpos.y-self.position.y)) * multiplier)
@@ -99,20 +112,38 @@ func set_held_item(item = null):
 		carrying = false
 
 func throw(pos):
+	var thrown = false
 	if carrying:
 		#can't throw while item is in midair
 		if heldItem.state != heldItem.States.HELD:
 			return
 		heldItem.throw(pos, 0.5)
 		set_held_item(null)
+		thrown = true
 	elif global.dripletsFollowing.size() > 0 and global.dripletsFollowing[0].position.distance_to(position) < throwableDistance:
 		global.dripletsFollowing[0].throw(pos, 0.5)
+		thrown = true
+	
+	if thrown:
+		animationPlayer.play("Throw")
+		if pos.x > position.x:
+			$Sprite.flip_h = false
+		elif pos.x < position.x:
+			$Sprite.flip_h = true
+
 
 func stop_dashing():
 	if state == States.DASHING:
 		state = States.MOVING
 		AfterImageCreator.stop_creating()
 		$TackleArea/CollisionShape2D.disabled = true
+
+func hold_play(anim):
+	if animationPlayer.current_animation != "Throw" and state != States.DASHING:
+		if carrying:
+			animationPlayer.play(anim + "Hold")
+		else:
+			animationPlayer.play(anim)
 
 func _on_DashTimer_timeout():
 	stop_dashing()

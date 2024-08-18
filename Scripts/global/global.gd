@@ -22,7 +22,7 @@ var maxDripCount = 10
 var turnipsEaten = 0
 var hungerMeter = 0
 var hungerSpeed = 3
-var maxHungerSpeed = 10
+var maxHungerSpeed = 100
 
 
 func increase_turnip_counter(num):

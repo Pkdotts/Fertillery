@@ -43,8 +43,8 @@ extents = Vector2( 24, 124 )
 [node name="BG" type="Node2D" parent="."]
 
 [node name="City" type="Sprite" parent="BG"]
-position = Vector2( -192, 100 )
-scale = Vector2( 1.33333, 1.30864 )
+position = Vector2( -192, 104 )
+scale = Vector2( 1.33333, 1.28395 )
 texture = ExtResource( 9 )
 
 [node name="Hole" parent="BG" instance=ExtResource( 11 )]
