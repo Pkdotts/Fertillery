@@ -8,6 +8,9 @@ var idx = -1
 var throw_height = -40
 var followPositionOffset = Vector2.ZERO
 
+var throwSpeed = 0
+var throwDir = Vector2.ZERO
+
 onready var animationPlayer = $AnimationPlayer
 onready var tween = $Tween
 onready var anchor = $Anchor
@@ -26,7 +29,7 @@ func _physics_process(delta):
 		States.FOLLOWING:
 			follow_state(delta)
 		States.THROWN:
-			pass
+			thrown_state(delta)
 
 func idle_state():
 	pass
@@ -48,33 +51,48 @@ func follow_state(delta):
 	elif round(oldPos.x) < round(position.x):
 		$Anchor/Sprite.flip_h = false
 
+func thrown_state(delta):
+	var velocity = throwDir * throwSpeed * delta
+	move_and_slide(velocity)
 
-func throw(newPos, time):
-	$AudioStreamPlayer.pitch_scale = rand_range(0.8, 1.2)
-	$AudioStreamPlayer.play(0.01)
-	if position.x > newPos.x:
-		$Anchor/Sprite.flip_h = true
-	elif position.x < newPos.x:
-		$Anchor/Sprite.flip_h = false
-	global.remove_driplet(idx - 1)
+func throw(height, newPos, time):
+	global_position = global.player.CarryPosition.global_position
+	jump_to(newPos, time, height)
+	calculate_trajectory(newPos, time)
+	yield(get_tree().create_timer(time/3*2),"timeout")
+	$Anchor/Hitbox/CollisionShape2D.set_deferred("disabled", false)
+
+func calculate_trajectory(newPos, time):
+	var distance = position.distance_to(newPos)
+	throwSpeed = (distance/time)/get_physics_process_delta_time()
+	throwDir = position.direction_to(newPos)
+
+func jump_to(newPos, time, height):
 	animationPlayer.play("Thrown")
+	play_throw_sfx()
+	if newPos.x < position.x:
+		$Anchor/Sprite.flip_h = true
+	elif newPos.x > position.x:
+		$Anchor/Sprite.flip_h = false
+	
 	set_state(States.THROWN)
-	tween.interpolate_property(self, "position", 
-		global.player.position, newPos, time)
 	tween.interpolate_property(anchor, "position:y", 
-		anchor.position.y, throw_height, time/2,
+		anchor.position.y, height, time/2,
 		Tween.TRANS_QUAD,Tween.EASE_OUT)
 	tween.interpolate_property(anchor, "position:y", 
-		throw_height, anchor.position.y, time/2,
+		height, anchor.position.y, time/2,
 		Tween.TRANS_QUAD,Tween.EASE_IN, time/2)
 	tween.start()
 	tween.connect("tween_all_completed", self, "land", [], CONNECT_ONESHOT)
-	yield(get_tree().create_timer(time/3*2),"timeout")
-	$Anchor/Hitbox/CollisionShape2D.disabled = false
 
 func land():
 	start_following()
 	$Anchor/Hitbox/CollisionShape2D.disabled = true
+
+func play_throw_sfx():
+	$AudioStreamPlayer.pitch_scale = rand_range(0.8, 1.2)
+	$AudioStreamPlayer.play(0.01)
+	global.remove_driplet(idx - 1)
 
 func spawn():
 	state = States.SPAWNING

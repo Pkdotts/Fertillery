@@ -177,8 +177,8 @@ shape = SubResource( 16 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Collisions"]
 position = Vector2( 216, 16 )
-collision_layer = 49
-collision_mask = 49
+collision_layer = 113
+collision_mask = 113
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/StaticBody2D"]
 position = Vector2( 0, 88 )
@@ -190,8 +190,8 @@ shape = SubResource( 5 )
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Collisions"]
 position = Vector2( -984, 328 )
-collision_layer = 49
-collision_mask = 49
+collision_layer = 113
+collision_mask = 113
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Collisions/StaticBody2D2"]
 position = Vector2( 0, -88 )
@@ -203,8 +203,8 @@ shape = SubResource( 6 )
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="Collisions"]
 position = Vector2( -968, 16 )
-collision_layer = 49
-collision_mask = 49
+collision_layer = 113
+collision_mask = 113
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Collisions/StaticBody2D3"]
 position = Vector2( 272, -152 )
@@ -216,8 +216,8 @@ shape = SubResource( 7 )
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="Collisions"]
 position = Vector2( 224, 336 )
-collision_layer = 49
-collision_mask = 49
+collision_layer = 113
+collision_mask = 113
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Collisions/StaticBody2D4"]
 position = Vector2( -296, -8 )

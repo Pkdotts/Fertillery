@@ -123,7 +123,7 @@ func throw(pos):
 		$ThrowSound.play()
 		thrown = true
 	elif global.dripletsFollowing.size() > 0 and global.dripletsFollowing[0].position.distance_to(position) < throwableDistance:
-		global.dripletsFollowing[0].throw(pos, 0.5)
+		global.dripletsFollowing[0].throw(THROWHEIGHT, pos, 0.5)
 		thrown = true
 	
 	if thrown:

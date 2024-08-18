@@ -21,6 +21,8 @@ var max_size = 6
 var runAway = false
 var targetPosition = Vector2.ZERO
 var runningFrom = []
+var throwSpeed = 0
+var throwDir = Vector2.ZERO
 
 onready var anchor = $Anchor
 onready var animationPlayer = $AnimationPlayer
@@ -41,7 +43,7 @@ func _physics_process(delta):
 		States.HELD:
 			held_state()
 		States.THROWN:
-			thrown_state()
+			thrown_state(delta)
 		States.MIDAIR:
 			midair_state()
 	
@@ -60,8 +62,9 @@ func held_state():
 	elif global.player.direction.x > 0:
 		$Anchor/Sprite.flip_h = false
 
-func thrown_state():
-	pass
+func thrown_state(delta):
+	var velocity = throwDir * throwSpeed * delta
+	move_and_slide(velocity)
 
 func midair_state():
 	global_position = lerp(global_position, global.player.CarryPosition.global_position.round(), 0.3) 
@@ -77,9 +80,14 @@ func grow():
 
 func throw(height, newPos, time):
 	jump_to(newPos, time, height)
-	tween.connect("tween_all_completed", self, "land", [], CONNECT_ONESHOT)
+	calculate_trajectory(newPos, time)
 	yield(get_tree().create_timer(time/3*2),"timeout")
 	$Anchor/Eatbox/CollisionShape2D.set_deferred("disabled", false)
+
+func calculate_trajectory(newPos, time):
+	var distance = position.distance_to(newPos)
+	throwSpeed = (distance/time)/get_physics_process_delta_time()
+	throwDir = position.direction_to(newPos)
 
 func jump_to(newPos, time, height):
 	if newPos.x < position.x:
@@ -89,8 +97,8 @@ func jump_to(newPos, time, height):
 	
 	animationPlayer.play("Throw" + str(size))
 	set_state(States.THROWN)
-	tween.interpolate_property(self, "position", 
-		position, newPos, time)
+	#tween.interpolate_property(self, "position", 
+	#	position, newPos, time)
 	tween.interpolate_property(anchor, "position:y", 
 		anchor.position.y, height, time/2,
 		Tween.TRANS_QUAD,Tween.EASE_OUT)
@@ -98,6 +106,7 @@ func jump_to(newPos, time, height):
 		height, anchor.position.y, time/2,
 		Tween.TRANS_QUAD,Tween.EASE_IN, time/2)
 	tween.start()
+	tween.connect("tween_all_completed", self, "land", [], CONNECT_ONESHOT)
 
 func flip(height, time):
 	#set_state(States.HIT)
@@ -157,6 +166,7 @@ func land():
 	$MoveTime.start(0.5)
 	$Anchor/Eatbox/CollisionShape2D.set_deferred("disabled", true)
 	$Hitbox/CollisionShape2D.set_deferred("disabled", false)
+	print("landed")
 
 
 func set_held():
@@ -175,7 +185,7 @@ func _on_Absorber_area_entered(area):
 
 func choose_random_position():
 	
-	if state == States.HELD or state == States.MIDAIR:
+	if state == States.HELD or state == States.MIDAIR or state == States.THROWN:
 		return # if this little [insert slur here] is behind held, he stops moving
 	
 	var shape = $WanderRadius/CollisionShape2D.shape
@@ -191,13 +201,13 @@ func choose_random_position():
 	var rng = RandomNumberGenerator.new()
 	
 	# if targetPosition is so close to the current position then offset target position by 16
-	if position.distance_to(targetPosition) < 8:
+	if position.distance_to(targetPosition) < 16:
 		
 		var newPos = Vector2(16 * rng.randi_range(-1,1), 16 * rng.randi_range(-1,1))
+		var dir = position.direction_to(newPos)
+		var velocity = dir * speed * get_physics_process_delta_time()
 		
-		
-		
-		targetPosition += newPos
+		move_and_slide(velocity)
 
 	set_state(States.MOVING)
 	
@@ -207,6 +217,10 @@ func _on_MoveTime_timeout():
 
 
 func move_towards_target():
+	
+	if state == States.HELD or state == States.THROWN or state == States.MIDAIR:
+		return
+	
 	var direction: Vector2
 	
 	animationPlayer.play("Walk" + str(size))

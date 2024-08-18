@@ -5,7 +5,7 @@ onready var hungerBar = $ColorRect/HungerBar
 const NORMALCOLOR = Color("ad668b")
 const DANGERCOLOR = Color("ca3a51")
 
-const DANGERZONE = 80
+const DANGERZONE = 60
 var initialSize = 0
 var initialPos = 0
 
