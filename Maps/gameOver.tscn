@@ -15,10 +15,36 @@ margin_bottom = 108.0
 text = "game over yeaaa"
 
 [node name="Button" type="Button" parent="."]
-margin_left = 124.0
-margin_top = 133.0
-margin_right = 248.0
-margin_bottom = 169.0
+margin_left = 123.0
+margin_top = 128.0
+margin_right = 247.0
+margin_bottom = 164.0
 text = "restart"
 
+[node name="Button2" type="Button" parent="."]
+margin_left = 124.0
+margin_top = 170.0
+margin_right = 248.0
+margin_bottom = 206.0
+text = "title screen"
+
+[node name="Results" type="RichTextLabel" parent="."]
+margin_left = 96.0
+margin_top = 82.0
+margin_right = 271.0
+margin_bottom = 96.0
+bbcode_enabled = true
+bbcode_text = "fuck"
+text = "fuck"
+scroll_active = false
+
+[node name="HighScore" type="RichTextLabel" parent="."]
+margin_left = 75.0
+margin_top = 100.0
+margin_right = 283.0
+margin_bottom = 114.0
+bbcode_enabled = true
+scroll_active = false
+
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_Button2_pressed"]

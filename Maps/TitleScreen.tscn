@@ -27,4 +27,11 @@ margin_bottom = 54.0
 rect_scale = Vector2( 5, 5 )
 text = "le shite"
 
+[node name="Results" type="Label" parent="."]
+margin_left = 144.0
+margin_top = 104.0
+margin_right = 229.0
+margin_bottom = 124.0
+align = 1
+
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

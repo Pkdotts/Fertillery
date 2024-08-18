@@ -38,6 +38,7 @@ func _on_Area2D_area_entered(area):
 	var turnip = area.get_parent().get_parent()
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("Chew")
+	global.turnipCount = global.turnipCount + 1
 	turnip.die()
 	global.increase_turnip_counter(turnip.size)
 	global.decrease_hunger(turnip.size * 10)
