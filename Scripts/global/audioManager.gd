@@ -2,6 +2,12 @@ extends Control
 
 #func play_music()
 
+func play_game_music():
+	$AudioPlayers/GameMusic.play()
+
+func stop_game_music():
+	$AudioPlayers/GameMusic.stop()
+
 func add_sfx(stream, name) -> AudioStreamPlayer:
 	var sfx_node: AudioStreamPlayer = get_sfx(name)
 	if !sfx_node:

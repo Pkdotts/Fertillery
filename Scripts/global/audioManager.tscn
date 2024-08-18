@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scripts/global/audioManager.gd" type="Script" id=1]
+[ext_resource path="res://Audio/Music/pancakebreakfast.wav" type="AudioStream" id=2]
 
 [node name="audioManager" type="Control"]
 margin_right = 40.0
@@ -11,8 +12,8 @@ script = ExtResource( 1 )
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AudioPlayers"]
-bus = "Music"
+[node name="GameMusic" type="AudioStreamPlayer" parent="AudioPlayers"]
+stream = ExtResource( 2 )
 
 [node name="Sfx" type="Node" parent="."]
 

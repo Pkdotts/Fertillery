@@ -8,36 +8,12 @@
 [ext_resource path="res://Nodes/DripletSpawner.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Nodes/monster.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Nodes/camarea.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Sprites/Maps/stage2.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Maps/stage4.png" type="Texture" id=9]
 [ext_resource path="res://Nodes/Cutscene.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Nodes/Driplet.tscn" type="PackedScene" id=11]
 
 [sub_resource type="RectangleShape2D" id=13]
-extents = Vector2( 412, 108 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 24, 72 )
-
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 156, 168 )
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 25, 72 )
-
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 264.5, 16 )
-
-[sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 216, 168 )
-
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 24, 68 )
-
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 264, 16 )
-
-[sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 24, 68 )
+extents = Vector2( 396, 80 )
 
 [sub_resource type="Shader" id=9]
 code = "shader_type canvas_item;
@@ -64,7 +40,7 @@ shader_param/flash_modifier = 0.0
 shader_param/glow_modifier = 0.0
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 480.5, 212 )
+extents = Vector2( 576.5, 212 )
 
 [sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 80, 60 )
@@ -78,16 +54,40 @@ extents = Vector2( 112, 56 )
 [sub_resource type="RectangleShape2D" id=16]
 extents = Vector2( 100, 60 )
 
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 24, 72 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 156, 108 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 25, 108 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 312.5, 16 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 312, 108 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 24, 92 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 312, 16 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 24, 68 )
+
 [node name="Guts" type="Node2D"]
 
 [node name="Cutscene" parent="." instance=ExtResource( 10 )]
 monsterPath = NodePath("../VoreMonster")
-nextMap = "Blood"
+nextMap = "Space"
 
 [node name="BG" type="Node2D" parent="."]
 
 [node name="BG" type="Sprite" parent="BG"]
-position = Vector2( -304, 100 )
+position = Vector2( -384, 100 )
 scale = Vector2( 1.01389, 1 )
 texture = ExtResource( 9 )
 
@@ -99,8 +99,85 @@ newParentPath = NodePath("../Objects")
 newParentPath = NodePath("../Objects")
 
 [node name="CollisionShape2D" parent="DripletSpawner" index="1"]
-position = Vector2( -508, 180 )
+position = Vector2( -524, 16 )
 shape = SubResource( 13 )
+
+[node name="Objects" type="YSort" parent="."]
+
+[node name="Player" parent="Objects" instance=ExtResource( 1 )]
+position = Vector2( -168, 80 )
+
+[node name="Turnip" parent="Objects" instance=ExtResource( 4 )]
+material = SubResource( 12 )
+position = Vector2( -400, 136 )
+
+[node name="Turnip2" parent="Objects" instance=ExtResource( 4 )]
+material = SubResource( 12 )
+position = Vector2( -792, 184 )
+
+[node name="Driplet" parent="Objects" instance=ExtResource( 11 )]
+position = Vector2( -680, 136 )
+
+[node name="Driplet2" parent="Objects" instance=ExtResource( 11 )]
+position = Vector2( -504, -16 )
+
+[node name="Driplet3" parent="Objects" instance=ExtResource( 11 )]
+position = Vector2( -136, 208 )
+
+[node name="Reticle" parent="." instance=ExtResource( 5 )]
+
+[node name="Camera" parent="." instance=ExtResource( 2 )]
+position = Vector2( -168, 80 )
+anchor_path = NodePath("../Objects/Player")
+
+[node name="camarea" parent="." instance=ExtResource( 8 )]
+visible = false
+
+[node name="CollisionShape2D" parent="camarea" index="0"]
+position = Vector2( -383.5, 100 )
+shape = SubResource( 1 )
+
+[node name="HoleGenerators" type="Node2D" parent="."]
+
+[node name="HoleGenerator3" parent="HoleGenerators" instance=ExtResource( 3 )]
+position = Vector2( -512, 184 )
+newParentPath = NodePath("../../BG")
+turnipParentPath = NodePath("../../Objects")
+enabled = true
+
+[node name="CollisionShape2D" parent="HoleGenerators/HoleGenerator3" index="0"]
+position = Vector2( -40, 28 )
+shape = SubResource( 11 )
+
+[node name="HoleGenerator4" parent="HoleGenerators" instance=ExtResource( 3 )]
+position = Vector2( -856, 112 )
+newParentPath = NodePath("../../BG")
+turnipParentPath = NodePath("../../Objects")
+enabled = true
+
+[node name="CollisionShape2D" parent="HoleGenerators/HoleGenerator4" index="0"]
+position = Vector2( 32, -8 )
+shape = SubResource( 14 )
+
+[node name="HoleGenerator5" parent="HoleGenerators" instance=ExtResource( 3 )]
+position = Vector2( -688, 200 )
+newParentPath = NodePath("../../BG")
+turnipParentPath = NodePath("../../Objects")
+enabled = true
+
+[node name="CollisionShape2D" parent="HoleGenerators/HoleGenerator5" index="0"]
+position = Vector2( -72, 40 )
+shape = SubResource( 15 )
+
+[node name="HoleGenerator2" parent="HoleGenerators" instance=ExtResource( 3 )]
+position = Vector2( -304, 200 )
+newParentPath = NodePath("../../BG")
+turnipParentPath = NodePath("../../Objects")
+enabled = true
+
+[node name="CollisionShape2D" parent="HoleGenerators/HoleGenerator2" index="0"]
+position = Vector2( -52, 36 )
+shape = SubResource( 16 )
 
 [node name="Collisions" type="Node2D" parent="."]
 
@@ -114,33 +191,33 @@ position = Vector2( 0, 88 )
 shape = SubResource( 2 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Collisions/StaticBody2D"]
-position = Vector2( -444, -152 )
+position = Vector2( -444, -212 )
 shape = SubResource( 5 )
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Collisions"]
-position = Vector2( -792, 328 )
+position = Vector2( -984, 328 )
 collision_layer = 113
 collision_mask = 113
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Collisions/StaticBody2D2"]
-position = Vector2( 0, -88 )
+position = Vector2( 0, -124 )
 shape = SubResource( 3 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Collisions/StaticBody2D2"]
-position = Vector2( 239.5, 0 )
+position = Vector2( 287.5, 0 )
 shape = SubResource( 6 )
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="Collisions"]
-position = Vector2( -776, 16 )
+position = Vector2( -968, 16 )
 collision_layer = 113
 collision_mask = 113
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Collisions/StaticBody2D3"]
-position = Vector2( 176, -152 )
+position = Vector2( 272, -212 )
 shape = SubResource( 10 )
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Collisions/StaticBody2D3"]
-position = Vector2( -16, 84 )
+position = Vector2( -16, -12 )
 shape = SubResource( 7 )
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="Collisions"]
@@ -149,88 +226,12 @@ collision_layer = 113
 collision_mask = 113
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Collisions/StaticBody2D4"]
-position = Vector2( -248, -8 )
+position = Vector2( -296, -8 )
 shape = SubResource( 4 )
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="Collisions/StaticBody2D4"]
 position = Vector2( -8, -92 )
 shape = SubResource( 8 )
-
-[node name="Objects" type="YSort" parent="."]
-
-[node name="Player" parent="Objects" instance=ExtResource( 1 )]
-position = Vector2( -168, 80 )
-
-[node name="Turnip" parent="Objects" instance=ExtResource( 4 )]
-material = SubResource( 12 )
-position = Vector2( -400, 136 )
-
-[node name="Turnip2" parent="Objects" instance=ExtResource( 4 )]
-material = SubResource( 12 )
-position = Vector2( -624, 232 )
-
-[node name="Driplet" parent="Objects" instance=ExtResource( 11 )]
-position = Vector2( -680, 136 )
-
-[node name="Driplet2" parent="Objects" instance=ExtResource( 11 )]
-position = Vector2( -432, 240 )
-
-[node name="Driplet3" parent="Objects" instance=ExtResource( 11 )]
-position = Vector2( -136, 208 )
-
-[node name="Reticle" parent="." instance=ExtResource( 5 )]
-
-[node name="Camera" parent="." instance=ExtResource( 2 )]
-position = Vector2( -168, 80 )
-anchor_path = NodePath("../Objects/Player")
-
-[node name="camarea" parent="." instance=ExtResource( 8 )]
-
-[node name="CollisionShape2D" parent="camarea" index="0"]
-position = Vector2( -287.5, 100 )
-shape = SubResource( 1 )
-
-[node name="HoleGenerators" type="Node2D" parent="."]
-
-[node name="HoleGenerator3" parent="HoleGenerators" instance=ExtResource( 3 )]
-position = Vector2( -456, 80 )
-newParentPath = NodePath("../../BG")
-turnipParentPath = NodePath("../../Objects")
-enabled = true
-
-[node name="CollisionShape2D" parent="HoleGenerators/HoleGenerator3" index="0"]
-position = Vector2( -40, 28 )
-shape = SubResource( 11 )
-
-[node name="HoleGenerator4" parent="HoleGenerators" instance=ExtResource( 3 )]
-position = Vector2( -688, 112 )
-newParentPath = NodePath("../../BG")
-turnipParentPath = NodePath("../../Objects")
-enabled = true
-
-[node name="CollisionShape2D" parent="HoleGenerators/HoleGenerator4" index="0"]
-position = Vector2( 32, -8 )
-shape = SubResource( 14 )
-
-[node name="HoleGenerator5" parent="HoleGenerators" instance=ExtResource( 3 )]
-position = Vector2( -520, 200 )
-newParentPath = NodePath("../../BG")
-turnipParentPath = NodePath("../../Objects")
-enabled = true
-
-[node name="CollisionShape2D" parent="HoleGenerators/HoleGenerator5" index="0"]
-position = Vector2( -72, 40 )
-shape = SubResource( 15 )
-
-[node name="HoleGenerator2" parent="HoleGenerators" instance=ExtResource( 3 )]
-position = Vector2( -224, 208 )
-newParentPath = NodePath("../../BG")
-turnipParentPath = NodePath("../../Objects")
-enabled = true
-
-[node name="CollisionShape2D" parent="HoleGenerators/HoleGenerator2" index="0"]
-position = Vector2( -52, 36 )
-shape = SubResource( 16 )
 
 [editable path="DripletSpawner"]
 [editable path="camarea"]

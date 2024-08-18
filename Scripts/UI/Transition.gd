@@ -4,10 +4,12 @@ signal transition_finished
 
 onready var animPlayer = $AnimationPlayer
 
-func fadein():
+func fadein(speed = 1):
+	animPlayer.playback_speed = speed
 	animPlayer.play("FadeIn")
 
-func fadeout():
+func fadeout(speed = 1):
+	animPlayer.playback_speed = speed
 	animPlayer.play("FadeOut")
 
 func _on_AnimationPlayer_animation_finished(anim_name):

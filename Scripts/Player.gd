@@ -139,7 +139,7 @@ func stop_dashing():
 	if state == States.DASHING:
 		state = States.MOVING
 		AfterImageCreator.stop_creating()
-		$TackleArea/CollisionShape2D.disabled = true
+		$TackleArea/CollisionShape2D.set_deferred("disabled", true)
 
 func hold_play(anim):
 	if animationPlayer.current_animation != "Throw" and state != States.DASHING:

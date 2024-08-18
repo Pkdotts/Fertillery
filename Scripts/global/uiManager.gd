@@ -40,19 +40,19 @@ func create_reticle():
 	reticle = newReticle
 
 
-func fade_in():
+func fade_in(speed = 1):
 	if transition != null:
 		transition.queue_free()
 		transition = null
 	var transitionUI = transitionNode.instance()
 	add_child(transitionUI)
 	transition = transitionUI
-	transition.fadein()
+	transition.fadein(speed)
 	fading = true
 
-func fade_out():
+func fade_out(speed = 1):
 	if transition != null:
-		transition.fadeout()
+		transition.fadeout(speed)
 		transition.connect("transition_finished", self, "remove_transition")
 
 func remove_transition():

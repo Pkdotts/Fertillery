@@ -38,7 +38,7 @@ func set_state(newState):
 func throw(height, newPos, time):
 	jump_to(newPos, time, height)
 	calculate_trajectory(newPos, time)
-	yield(get_tree().create_timer(time/3*2),"timeout")
+	yield(get_tree().create_timer(time * 0.9),"timeout")
 	$Anchor/Area2D/CollisionShape2D.set_deferred("disabled", false)
 
 func calculate_trajectory(newPos, time):
@@ -71,6 +71,7 @@ func land():
 	state = States.IDLE
 	$Anchor/Area2D/CollisionShape2D.set_deferred("disabled", true)
 	$Hitbox/CollisionShape2D.set_deferred("disabled", false)
+	position = position.round()
 	set_collisions(true)
 
 func flip(height, time):

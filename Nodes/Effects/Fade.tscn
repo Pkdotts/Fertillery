@@ -3,7 +3,6 @@
 [ext_resource path="res://Nodes/Effects/Fade.gd" type="Script" id=1]
 [ext_resource path="res://Shaders/Fade.shader" type="Shader" id=2]
 
-
 [sub_resource type="Animation" id=1]
 length = 0.001
 tracks/0/type = "value"

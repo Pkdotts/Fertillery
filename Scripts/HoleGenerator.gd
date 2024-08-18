@@ -3,6 +3,7 @@ extends Area2D
 export var newParentPath : NodePath
 export var turnipParentPath : NodePath
 export var enabled = false
+export var wait_time = 30
 
 var holeNode = preload("res://Nodes/Hole.tscn")
 

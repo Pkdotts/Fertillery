@@ -81,8 +81,10 @@ func grow():
 func throw(height, newPos, time):
 	jump_to(newPos, time, height)
 	calculate_trajectory(newPos, time)
+	set_collision_layer_bit(3, false)
 	yield(get_tree().create_timer(time/3*2),"timeout")
 	$Anchor/Eatbox/CollisionShape2D.set_deferred("disabled", false)
+	
 
 func calculate_trajectory(newPos, time):
 	var distance = position.distance_to(newPos)
@@ -166,7 +168,7 @@ func land():
 	$MoveTime.start(0.5)
 	$Anchor/Eatbox/CollisionShape2D.set_deferred("disabled", true)
 	$Hitbox/CollisionShape2D.set_deferred("disabled", false)
-	print("landed")
+	set_collision_layer_bit(3, true)
 
 
 func set_held():
