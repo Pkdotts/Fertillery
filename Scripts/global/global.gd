@@ -36,18 +36,20 @@ var minDripDelay = 2
 var dripCount = 0
 var maxDripCount = 10
 
-const THRESHOLDADDER = 30
-var nextThreshold = 30
+const THRESHOLDADDER = 1
+var nextThreshold = 2
 var turnipsEaten = 0
 var hungerMeter = 0
 var hungerSpeed = 3
 var maxHungerSpeed = 100
 
+var meterPaused = true
 
 func _ready():
 	trailPositions.resize(trailSize)
 	increase_win_size(2)
-	if get_tree().current_scene is Node2D:
+	audioManager.play_game_music()
+	if get_tree().current_scene is Node2D and get_tree().current_scene.name != "Tutorial":
 		uiManager.create_HUD()
 	#audioManager.play_music("", music["gameplay"])
 
@@ -92,11 +94,17 @@ func reset_driplets():
 	dripletsFollowing.clear()
 
 func increase_difficulty():
-	increase_hunger_speed(0.2)
+	increase_hunger_speed(0.5)
 	decrease_drip_delay(0.5)
 
+func pause_meter():
+	meterPaused = true
+
+func unpause_meter():
+	meterPaused = false
+
 func _physics_process(delta):
-	if !uiManager.fading:
+	if !uiManager.fading and !meterPaused:
 		if hungerMeter < 100:
 			if hungerMeter < 50:
 				hungerMeter += delta * hungerSpeed
@@ -154,15 +162,16 @@ func change_scenes(scene):
 	if uiManager.transition != null:
 		uiManager.transition.queue_free()
 		uiManager.transition = null
-	uiManager.fade_in()
+	uiManager.fade_in(0.3)
 	yield(uiManager.transition, "transition_finished")
 	get_tree().change_scene(scene)
-	
+	hungerMeter = 0
 	reset_driplets()
-	uiManager.fade_out()
+	uiManager.fade_out(0.3)
 	yield(uiManager.transition, "transition_finished")
 	if !get_tree().get_current_scene() is Control:
 		uiManager.create_HUD()
 	else:
 		uiManager.erase_HUD()
+	unpause_meter()
 	uiManager.fading = false
