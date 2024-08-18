@@ -30,6 +30,12 @@ collision_mask = 8
 position = Vector2( -22.5, 16.5 )
 shape = SubResource( 1 )
 
+[node name="BlowHolePos" type="Position2D" parent="."]
+position = Vector2( 29, -153 )
+__meta__ = {
+"_gizmo_extents_": 48.5
+}
+
 [node name="FertilizerPositions" type="Node2D" parent="."]
 position = Vector2( -73, 42 )
 

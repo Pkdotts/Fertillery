@@ -1,6 +1,7 @@
 extends Node
 
 signal updateTurnipCounter
+signal updateDripDelay(dripDelay)
 
 var winSize = 1
 var winDim = Vector2(384, 216)
@@ -13,16 +14,26 @@ var trailSize = 255
 var trailPositions = []
 var dripletsFollowing = []
 
+var dripDelay = 5
+var minDripDelay = 2
 var dripCount = 0
 var maxDripCount = 10
 
 var turnipsEaten = 0
 var hungerMeter = 0
 var hungerSpeed = 3
+var maxHungerSpeed = 10
+
 
 func increase_turnip_counter(num):
 	turnipsEaten += num
 	emit_signal("updateTurnipCounter")
+
+func decrease_drip_delay(amount):
+	dripDelay -= amount
+	if dripDelay < minDripDelay:
+		dripDelay = minDripDelay
+	emit_signal("updateDripDelay", dripDelay)
 
 func decrease_hunger(amount):
 	hungerMeter -= amount
@@ -31,6 +42,8 @@ func decrease_hunger(amount):
 
 func increase_hunger_speed(amount):
 	hungerSpeed += amount
+	if hungerSpeed > maxHungerSpeed:
+		hungerSpeed = maxHungerSpeed
 
 func set_hunger_speed(speed):
 	hungerSpeed = speed

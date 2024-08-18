@@ -5,6 +5,7 @@ enum States {MOVING, DASHING, PAUSED}
 const WALKSPEED = 6500
 const DASHSPEED = 20000
 const DECELERATION = 50000
+const FLIPHEIGHT = 32
 
 var heldItem = null
 
@@ -99,20 +100,29 @@ func set_held_item(item = null):
 
 func throw(pos):
 	if carrying:
+		#can't throw while item is in midair
+		if heldItem.state != heldItem.States.HELD:
+			return
 		heldItem.throw(pos, 0.5)
 		set_held_item(null)
 	elif global.dripletsFollowing.size() > 0 and global.dripletsFollowing[0].position.distance_to(position) < throwableDistance:
 		global.dripletsFollowing[0].throw(pos, 0.5)
 
-func _on_DashTimer_timeout():
+func stop_dashing():
 	if state == States.DASHING:
 		state = States.MOVING
 		AfterImageCreator.stop_creating()
 		$TackleArea/CollisionShape2D.disabled = true
 
+func _on_DashTimer_timeout():
+	stop_dashing()
+
 
 func _on_TackleArea_area_entered(area):
 	var parent = area.get_parent()
-	if !carrying and parent.has_method("set_held") and parent.state != parent.States.THROWN:
-		parent.set_held()
+	print($TackleArea/CollisionShape2D.disabled)
+	if state == States.DASHING and !carrying and parent.has_method("set_held") and parent.state != parent.States.THROWN:
+		parent.flip(-FLIPHEIGHT, 0.5)
 		set_held_item(parent)
+		stop_dashing()
+		global.currentCamera.shake_camera(2, 0.04, Vector2(1, 0))

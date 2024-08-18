@@ -1,13 +1,16 @@
 extends Area2D
 
 export var newParentPath : NodePath
-export var dripTimer = 5
 var dripletNode = preload("res://Nodes/Driplet.tscn")
 
 onready var newParent = get_node_or_null(newParentPath)
 
 func _ready():
-	$Timer.wait_time = dripTimer
+	set_drip_timer(global.dripDelay)
+	global.connect("updateDripDelay", self, "set_drip_timer")
+
+func set_drip_timer(time):
+	$Timer.wait_time = time
 
 func get_random_position():
 	var size = $CollisionShape2D.shape.extents * 2 * self.transform.get_scale()

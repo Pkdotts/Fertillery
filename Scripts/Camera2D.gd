@@ -103,25 +103,24 @@ func shake_camera(magnitude = 1.0, time = 1.0, direction = Vector2.ONE):
 		if time < 0.2:
 			time = 0.2
 		for i in int(time / .02):
-			if !global.queuedBattle and !global.inBattle and global.persistPlayer.state != global.persistPlayer.CAMERA:
-				var new_offset = Vector2.ZERO
-				if abs(shake) > 1:
-					shake = shake * -1
-					magnitude = magnitude * -1
+			var new_offset = Vector2.ZERO
+			if abs(shake) > 1:
+				shake = shake * -1
+				magnitude = magnitude * -1
+			else:
+				if shake < 0.5:
+					shake = 1.0
 				else:
-					if shake < 0.5:
-						shake = 1.0
-					else:
-						shake = 0.0
-				new_offset = Vector2(shake, shake) * direction
-				#offset = new_offset
-				$Tween.interpolate_property(self, "offset",
-					offset, new_offset, 0.02, 
-					Tween.TRANS_QUART, Tween.EASE_OUT)
-				$Tween.start()
-				yield(get_tree().create_timer(.02), "timeout")
-				if abs(shake) > 1:
-					shake -= magnitude / int(time / .02)
+					shake = 0.0
+			new_offset = Vector2(shake, shake) * direction
+			#offset = new_offset
+			$Tween.interpolate_property(self, "offset",
+				offset, new_offset, 0.02, 
+				Tween.TRANS_QUART, Tween.EASE_OUT)
+			$Tween.start()
+			yield(get_tree().create_timer(.02), "timeout")
+			if abs(shake) > 1:
+				shake -= magnitude / int(time / .02)
 				
 		offset = old_offset
 		shaking = false

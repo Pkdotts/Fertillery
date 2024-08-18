@@ -38,6 +38,9 @@ func land():
 	$Anchor/Area2D/CollisionShape2D.set_deferred("disabled", true)
 	$Hitbox/CollisionShape2D.set_deferred("disabled", false)
 
+func flip(height, time):
+	set_held()
+
 func set_held():
 	state = States.HELD
 	$Hitbox/CollisionShape2D.set_deferred("disabled", true)

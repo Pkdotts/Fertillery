@@ -1,12 +1,15 @@
 extends KinematicBody2D
 
+
+signal stopped_shaking
+
 export var speed = 100
 export var size = 1
 
 
 
 
-enum States {IDLE, MOVING, HELD, THROWN}
+enum States {IDLE, MOVING, HELD, THROWN, MIDAIR, HIT}
 var state = States.IDLE
 
 var sfx = {
@@ -40,6 +43,8 @@ func _physics_process(delta):
 			held_state()
 		States.THROWN:
 			thrown_state()
+		States.MIDAIR:
+			midair_state()
 	
 	position = position.round()
 
@@ -59,6 +64,9 @@ func held_state():
 func thrown_state():
 	pass
 
+func midair_state():
+	global_position = lerp(global_position, global.player.CarryPosition.global_position.round(), 0.3) 
+
 func set_state(newState):
 	state = newState
 
@@ -69,6 +77,12 @@ func grow():
 	speed = round(150 / (1 + (size - 1) * 0.5))
 
 func throw(newPos, time):
+	jump_to(newPos, time, throw_height)
+	tween.connect("tween_all_completed", self, "land", [], CONNECT_ONESHOT)
+	yield(get_tree().create_timer(time/3*2),"timeout")
+	$Anchor/Eatbox/CollisionShape2D.set_deferred("disabled", false)
+
+func jump_to(newPos, time, height):
 	if newPos.x < position.x:
 		$Anchor/Sprite.flip_h = true
 	elif newPos.x > position.x:
@@ -79,15 +93,60 @@ func throw(newPos, time):
 	tween.interpolate_property(self, "position", 
 		position, newPos, time)
 	tween.interpolate_property(anchor, "position:y", 
-		anchor.position.y, throw_height, time/2,
+		anchor.position.y, height, time/2,
 		Tween.TRANS_QUAD,Tween.EASE_OUT)
 	tween.interpolate_property(anchor, "position:y", 
-		throw_height, anchor.position.y, time/2,
+		height, anchor.position.y, time/2,
 		Tween.TRANS_QUAD,Tween.EASE_IN, time/2)
 	tween.start()
-	tween.connect("tween_all_completed", self, "land", [], CONNECT_ONESHOT)
-	yield(get_tree().create_timer(time/3*2),"timeout")
-	$Anchor/Eatbox/CollisionShape2D.set_deferred("disabled", false)
+
+func flip(height, time):
+	#set_state(States.HIT)
+	animationPlayer.play("Throw" + str(size))
+	#shake_sprite(5, 0.02, Vector2(1, 0))
+	
+	#yield(self, "stopped_shaking")
+	set_state(States.MIDAIR)
+	tween.interpolate_property(anchor, "position:y", 
+		anchor.position.y, height, time/2,
+		Tween.TRANS_QUAD,Tween.EASE_OUT)
+	tween.interpolate_property(anchor, "position:y", 
+		height, anchor.position.y, time/2,
+		Tween.TRANS_QUAD,Tween.EASE_IN, time/2)
+	tween.start()
+	
+	tween.connect("tween_all_completed", self, "set_held", [], CONNECT_ONESHOT)
+
+func shake_sprite(magnitude = 1.0, time = 1.0, direction = Vector2.ONE):
+	if !$Tween.is_active():
+		var old_pos = anchor.position
+		var shake = magnitude
+		if shake < 1.0:
+			shake = 1.0
+		if time < 0.2:
+			time = 0.2
+		for i in int(time / .02):
+			var new_offset = Vector2.ZERO
+			if abs(shake) > 1:
+				shake = shake * -1
+				magnitude = magnitude * -1
+			else:
+				if shake < 0.5:
+					shake = 1.0
+				else:
+					shake = 0.0
+			new_offset = Vector2(shake, shake) * direction
+			#offset = new_offset
+			$Tween.interpolate_property(anchor, "position",
+				anchor.position, new_offset, 0.02, 
+				Tween.TRANS_QUART, Tween.EASE_OUT)
+			$Tween.start()
+			yield(get_tree().create_timer(.02), "timeout")
+			if abs(shake) > 1:
+				shake -= magnitude / int(time / .02)
+				
+		anchor.position = old_pos
+		emit_signal("stopped_shaking")
 
 func die():
 	if global.player.heldItem == self:
@@ -99,6 +158,7 @@ func land():
 	$MoveTime.start(0.5)
 	$Anchor/Eatbox/CollisionShape2D.set_deferred("disabled", true)
 	$Hitbox/CollisionShape2D.set_deferred("disabled", false)
+
 
 func set_held():
 	set_state(States.HELD)
@@ -114,12 +174,9 @@ func _on_Absorber_area_entered(area):
 		driplet.die(sound)
 		grow()
 
-
-
-
 func choose_random_position():
 	
-	if state == States.HELD:
+	if state == States.HELD or state == States.MIDAIR:
 		return # if this little [insert slur here] is behind held, he stops moving
 	
 	var shape = $WanderRadius/CollisionShape2D.shape
