@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 signal paused
 
-enum States {MOVING, DASHING, PAUSED} 
+enum States {MOVING, DASHING} 
 
 const WALKSPEED = 8200
 const DASHSPEED = 20000
@@ -18,10 +18,9 @@ var inputVector = Vector2.ZERO
 var speed = 6500
 var throwableDistance = 100
 
-
+var paused = false
 var carrying = false
 var state = States.MOVING
-
 
 
 onready var CarryPosition = $CarryPosition
@@ -41,7 +40,7 @@ func _ready():
 
 
 func _input(event):
-	if event.is_action_pressed("ui_shift") and !carrying and state != States.PAUSED:
+	if event.is_action_pressed("ui_shift") and !carrying and !paused:
 		start_dash()
 
 func _physics_process(delta):
@@ -100,9 +99,10 @@ func update_party_positions(oldpos, multiplier = 1):
 
 
 func controls():
-	inputVector = controlsManager.get_controls_vector(false)
-	if inputVector != Vector2.ZERO:
-		direction = inputVector
+	if !paused:
+		inputVector = controlsManager.get_controls_vector(false)
+		if inputVector != Vector2.ZERO:
+			direction = inputVector
 
 
 
@@ -114,25 +114,26 @@ func set_held_item(item = null):
 		carrying = false
 
 func throw(pos):
-	var thrown = false
-	if carrying:
-		#can't throw while item is in midair
-		if heldItem.state != heldItem.States.HELD:
-			return
-		heldItem.throw(THROWHEIGHT, pos, 0.5)
-		set_held_item(null)
-		$ThrowSound.play()
-		thrown = true
-	elif global.dripletsFollowing.size() > 0 and global.dripletsFollowing[0].position.distance_to(position) < throwableDistance:
-		global.dripletsFollowing[0].throw(THROWHEIGHT, pos, 0.5)
-		thrown = true
-	
-	if thrown:
-		animationPlayer.play("Throw")
-		if pos.x > position.x:
-			$Sprite.flip_h = false
-		elif pos.x < position.x:
-			$Sprite.flip_h = true
+	if !paused:
+		var thrown = false
+		if carrying:
+			#can't throw while item is in midair
+			if heldItem.state != heldItem.States.HELD:
+				return
+			heldItem.throw(THROWHEIGHT, pos, 0.5)
+			set_held_item(null)
+			$ThrowSound.play()
+			thrown = true
+		elif global.dripletsFollowing.size() > 0 and global.dripletsFollowing[0].position.distance_to(position) < throwableDistance:
+			global.dripletsFollowing[0].throw(THROWHEIGHT, pos, 0.5)
+			thrown = true
+		
+		if thrown:
+			animationPlayer.play("Throw")
+			if pos.x > position.x:
+				$Sprite.flip_h = false
+			elif pos.x < position.x:
+				$Sprite.flip_h = true
 
 
 func stop_dashing():
@@ -149,8 +150,11 @@ func hold_play(anim):
 			animationPlayer.play(anim)
 
 func pause():
-	state = States.PAUSED
+	paused = true
 	emit_signal("paused")
+
+func unpause():
+	paused = false
 
 func _on_DashTimer_timeout():
 	stop_dashing()

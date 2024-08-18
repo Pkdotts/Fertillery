@@ -170,7 +170,7 @@ position = Vector2( -72, 40 )
 shape = SubResource( 15 )
 
 [node name="HoleGenerator2" parent="HoleGenerators" instance=ExtResource( 3 )]
-position = Vector2( -224, 208 )
+position = Vector2( -392, 200 )
 newParentPath = NodePath("../../BG")
 turnipParentPath = NodePath("../../Objects")
 enabled = true

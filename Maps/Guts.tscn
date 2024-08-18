@@ -13,7 +13,7 @@
 [ext_resource path="res://Nodes/Driplet.tscn" type="PackedScene" id=11]
 
 [sub_resource type="RectangleShape2D" id=13]
-extents = Vector2( 412, 108 )
+extents = Vector2( 324, 108 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 24, 72 )
@@ -99,7 +99,7 @@ newParentPath = NodePath("../Objects")
 newParentPath = NodePath("../Objects")
 
 [node name="CollisionShape2D" parent="DripletSpawner" index="1"]
-position = Vector2( -508, 180 )
+position = Vector2( -420, 180 )
 shape = SubResource( 13 )
 
 [node name="Collisions" type="Node2D" parent="."]

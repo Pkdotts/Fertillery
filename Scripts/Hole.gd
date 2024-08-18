@@ -31,7 +31,7 @@ func open():
 
 func _on_Area2D_area_entered(area):
 	var parent = area.get_parent().get_parent()
-	if opened and parent.get("state") != null and parent.state != parent.States.HELD:
+	if opened and parent.get("state") != null and (parent.state != parent.States.HELD and parent.state != parent.States.MIDAIR):
 		parent.die()
 		$AnimationPlayer.play("GrowSprout")
 

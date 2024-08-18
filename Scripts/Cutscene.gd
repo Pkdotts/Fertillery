@@ -14,10 +14,13 @@ func check_threshold():
 	if global.turnipsEaten >= global.nextThreshold and monster != null:
 		play_inhale_cutscene()
 
+
+
 func play_inhale_cutscene():
 	global.player.pause()
 	global.currentCamera.set_anchor(monster.cameraZoomPos)
 	global.currentCamera.update_offset(Vector2(-100, 0), 0.05)
+	global.pause_meter()
 	yield(get_tree().create_timer(2), "timeout")
 	monster.inhale()
 	audioManager.play_sfx(screamSFX, "scream")
@@ -26,6 +29,5 @@ func play_inhale_cutscene():
 	global.currentCamera.zoom_in(1)
 	yield(get_tree().create_timer(1), "timeout")
 	global.change_scenes("res://Maps/" + nextMap + ".tscn")
-	global.hungerMeter = 0
 	global.nextThreshold += global.THRESHOLDADDER
 	

@@ -11,8 +11,6 @@ func _process(delta):
 	var diff = get_global_mouse_position() - global.player.position
 	var newPosition = get_global_mouse_position()
 	position = newPosition
-	
-	
 
 func _input(event):
 	if event.is_action_pressed("left_click"):

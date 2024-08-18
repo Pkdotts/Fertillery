@@ -17,11 +17,13 @@ func create_HUD():
 		var newHud = hudNode.instance()
 		add_child(newHud)
 		hud = newHud
+		global.unpause_meter()
 
 func erase_HUD():
 	if hud != null:
 		hud.queue_free()
 		hud = null
+		global.pause_meter()
 
 func create_transition():
 	if transition == null:
