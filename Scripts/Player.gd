@@ -1,10 +1,12 @@
 extends KinematicBody2D
 
+signal paused
+
 enum States {MOVING, DASHING, PAUSED} 
 
-const WALKSPEED = 6500
+const WALKSPEED = 8200
 const DASHSPEED = 20000
-const DECELERATION = 50000
+const DECELERATION = 45000
 const FLIPHEIGHT = 32
 const THROWHEIGHT = -40
 
@@ -92,7 +94,7 @@ func move(dir, spd, delta):
 func update_party_positions(oldpos, multiplier = 1):
 	var maxDist = round(max(abs(oldpos.x-self.position.x), abs(oldpos.y-self.position.y)) * multiplier)
 	for i in maxDist:
-		global.trailPositions.push_front(lerp(oldpos, position.round(), (i+1)/maxDist))
+		global.trailPositions.push_front(lerp(oldpos, position, (i+1)/maxDist))
 		global.trailPositions.pop_back()
 
 
@@ -148,6 +150,7 @@ func hold_play(anim):
 
 func pause():
 	state = States.PAUSED
+	emit_signal("paused")
 
 func _on_DashTimer_timeout():
 	stop_dashing()

@@ -54,7 +54,7 @@ position = Vector2( 192, 212 )
 texture = ExtResource( 9 )
 
 [node name="VoreMonster" parent="." instance=ExtResource( 7 )]
-position = Vector2( 568, 168 )
+position = Vector2( 568, 192 )
 newParentPath = NodePath("../Objects")
 
 [node name="Objects" type="YSort" parent="."]
@@ -63,7 +63,7 @@ newParentPath = NodePath("../Objects")
 position = Vector2( 208, 240 )
 
 [node name="Fertilizer3" parent="Objects" instance=ExtResource( 4 )]
-position = Vector2( 440, 224 )
+position = Vector2( 352, 248 )
 
 [node name="Reticle" parent="." instance=ExtResource( 5 )]
 

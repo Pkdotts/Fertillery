@@ -4,6 +4,7 @@ var maxDistance = 100
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	global.player.connect("paused", self, "hide")
 
 func _process(delta):
 	var playerDirectionToMouse = global.player.position.direction_to(get_global_mouse_position())

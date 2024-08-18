@@ -177,11 +177,12 @@ func set_held():
 func _on_Absorber_area_entered(area):
 	if size < max_size:
 		var driplet = area.get_parent().get_parent()
-		var sound = sfx["grow"]
-		if size == 5:
-			sound = sfx["maxgrow"]
-		driplet.die(sound)
-		grow()
+		if driplet.visible:
+			var sound = sfx["grow"]
+			if size == 5:
+				sound = sfx["maxgrow"]
+			driplet.die(sound)
+			grow()
 
 func choose_random_position():
 	

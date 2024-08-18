@@ -3,7 +3,7 @@ extends KinematicBody2D
 
 enum States {IDLE, FOLLOWING, THROWN, SPAWNING}
 var state = States.IDLE
-var speed = 7000
+var speed = 8200
 var idx = -1
 var throw_height = -40
 var followPositionOffset = Vector2.ZERO
