@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 
-enum States {IDLE, FOLLOWING, THROWN}
+enum States {IDLE, FOLLOWING, THROWN, SPAWNING}
 var state = States.IDLE
 var speed = 7000
 var idx = -1
@@ -13,8 +13,8 @@ onready var tween = $Tween
 onready var anchor = $Anchor
 
 func _ready():
+	$AnimationPlayer.play("Idle")
 	global.dripCount += 1
-	set_state(States.IDLE)
 	var randX = rand_range(-global.randomFollowerOffset, global.randomFollowerOffset)
 	var randY = rand_range(-global.randomFollowerOffset, global.randomFollowerOffset)
 	followPositionOffset = Vector2(randX, randY).round()
@@ -38,12 +38,14 @@ func follow_state(delta):
 	if abs(difference.x) > 5 or abs(difference.y) > 5:
 		var direction = global_position.direction_to(newPosition)
 		move_and_slide(direction * speed * delta)
-		animationPlayer.play("Walk")
+		$AnimationPlayer.play("Walk")
+	elif global.player.moving:
+		$AnimationPlayer.play("Walk")
 	else:
-		animationPlayer.play("Idle")
-	if oldPos.x > position.x:
+		$AnimationPlayer.play("Idle")
+	if round(oldPos.x) > round(position.x):
 		$Anchor/Sprite.flip_h = true
-	elif oldPos.x < position.x:
+	elif round(oldPos.x) < round(position.x):
 		$Anchor/Sprite.flip_h = false
 
 
@@ -73,6 +75,22 @@ func throw(newPos, time):
 func land():
 	start_following()
 	$Anchor/Hitbox/CollisionShape2D.disabled = true
+
+func spawn():
+	state = States.SPAWNING
+	$ViewArea/CollisionShape2D.disabled = true
+	var dropPosition = Vector2(position.x - 212, position.x - 424)
+	$AnimationPlayer.play("Falling")
+	tween.interpolate_property(self, "position", 
+		dropPosition, position, 1)
+	tween.start()
+	yield(tween, "tween_all_completed")
+	$AudioStreamPlayer2D.play(0.01)
+	$AnimationPlayer.play("Drop")
+	yield($AnimationPlayer, "animation_finished")
+	set_state(States.IDLE)
+	$ViewArea/CollisionShape2D.disabled = false
+
 
 func die(sfx = null):
 	global.dripCount -= 1

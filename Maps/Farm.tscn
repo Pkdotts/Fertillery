@@ -8,13 +8,13 @@
 [ext_resource path="res://Nodes/DripletSpawner.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Nodes/monster.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Nodes/camarea.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Sprites/Maps/City.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Maps/stage1.png" type="Texture" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 384.5, 212 )
 
 [sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 224, 180 )
+extents = Vector2( 224, 98 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 24, 168 )
@@ -45,8 +45,7 @@ extents = Vector2( 24, 60 )
 [node name="BG" type="Node2D" parent="."]
 
 [node name="City" type="Sprite" parent="BG"]
-position = Vector2( 384, 216 )
-scale = Vector2( 1.33333, 1.30864 )
+position = Vector2( 192, 212 )
 texture = ExtResource( 9 )
 
 [node name="VoreMonster" parent="." instance=ExtResource( 7 )]
@@ -56,10 +55,10 @@ newParentPath = NodePath("../Objects")
 [node name="Objects" type="YSort" parent="."]
 
 [node name="Player" parent="Objects" instance=ExtResource( 1 )]
-position = Vector2( 360, 144 )
+position = Vector2( 208, 240 )
 
 [node name="Fertilizer3" parent="Objects" instance=ExtResource( 4 )]
-position = Vector2( 448, 128 )
+position = Vector2( 440, 224 )
 
 [node name="Reticle" parent="." instance=ExtResource( 5 )]
 
@@ -67,6 +66,7 @@ position = Vector2( 448, 128 )
 anchor_path = NodePath("../Objects/Player")
 
 [node name="camarea" parent="." instance=ExtResource( 8 )]
+visible = false
 position = Vector2( 384, 208 )
 
 [node name="CollisionShape2D" parent="camarea" index="0"]
@@ -77,24 +77,28 @@ position = Vector2( 248, 224 )
 newParentPath = NodePath("../Objects")
 
 [node name="CollisionShape2D" parent="DripletSpawner" index="1"]
+position = Vector2( 0, 82 )
 shape = SubResource( 9 )
 
 [node name="HoleGenerators" type="Node2D" parent="."]
 
 [node name="HoleGenerator3" parent="HoleGenerators" instance=ExtResource( 3 )]
-position = Vector2( 152, 312 )
+position = Vector2( 152, 344 )
+scale = Vector2( 1, 0.5 )
 newParentPath = NodePath("../../BG")
 turnipParentPath = NodePath("../../Objects")
 enabled = true
 
 [node name="HoleGenerator" parent="HoleGenerators" instance=ExtResource( 3 )]
-position = Vector2( 120, 112 )
+position = Vector2( 128, 248 )
+scale = Vector2( 1, 0.5 )
 newParentPath = NodePath("../../BG")
 turnipParentPath = NodePath("../../Objects")
 enabled = true
 
 [node name="HoleGenerator2" parent="HoleGenerators" instance=ExtResource( 3 )]
-position = Vector2( 368, 152 )
+position = Vector2( 376, 312 )
+scale = Vector2( 1, 0.5 )
 newParentPath = NodePath("../../BG")
 turnipParentPath = NodePath("../../Objects")
 enabled = true

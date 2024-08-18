@@ -64,6 +64,7 @@ func increase_turnip_counter(num):
 func check_threshold():
 	if turnipsEaten >= nextThreshold:
 		change_scenes("res://Maps/Guts.tscn")
+		hungerMeter = 0
 		nextThreshold += THRESHOLDADDER
 
 func decrease_drip_delay(amount):
@@ -96,7 +97,12 @@ func reset_driplets():
 
 func _physics_process(delta):
 	if hungerMeter < 100:
-		hungerMeter += delta * hungerSpeed
+		if hungerMeter < 50:
+			hungerMeter += delta * hungerSpeed
+		elif hungerMeter < 80:
+			hungerMeter += delta * hungerSpeed * 0.85
+		else:
+			hungerMeter += delta * hungerSpeed * 0.7
 
 func _input(event):
 	if event.is_action_pressed("ui_winsize"):

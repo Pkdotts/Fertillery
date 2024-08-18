@@ -8,7 +8,7 @@
 [ext_resource path="res://Nodes/DripletSpawner.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Nodes/monster.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Nodes/camarea.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Sprites/Maps/stage1.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Maps/stage2.png" type="Texture" id=9]
 [ext_resource path="res://Nodes/Driplet.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Shader" id=9]
@@ -54,10 +54,10 @@ extents = Vector2( 112, 56 )
 extents = Vector2( 84, 96 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 24, 88 )
+extents = Vector2( 24, 72 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 288, 16 )
+extents = Vector2( 312, 168 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 25, 72 )
@@ -66,7 +66,7 @@ extents = Vector2( 25, 72 )
 extents = Vector2( 312.5, 16 )
 
 [sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 312, 16 )
+extents = Vector2( 312, 168 )
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 24, 68 )
@@ -115,6 +115,7 @@ position = Vector2( -56, 232 )
 [node name="Reticle" parent="." instance=ExtResource( 5 )]
 
 [node name="Camera" parent="." instance=ExtResource( 2 )]
+position = Vector2( -168, 80 )
 anchor_path = NodePath("../Objects/Player")
 
 [node name="camarea" parent="." instance=ExtResource( 8 )]
@@ -180,11 +181,11 @@ collision_layer = 49
 collision_mask = 49
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/StaticBody2D"]
-position = Vector2( 0, 72 )
+position = Vector2( 0, 88 )
 shape = SubResource( 2 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Collisions/StaticBody2D"]
-position = Vector2( -312, 0 )
+position = Vector2( -288, -152 )
 shape = SubResource( 5 )
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Collisions"]
@@ -206,7 +207,7 @@ collision_layer = 49
 collision_mask = 49
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Collisions/StaticBody2D3"]
-position = Vector2( 272, 0 )
+position = Vector2( 272, -152 )
 shape = SubResource( 10 )
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Collisions/StaticBody2D3"]

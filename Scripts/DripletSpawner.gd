@@ -23,7 +23,11 @@ func spawn_driplet():
 	if global.dripCount < global.maxDripCount and newParent != null:
 		var driplet = dripletNode.instance()
 		driplet.position = get_random_position().round()
+		driplet.hide()
 		newParent.call_deferred("add_child", driplet)
+		yield(get_tree(), "idle_frame")
+		driplet.spawn()
+		driplet.show()
 
 func start_timer():
 	$Timer.start()
