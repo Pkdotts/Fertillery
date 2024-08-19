@@ -8,7 +8,8 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Results.text = "Turnips fed - " + var2str(global.turnipCount)
+	yield(get_tree().create_timer(0.1),"timeout")
+	$AnimationPlayer.play("start")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -16,10 +17,5 @@ func _ready():
 #	pass
 
 
-func _on_Button_pressed():
-	
-	global.change_scenes("res://Maps/Farm.tscn")
-
-
-func _on_Button2_pressed():
-	$Credits.show()
+func _on_AnimationPlayer_animation_finished(anim_name):
+	global.change_scenes("res://Maps/TitleScreen.tscn")

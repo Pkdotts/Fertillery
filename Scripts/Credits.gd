@@ -8,7 +8,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Results.text = "Turnips fed - " + var2str(global.turnipCount)
+	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -17,9 +17,5 @@ func _ready():
 
 
 func _on_Button_pressed():
-	
-	global.change_scenes("res://Maps/Farm.tscn")
-
-
-func _on_Button2_pressed():
-	$Credits.show()
+	if self.visible:
+		self.hide()
