@@ -126,6 +126,7 @@ position = Vector2( 96, 344 )
 scale = Vector2( 1, 0.5 )
 newParentPath = NodePath("../../BG")
 turnipParentPath = NodePath("../../Objects")
+seedSpawnerPath = NodePath("../../Objects/SeedSpawner")
 enabled = true
 
 [node name="HoleGenerator4" parent="HoleGenerators" instance=ExtResource( 3 )]
@@ -133,6 +134,7 @@ position = Vector2( 312, 216 )
 scale = Vector2( 0.8, 0.5 )
 newParentPath = NodePath("../../BG")
 turnipParentPath = NodePath("../../Objects")
+seedSpawnerPath = NodePath("../../Objects/SeedSpawner")
 enabled = true
 
 [node name="HoleGenerator" parent="HoleGenerators" instance=ExtResource( 3 )]
@@ -140,6 +142,7 @@ position = Vector2( -16, 240 )
 scale = Vector2( 1, 0.5 )
 newParentPath = NodePath("../../BG")
 turnipParentPath = NodePath("../../Objects")
+seedSpawnerPath = NodePath("../../Objects/SeedSpawner")
 enabled = true
 
 [node name="HoleGenerator2" parent="HoleGenerators" instance=ExtResource( 3 )]
@@ -147,6 +150,7 @@ position = Vector2( 376, 328 )
 scale = Vector2( 1, 0.5 )
 newParentPath = NodePath("../../BG")
 turnipParentPath = NodePath("../../Objects")
+seedSpawnerPath = NodePath("../../Objects/SeedSpawner")
 enabled = true
 
 [node name="Collisions" type="Node2D" parent="."]

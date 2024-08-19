@@ -15,13 +15,20 @@ onready var timer = $Timer
 var turnipNode = preload("res://Nodes/Turnip.tscn")
 var opened = false
 
+var seedSpawner = null
+
 onready var plantSFX = preload("res://Audio/SFX/plant.wav")
 onready var turnipGrowSFX = preload("res://Audio/SFX/turnipgrow.wav")
+
+
 
 func _ready():
 	open()
 	if wait_time != 0:
 		$Timer.wait_time = wait_time
+
+func set_seed_spawner(elefun):
+	seedSpawner = elefun
 
 func create_turnip():
 	close()
@@ -36,6 +43,8 @@ func create_turnip():
 			turnip.set_tutorial_turnip(cutscene)
 			cutscene = null
 		emit_signal("created_turnip")
+		if seedSpawner != null:
+			seedSpawner.start_creating()
 
 func close():
 	opened = false

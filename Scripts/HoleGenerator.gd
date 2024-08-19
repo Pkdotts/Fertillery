@@ -2,6 +2,7 @@ extends Area2D
 
 export var newParentPath : NodePath
 export var turnipParentPath : NodePath
+export var seedSpawnerPath : NodePath
 export var enabled = false
 export var wait_time = 30
 
@@ -10,6 +11,7 @@ var holeNode = preload("res://Nodes/Hole.tscn")
 var attachedHole = null
 
 onready var newParent = get_node_or_null(newParentPath)
+onready var seedSpawner = get_node_or_null(seedSpawnerPath)
 
 func _ready():
 	if enabled:
@@ -32,6 +34,7 @@ func spawn_hole():
 		hole.position = get_random_position().round()
 		newParent.call_deferred("add_child", hole)
 		attachedHole = hole
+		hole.set_seed_spawner(seedSpawner)
 
 func erase_hole():
 	if attachedHole != null:

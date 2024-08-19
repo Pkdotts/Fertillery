@@ -89,6 +89,7 @@ func play_intro_cutscene():
 	audioManager.play_game_music()
 	uiManager.create_HUD()
 	create_seed()
+	hole.set_seed_spawner(seedSpawner)
 	
 
 func play_inhale_cutscene():

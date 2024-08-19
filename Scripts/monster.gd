@@ -38,8 +38,8 @@ func _on_Area2D_area_entered(area):
 	global.increase_turnip_counter(turnip.size)
 	global.decrease_hunger(turnip.size * 10)
 	global.increase_difficulty(turnip.size)
-	if seedSpawner != null:
-		seedSpawner.start_creating()
+	#if seedSpawner != null:
+		#seedSpawner.start_creating()
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Chew":

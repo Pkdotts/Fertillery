@@ -27,7 +27,7 @@ var maxDripCount = 10
 
 const THRESHOLDADDER = 30
 const STARTTHRESHOLD = 25
-var nextThreshold = 0
+var nextThreshold = 25
 var turnipsEaten = 0
 var hungerMeter = 0
 var hungerSpeed = 1
