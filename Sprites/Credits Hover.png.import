@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Sprout.png-3b6366a510cd417338bce86d41419ac1.stex"
+path="res://.import/Credits Hover.png-24ed2d14975e6603f53a693f37332c50.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Sprout.png"
-dest_files=[ "res://.import/Sprout.png-3b6366a510cd417338bce86d41419ac1.stex" ]
+source_file="res://Sprites/Credits Hover.png"
+dest_files=[ "res://.import/Credits Hover.png-24ed2d14975e6603f53a693f37332c50.stex" ]
 
 [params]
 

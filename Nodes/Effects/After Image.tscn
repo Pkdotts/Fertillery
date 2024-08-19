@@ -18,7 +18,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.25 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 0.207843, 0.807843, 0.92549, 1 ), Color( 0.152941, 0.156863, 0.301961, 1 ) ]
+"values": [ Color( 0.952941, 0.807843, 0.6, 1 ), Color( 0.278431, 0.192157, 0.0470588, 1 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:material:shader_param/flash_modifier")

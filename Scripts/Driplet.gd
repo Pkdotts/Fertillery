@@ -42,7 +42,7 @@ func follow_state(delta):
 		var direction = global_position.direction_to(newPosition)
 		move_and_slide(direction * speed * delta)
 		$AnimationPlayer.play("Walk")
-	elif global.player.moving:
+	elif global.player.moving and !global.player.paused:
 		$AnimationPlayer.play("Walk")
 	else:
 		$AnimationPlayer.play("Idle")

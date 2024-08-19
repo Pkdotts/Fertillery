@@ -10,7 +10,7 @@ func _ready():
 	#	$Results.hide()
 	#else:
 	$Results.show()
-	$Results.text = var2str(global.turnipCount)
+	$Results.text = var2str(global.highScore)
 	uiManager.reticle.set_mode(1)
 
 
@@ -24,6 +24,7 @@ func _on_Button2_pressed():
 	if enabled:
 		$Credits.show()
 		uiManager.reticle.play_sfx()
+		$CreditsHover.hide()
 
 func hide():
 	enabled = false
@@ -32,3 +33,18 @@ func hide():
 	$Tween.start()
 	yield($Tween,"tween_all_completed")
 	hide()
+
+
+func _on_Button_mouse_entered():
+	$StartHover.show()
+
+func _on_Button_mouse_exited():
+	$StartHover.hide()
+
+
+func _on_Button2_mouse_entered():
+	$CreditsHover.show()
+
+
+func _on_Button2_mouse_exited():
+	$CreditsHover.hide()

@@ -46,6 +46,7 @@ func start_game():
 	uiManager.reticle.set_mode(0)
 	global.currentCamera.set_anchor(global.player)
 	global.player.unpause()
+	global.nextThreshold = global.STARTTHRESHOLD
 	if seedSpawner != null:
 			yield(get_tree().create_timer(1),"timeout")
 			create_seed()
@@ -84,7 +85,7 @@ func play_intro_cutscene():
 	yield(get_tree().create_timer(5), "timeout")
 	monster.idle()
 	yield(get_tree().create_timer(2), "timeout")
-	
+	global.start_timer()
 	audioManager.play_game_music()
 	uiManager.create_HUD()
 	create_seed()
@@ -108,4 +109,6 @@ func play_inhale_cutscene():
 	yield(get_tree().create_timer(1), "timeout")
 	global.change_scenes("res://Maps/" + nextMap + ".tscn")
 	global.nextThreshold += global.THRESHOLDADDER
-	
+
+func play_game_over_cutscene():
+	pass

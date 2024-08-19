@@ -8,7 +8,6 @@ var winDim = Vector2(384, 216)
 var player = null
 var currentCamera = null
 var level = 1
-var turnipCount = 0
 var highScore = 0
 
 var music = {
@@ -27,7 +26,8 @@ var dripCount = 0
 var maxDripCount = 10
 
 const THRESHOLDADDER = 30
-var nextThreshold = 30
+const STARTTHRESHOLD = 25
+var nextThreshold = 0
 var turnipsEaten = 0
 var hungerMeter = 0
 var hungerSpeed = 1

@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/TitleScreen.gd" type="Script" id=1]
 [ext_resource path="res://Maps/Credits.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Sprites/Logo.png" type="Texture" id=3]
 [ext_resource path="res://Fonts/Fertillery.tres" type="DynamicFont" id=4]
 [ext_resource path="res://Sprites/High Score.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Start.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Start Hover.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Credits.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Credits Hover.png" type="Texture" id=9]
 
 [node name="TitleScreen" type="Control"]
 script = ExtResource( 1 )
@@ -13,18 +17,38 @@ script = ExtResource( 1 )
 position = Vector2( 192, 84 )
 texture = ExtResource( 3 )
 
+[node name="StartSprite" type="Sprite" parent="."]
+position = Vector2( 194, 96 )
+texture = ExtResource( 6 )
+
+[node name="StartHover" type="Sprite" parent="."]
+visible = false
+position = Vector2( 195, 97 )
+texture = ExtResource( 7 )
+
+[node name="CreditsSprite" type="Sprite" parent="."]
+position = Vector2( 312, 189 )
+texture = ExtResource( 8 )
+
+[node name="CreditsHover" type="Sprite" parent="."]
+visible = false
+position = Vector2( 313, 190 )
+texture = ExtResource( 9 )
+
 [node name="Button" type="Button" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 margin_left = 128.0
-margin_top = 80.0
+margin_top = 72.0
 margin_right = 256.0
-margin_bottom = 116.0
+margin_bottom = 114.0
 text = "start"
 
 [node name="Button2" type="Button" parent="."]
-margin_left = 314.0
-margin_top = 178.0
-margin_right = 370.0
-margin_bottom = 206.0
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 255.0
+margin_top = 173.0
+margin_right = 369.0
+margin_bottom = 203.0
 text = "credits"
 
 [node name="Results" type="Label" parent="."]
@@ -54,5 +78,9 @@ visible = false
 
 [node name="Tween" type="Tween" parent="."]
 
+[connection signal="mouse_entered" from="Button" to="." method="_on_Button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_Button_mouse_exited"]
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[connection signal="mouse_entered" from="Button2" to="." method="_on_Button2_mouse_entered"]
+[connection signal="mouse_exited" from="Button2" to="." method="_on_Button2_mouse_exited"]
 [connection signal="pressed" from="Button2" to="." method="_on_Button2_pressed"]

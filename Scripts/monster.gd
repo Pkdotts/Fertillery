@@ -25,6 +25,7 @@ func idle():
 func _on_Area2D_area_entered(area):
 	var turnip = area.get_parent().get_parent()
 	
+	#if turnip somehow enters the area again
 	if turnip.queuedEaten:
 		return
 	else:
@@ -33,7 +34,6 @@ func _on_Area2D_area_entered(area):
 	yield(get_tree().create_timer(0.1), "timeout")
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("Chew")
-	global.turnipCount = global.turnipCount + 1
 	turnip.die()
 	global.increase_turnip_counter(turnip.size)
 	global.decrease_hunger(turnip.size * 10)

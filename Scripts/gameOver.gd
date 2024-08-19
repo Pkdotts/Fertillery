@@ -8,9 +8,9 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$SatiationPointsLabel.bbcode_text = var2str(global.turnipCount)
-	if global.turnipCount > global.highScore:
-		global.highScore = global.turnipCount 
+	$SatiationPointsLabel.bbcode_text = var2str(global.turnipsEaten)
+	if global.turnipsEaten > global.highScore:
+		global.highScore = global.turnipsEaten 
 		$HighScoreLabel.bbcode_text = "[rainbow]" + var2str(global.highScore)
 	else:
 		$HighScoreLabel.bbcode_text = var2str(global.highScore)
