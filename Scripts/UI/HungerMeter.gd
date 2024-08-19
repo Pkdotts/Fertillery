@@ -1,6 +1,6 @@
 extends Control
 
-onready var hungerBar = $ColorRect/HungerBar
+onready var hungerBar = $HungerBar
 
 const NORMALCOLOR = Color("ad668b")
 const DANGERCOLOR = Color("ca3a51")

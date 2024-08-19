@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Nodes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Nodes/Camera.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Sprites/Maps/stage4.png" type="Texture" id=9]
 [ext_resource path="res://Nodes/Cutscene.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Nodes/Driplet.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Nodes/SeedSpawner.tscn" type="PackedScene" id=12]
 
 [sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 396, 80 )
@@ -93,7 +94,7 @@ texture = ExtResource( 9 )
 
 [node name="VoreMonster" parent="." instance=ExtResource( 7 )]
 position = Vector2( 8, 80 )
-newParentPath = NodePath("../Objects")
+seedSpawnerPath = NodePath("../Objects/SeedSpawner")
 
 [node name="DripletSpawner" parent="." instance=ExtResource( 6 )]
 newParentPath = NodePath("../Objects")
@@ -105,7 +106,7 @@ shape = SubResource( 13 )
 [node name="Objects" type="YSort" parent="."]
 
 [node name="Player" parent="Objects" instance=ExtResource( 1 )]
-position = Vector2( -168, 80 )
+position = Vector2( -816, 32 )
 
 [node name="Turnip" parent="Objects" instance=ExtResource( 4 )]
 material = SubResource( 12 )
@@ -124,10 +125,13 @@ position = Vector2( -504, -16 )
 [node name="Driplet3" parent="Objects" instance=ExtResource( 11 )]
 position = Vector2( -136, 208 )
 
+[node name="SeedSpawner" parent="Objects" instance=ExtResource( 12 )]
+position = Vector2( -760, -8 )
+
 [node name="Reticle" parent="." instance=ExtResource( 5 )]
 
 [node name="Camera" parent="." instance=ExtResource( 2 )]
-position = Vector2( -168, 80 )
+position = Vector2( -816, 32 )
 anchor_path = NodePath("../Objects/Player")
 
 [node name="camarea" parent="." instance=ExtResource( 8 )]

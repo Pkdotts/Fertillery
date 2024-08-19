@@ -38,8 +38,8 @@ var minDripDelay = 2
 var dripCount = 0
 var maxDripCount = 10
 
-const THRESHOLDADDER = 1
-var nextThreshold = 2
+const THRESHOLDADDER = 30
+var nextThreshold = 30
 var turnipsEaten = 0
 var hungerMeter = 0
 var hungerSpeed = 3

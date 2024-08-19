@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/cratebreak.wav-65c74e59dbcc46468dd8abc7fc33eea4.sample"
+
+[deps]
+
+source_file="res://Audio/SFX/cratebreak.wav"
+dest_files=[ "res://.import/cratebreak.wav-65c74e59dbcc46468dd8abc7fc33eea4.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

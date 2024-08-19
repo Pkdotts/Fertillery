@@ -8,18 +8,32 @@ onready var monster = get_node_or_null(monsterPath)
 export var binPath : NodePath
 onready var bin = get_node_or_null(binPath)
 
+export var seedSpawnerPath : NodePath
+onready var seedSpawner = get_node_or_null(seedSpawnerPath)
+
 export var nextMap = ""
 export var monsterDropPosition = 0
 
 
 
 onready var screamSFX = preload("res://Audio/SFX/fiendroar.wav")
+onready var fallSFX = preload("res://Audio/SFX/fiendfallin.wav")
+onready var explodeSFX = preload("res://Audio/SFX/cratebreak.wav")
 
 func _ready():
 	global.connect("updateTurnipCounter", self, "check_threshold")
 	if tutorial:
 		if bin != null:
 			bin.connect("ate", self, "play_intro_cutscene")
+		if seedSpawner != null:
+			yield(get_tree().create_timer(1),"timeout")
+			create_seed()
+		
+
+func create_seed():
+	if seedSpawner != null:
+		seedSpawner.start_creating()
+
 
 func check_threshold():
 	if global.turnipsEaten >= global.nextThreshold and monster != null:
@@ -40,8 +54,10 @@ func play_intro_cutscene():
 	$Tween.interpolate_property(monster, "position:y",
 		monster.position.y, monsterDropPosition, 1)
 	$Tween.start()
+	audioManager.play_sfx(fallSFX, "explosion")
 	yield(get_tree().create_timer(0.8), "timeout")
 	bin.die()
+	audioManager.play_sfx(explodeSFX, "explosion")
 	yield(get_tree().create_timer(0.8), "timeout")
 	monster.roar()
 	audioManager.play_sfx(screamSFX, "scream")
@@ -51,6 +67,7 @@ func play_intro_cutscene():
 	
 	audioManager.play_game_music()
 	uiManager.create_HUD()
+	create_seed()
 	
 
 func play_inhale_cutscene():
