@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scripts/HUD.gd" type="Script" id=1]
 [ext_resource path="res://Nodes/UI/HungerMeter.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Fonts/Brickish.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Fonts/Fertillery.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Sprites/Satiation Points.png" type="Texture" id=4]
 
 [node name="HUD" type="CanvasLayer"]
@@ -21,10 +21,10 @@ position = Vector2( 71, 24 )
 texture = ExtResource( 4 )
 
 [node name="Score" type="Label" parent="Control/SatiationPoints"]
-margin_left = 93.0
-margin_top = 23.0
-margin_right = 99.0
-margin_bottom = 36.0
+margin_left = 91.0
+margin_top = 22.0
+margin_right = 106.0
+margin_bottom = 38.0
 custom_fonts/font = ExtResource( 3 )
 text = "0"
 

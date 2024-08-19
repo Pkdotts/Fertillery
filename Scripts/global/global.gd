@@ -26,12 +26,12 @@ var dripletsFollowing = []
 var dripCount = 0
 var maxDripCount = 10
 
-const THRESHOLDADDER = 1
-var nextThreshold = 1
+const THRESHOLDADDER = 30
+var nextThreshold = 30
 var turnipsEaten = 0
 var hungerMeter = 0
 var hungerSpeed = 1
-var maxHungerSpeed = 100
+var maxHungerSpeed = 50
 
 var time = 0
 var timer = false
