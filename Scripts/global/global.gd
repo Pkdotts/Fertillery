@@ -33,8 +33,6 @@ const trailSize = 255
 var trailPositions = []
 var dripletsFollowing = []
 
-var dripDelay = 5
-var minDripDelay = 2
 var dripCount = 0
 var maxDripCount = 10
 
@@ -42,7 +40,7 @@ const THRESHOLDADDER = 30
 var nextThreshold = 30
 var turnipsEaten = 0
 var hungerMeter = 0
-var hungerSpeed = 3
+var hungerSpeed = 2
 var maxHungerSpeed = 100
 
 var meterPaused = true
@@ -64,12 +62,6 @@ func increase_turnip_counter(num):
 	turnipsEaten += num
 	emit_signal("updateTurnipCounter")
 
-
-func decrease_drip_delay(amount):
-	dripDelay -= amount
-	if dripDelay < minDripDelay:
-		dripDelay = minDripDelay
-	emit_signal("updateDripDelay", dripDelay)
 
 func decrease_hunger(amount):
 	hungerMeter -= amount
@@ -96,7 +88,6 @@ func reset_driplets():
 
 func increase_difficulty():
 	increase_hunger_speed(0.5)
-	decrease_drip_delay(0.5)
 
 func pause_meter():
 	meterPaused = true

@@ -98,6 +98,7 @@ seedSpawnerPath = NodePath("../SeedSpawner")
 
 [node name="DripletSpawner" parent="." instance=ExtResource( 6 )]
 newParentPath = NodePath("../Objects")
+dripDelay = 4.0
 
 [node name="CollisionShape2D" parent="DripletSpawner" index="1"]
 position = Vector2( -508, 180 )

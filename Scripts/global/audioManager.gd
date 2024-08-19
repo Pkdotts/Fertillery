@@ -5,12 +5,19 @@ var musicVolume = 0
 
 func _ready():
 	$AudioPlayers/GameMusic.volume_db = musicVolume
+	$AudioPlayers/Ambiance.volume_db = musicVolume
 
 func play_game_music():
 	$AudioPlayers/GameMusic.play()
 
 func stop_game_music():
 	$AudioPlayers/GameMusic.stop()
+
+func play_ambiance_music():
+	$AudioPlayers/Ambiance.play()
+
+func stop_ambiance_music():
+	$AudioPlayers/Ambiance.stop()
 
 func add_sfx(stream, name) -> AudioStreamPlayer:
 	var sfx_node: AudioStreamPlayer = get_sfx(name)

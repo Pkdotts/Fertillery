@@ -16,7 +16,7 @@
 extents = Vector2( 384.5, 212 )
 
 [sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 224, 98 )
+extents = Vector2( 192, 106 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 24, 88 )
@@ -64,10 +64,10 @@ seedSpawnerPath = NodePath("../Objects/SeedSpawner")
 position = Vector2( 208, 240 )
 
 [node name="Fertilizer3" parent="Objects" instance=ExtResource( 4 )]
-position = Vector2( 352, 248 )
+position = Vector2( 240, 280 )
 
 [node name="SeedSpawner" parent="Objects" instance=ExtResource( 11 )]
-position = Vector2( 392, 224 )
+position = Vector2( 272, 264 )
 
 [node name="Reticle" parent="." instance=ExtResource( 5 )]
 
@@ -83,11 +83,12 @@ position = Vector2( 384, 208 )
 shape = SubResource( 1 )
 
 [node name="DripletSpawner" parent="." instance=ExtResource( 6 )]
+visible = false
 position = Vector2( 248, 224 )
 newParentPath = NodePath("../Objects")
 
 [node name="CollisionShape2D" parent="DripletSpawner" index="1"]
-position = Vector2( 0, 82 )
+position = Vector2( -32, 74 )
 shape = SubResource( 9 )
 
 [node name="HoleGenerators" type="Node2D" parent="."]

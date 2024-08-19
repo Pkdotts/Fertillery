@@ -1,5 +1,7 @@
 extends Node2D
 
+signal created_turnip
+
 export var newParentPath : NodePath
 onready var newParent = get_node_or_null(newParentPath)
 
@@ -30,6 +32,7 @@ func create_turnip():
 		if cutscene != null:
 			turnip.set_tutorial_turnip(cutscene)
 			cutscene = null
+		emit_signal("created_turnip")
 
 func close():
 	opened = false

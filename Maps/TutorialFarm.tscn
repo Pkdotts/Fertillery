@@ -49,6 +49,8 @@ tutorial = true
 monsterPath = NodePath("../VoreMonster")
 binPath = NodePath("../BG/Bin")
 seedSpawnerPath = NodePath("../Objects/SeedSpawner")
+holePath = NodePath("../BG/Hole")
+dripletSpawnerPath = NodePath("../DripletSpawner")
 nextMap = "Guts"
 monsterDropPosition = 232
 
@@ -74,6 +76,8 @@ seedSpawnerPath = NodePath("../Objects/SeedSpawner")
 [node name="DripletSpawner" parent="." instance=ExtResource( 6 )]
 position = Vector2( 248, 224 )
 newParentPath = NodePath("../Objects")
+spawning = false
+dripDelay = 4.5
 
 [node name="CollisionShape2D" parent="DripletSpawner" index="1"]
 position = Vector2( -112, 66 )
@@ -101,59 +105,59 @@ visible = false
 position = Vector2( -160, 0 )
 shape = SubResource( 1 )
 
-[node name="Collisions" type="Node2D" parent="."]
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Collisions"]
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2( 536, 144 )
 collision_layer = 113
 collision_mask = 113
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 0, 88 )
 shape = SubResource( 2 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Collisions/StaticBody2D"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( -136, -64 )
 shape = SubResource( 5 )
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="Collisions"]
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2( -88, 440 )
-collision_layer = 113
+collision_layer = 81
 collision_mask = 113
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Collisions/StaticBody2D2"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D2"]
 position = Vector2( 0, -80 )
 shape = SubResource( 3 )
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Collisions/StaticBody2D2"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D2"]
 position = Vector2( 151.5, 0 )
 shape = SubResource( 6 )
 
-[node name="StaticBody2D3" type="StaticBody2D" parent="Collisions"]
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
 position = Vector2( -72, 144 )
-collision_layer = 113
+collision_layer = 81
 collision_mask = 113
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Collisions/StaticBody2D3"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D3"]
 position = Vector2( 136, -64 )
 shape = SubResource( 10 )
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Collisions/StaticBody2D3"]
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D3"]
 position = Vector2( -16, 84 )
 shape = SubResource( 7 )
 
-[node name="StaticBody2D4" type="StaticBody2D" parent="Collisions"]
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
 position = Vector2( 544, 448 )
-collision_layer = 113
+collision_layer = 81
 collision_mask = 113
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Collisions/StaticBody2D4"]
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D4"]
 position = Vector2( -144, -8 )
 shape = SubResource( 4 )
 
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="Collisions/StaticBody2D4"]
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D4"]
 position = Vector2( -8, -84 )
 shape = SubResource( 8 )
+
+[node name="Collisions" type="Node2D" parent="."]
 
 [editable path="DripletSpawner"]
 [editable path="camarea"]
