@@ -69,7 +69,7 @@ texture = ExtResource( 14 )
 position = Vector2( 136, 304 )
 newParentPath = NodePath("../../Objects")
 cutscenePath = NodePath("../../Cutscene")
-wait_time = 5
+wait_time = 4
 
 [node name="Bin" parent="BG" instance=ExtResource( 11 )]
 position = Vector2( 1080, 240 )

@@ -51,8 +51,12 @@ func close():
 	$AnimationPlayer.play("Close")
 
 func open():
+	if global.turnipCount >= global.maxTurnipCount:
+		yield(global, "removedTurnip")
+		
 	opened = true
 	$AnimationPlayer.play("Open")
+	
 
 func _on_Area2D_area_entered(area):
 	var parent = area.get_parent().get_parent()

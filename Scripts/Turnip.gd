@@ -32,6 +32,7 @@ onready var tween = $Tween
 
 func _ready():
 	material = material.duplicate()
+	global.turnipCount += 1
 
 func set_tutorial_turnip(cutscene):
 	connect("maxGrow", cutscene, "bin_slide_in", [], CONNECT_ONESHOT)
@@ -168,6 +169,7 @@ func shake_sprite(magnitude = 1.0, time = 1.0, direction = Vector2.ONE):
 func die():
 	if global.player.heldItem == self:
 		global.player.set_held_item(null)
+	global.remove_turnip()
 	queue_free()
 
 func land():

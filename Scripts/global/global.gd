@@ -2,6 +2,7 @@ extends Node
 
 signal updateTurnipCounter
 signal updateDripDelay(dripDelay)
+signal removedTurnip
 
 var winSize = 1
 var winDim = Vector2(384, 216)
@@ -24,6 +25,9 @@ var dripletsFollowing = []
 
 var dripCount = 0
 var maxDripCount = 10
+
+var turnipCount = 0
+var maxTurnipCount = 5
 
 const THRESHOLDADDER = 30
 const STARTTHRESHOLD = 25
@@ -79,6 +83,14 @@ func remove_driplet(idx = 0):
 func reset_driplets():
 	dripCount = 0
 	dripletsFollowing.clear()
+
+func remove_turnip():
+	turnipCount -= 1
+	print(turnipCount)
+	emit_signal("removedTurnip")
+
+func reset_turnip_count():
+	turnipCount = 0
 
 func increase_difficulty(amount):
 	increase_hunger_speed(0.1*amount)
