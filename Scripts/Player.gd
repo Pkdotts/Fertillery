@@ -32,7 +32,6 @@ onready var animationPlayer = $AnimationPlayer
 func _ready():
 	$TackleArea/CollisionShape2D.disabled = true
 	global.player = self
-	uiManager.create_reticle()
 	for i in global.trailPositions.size():
 		
 		global.trailPositions.push_front(position)
@@ -178,3 +177,7 @@ func _on_TackleArea_area_entered(area):
 		global.currentCamera.shake_camera(2, 0.04, Vector2(1, 0))
 		animationPlayer.play("Pickup")
 		$GrabSound.play()
+
+
+func _on_Player_tree_exited():
+	global.player = null

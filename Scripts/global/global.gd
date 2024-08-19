@@ -36,8 +36,8 @@ var dripletsFollowing = []
 var dripCount = 0
 var maxDripCount = 10
 
-const THRESHOLDADDER = 30
-var nextThreshold = 30
+const THRESHOLDADDER = 1
+var nextThreshold = 1
 var turnipsEaten = 0
 var hungerMeter = 0
 var hungerSpeed = 1
@@ -48,6 +48,7 @@ var meterPaused = true
 func _ready():
 	trailPositions.resize(trailSize)
 	increase_win_size(2)
+	uiManager.create_reticle()
 	if get_tree().current_scene is Node2D and get_tree().current_scene.name != "Tutorial":
 		uiManager.create_HUD()
 	#audioManager.play_music("", music["gameplay"])

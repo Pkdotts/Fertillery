@@ -1,10 +1,9 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Nodes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Nodes/Camera.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Nodes/HoleGenerator.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Nodes/Turnip.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Nodes/Reticle.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Nodes/DripletSpawner.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Nodes/monster.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Nodes/camarea.tscn" type="PackedScene" id=8]
@@ -107,7 +106,7 @@ shape = SubResource( 13 )
 [node name="Objects" type="YSort" parent="."]
 
 [node name="Player" parent="Objects" instance=ExtResource( 1 )]
-position = Vector2( -520, 136 )
+position = Vector2( -328, 112 )
 
 [node name="Turnip" parent="Objects" instance=ExtResource( 4 )]
 material = SubResource( 12 )
@@ -127,12 +126,10 @@ position = Vector2( -432, 240 )
 position = Vector2( -136, 208 )
 
 [node name="SeedSpawner" parent="Objects" instance=ExtResource( 12 )]
-position = Vector2( -472, 88 )
-
-[node name="Reticle" parent="." instance=ExtResource( 5 )]
+position = Vector2( -240, 80 )
 
 [node name="Camera" parent="." instance=ExtResource( 2 )]
-position = Vector2( -520, 136 )
+position = Vector2( -328, 112 )
 anchor_path = NodePath("../Objects/Player")
 
 [node name="camarea" parent="." instance=ExtResource( 8 )]

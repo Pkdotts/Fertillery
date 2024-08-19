@@ -38,9 +38,21 @@ func erase_transition():
 
 func create_reticle():
 	var newReticle = reticleNode.instance()
-	global.player.get_parent().add_child(newReticle)
+	add_child(newReticle)
 	reticle = newReticle
 
+func erase_reticle():
+	if reticle != null:
+		reticle.queue_free()
+		reticle = null
+
+func hide_reticle():
+	if reticle != null:
+		reticle.hide()
+
+func show_reticle():
+	if reticle != null:
+		reticle.show()
 
 func fade_in(speed = 1):
 	if transition != null:
@@ -70,4 +82,5 @@ func fade_transition():
 		yield(transition, "transition_finished")
 		transition.fadeout()
 		yield(transition, "transition_finished")
+		
 

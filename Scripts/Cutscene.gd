@@ -29,6 +29,8 @@ onready var explodeSFX = preload("res://Audio/SFX/cratebreak.wav")
 
 func _ready():
 	global.connect("updateTurnipCounter", self, "check_threshold")
+	uiManager.reticle.set_mode(0)
+	uiManager.show_reticle()
 	if tutorial:
 		audioManager.play_ambiance_music()
 		if bin != null:
@@ -69,7 +71,7 @@ func play_intro_cutscene():
 	bin.die()
 	audioManager.play_sfx(explodeSFX, "explosion")
 	yield(get_tree().create_timer(2), "timeout")
-	monster.roar()
+	monster.inhale()
 	audioManager.play_sfx(screamSFX, "scream")
 	yield(get_tree().create_timer(2), "timeout")
 	monster.idle()
@@ -81,15 +83,19 @@ func play_intro_cutscene():
 	
 
 func play_inhale_cutscene():
+	var monsterZoomPos = monster.cameraZoomPos.global_position
 	global.player.pause()
-	global.currentCamera.set_anchor(monster.cameraZoomPos)
-	global.currentCamera.update_offset(Vector2(monsterAnchorXOffset, 0), 0.05)
+	uiManager.hide_reticle()
+	global.currentCamera.set_anchor(null)
+	#global.currentCamera.update_offset(Vector2(monsterAnchorXOffset, 0), 0.05)
+	global.currentCamera.move_camera(monsterZoomPos.x + monsterAnchorXOffset, monsterZoomPos.y, 0.5)
 	global.pause_meter()
 	yield(get_tree().create_timer(2), "timeout")
 	monster.inhale()
 	audioManager.play_sfx(screamSFX, "scream")
 	yield(get_tree().create_timer(2), "timeout")
 	global.currentCamera.update_offset(Vector2(0, 0), 1)
+	global.currentCamera.move_camera(monsterZoomPos.x, monsterZoomPos.y, 1)
 	global.currentCamera.zoom_in(1)
 	yield(get_tree().create_timer(1), "timeout")
 	global.change_scenes("res://Maps/" + nextMap + ".tscn")
