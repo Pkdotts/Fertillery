@@ -57,6 +57,9 @@ func open():
 	opened = true
 	$AnimationPlayer.play("Open")
 	
+func set_wait_time(wait):
+	wait_time = wait
+	$Timer.wait_time = wait
 
 func _on_Area2D_area_entered(area):
 	var parent = area.get_parent().get_parent()

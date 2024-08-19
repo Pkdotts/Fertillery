@@ -34,10 +34,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.0833333, 0.166667, 0.25, 0.333333, 2.33333, 2.41667, 2.5, 2.58333, 2.66667, 2.75, 2.83333 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.0833333, 0.166667, 0.25, 0.333333, 1.66667, 1.75, 1.83333, 2, 2.08333, 2.16667, 2.33333, 2.41667, 2.5, 2.58333, 2.66667, 2.75, 2.83333 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 1, 2, 3, 4, 5, 4, 2, 3, 2, 3, 2, 3 ]
+"values": [ 1, 2, 3, 4, 5, 4, 2, 3, 4, 2, 3, 4, 2, 3, 2, 3, 2, 3 ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -95,7 +95,7 @@ monitorable = false
 shape = SubResource( 1 )
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 40.0
+wait_time = 5.0
 one_shot = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

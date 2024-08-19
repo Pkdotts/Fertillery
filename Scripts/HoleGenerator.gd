@@ -35,6 +35,7 @@ func spawn_hole():
 		newParent.call_deferred("add_child", hole)
 		attachedHole = hole
 		hole.set_seed_spawner(seedSpawner)
+		hole.set_wait_time(wait_time)
 
 func erase_hole():
 	if attachedHole != null:
