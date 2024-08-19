@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Nodes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Nodes/Camera.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Nodes/Cutscene.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Nodes/Driplet.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Nodes/SeedSpawner.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Nodes/Fire.tscn" type="PackedScene" id=13]
 
 [sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 412, 112 )
@@ -37,6 +38,30 @@ resource_local_to_scene = true
 shader = SubResource( 9 )
 shader_param/flash_color = Color( 0.929412, 0.956863, 0.854902, 1 )
 shader_param/glow_color = Color( 0.929412, 0.956863, 0.854902, 1 )
+shader_param/flash_modifier = 0.0
+shader_param/glow_modifier = 0.0
+
+[sub_resource type="Shader" id=18]
+code = "shader_type canvas_item;
+
+uniform vec4 flash_color : hint_color = vec4(1.0);
+uniform vec4 glow_color : hint_color = vec4(1.0);
+uniform float flash_modifier : hint_range(0.0, 1.0) = 0.0;
+uniform float glow_modifier : hint_range(0.0, 1.0) = 0.0;
+
+void fragment() {
+	vec4 color = texture(TEXTURE, UV);
+	color.rgb = color.rgb + glow_color.rgb * glow_modifier;
+	color.rgb = mix(color.rgb, flash_color.rgb, flash_modifier);
+	COLOR = color;
+}
+"
+
+[sub_resource type="ShaderMaterial" id=19]
+resource_local_to_scene = true
+shader = SubResource( 18 )
+shader_param/flash_color = Color( 0.956863, 0.286275, 0.105882, 1 )
+shader_param/glow_color = Color( 0.956863, 0.286275, 0.105882, 1 )
 shader_param/flash_modifier = 0.0
 shader_param/glow_modifier = 0.0
 
@@ -98,7 +123,6 @@ seedSpawnerPath = NodePath("../Objects/SeedSpawner")
 
 [node name="DripletSpawner" parent="." instance=ExtResource( 6 )]
 newParentPath = NodePath("../Objects")
-dripDelay = 1.5
 
 [node name="CollisionShape2D" parent="DripletSpawner" index="1"]
 position = Vector2( -508, 176 )
@@ -135,6 +159,10 @@ position = Vector2( -680, 184 )
 
 [node name="Fertilizer" parent="Objects" instance=ExtResource( 5 )]
 position = Vector2( -712, 200 )
+
+[node name="Fire" parent="Objects" instance=ExtResource( 13 )]
+material = SubResource( 19 )
+position = Vector2( -456, 64 )
 
 [node name="Camera" parent="." instance=ExtResource( 2 )]
 position = Vector2( -552, 184 )

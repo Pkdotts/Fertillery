@@ -4,7 +4,8 @@ extends KinematicBody2D
 signal stopped_shaking
 signal maxGrow
 
-export var speed = 100
+const STARTSPEED = 40
+var speed = 40
 export var size = 3
 
 
@@ -32,7 +33,7 @@ onready var tween = $Tween
 
 func _ready():
 	material = material.duplicate()
-	speed = round(150 * (1 + (size - 2) * 0.5))
+	speed = round(STARTSPEED * (1 + (size - 1) * 0.5))
 
 func set_tutorial_turnip(cutscene):
 	connect("maxGrow", cutscene, "bin_slide_in", [], CONNECT_ONESHOT)
@@ -295,11 +296,12 @@ func move_towards_target():
 
 func _on_FleeArea_body_entered(body):
 	if !runningFrom.has(body) and body != self:
-		runAway = true
-		choose_random_position()
-		runningFrom.append(body)
-		
-		print("KILL YOURSELF" + body.name)
+		if body.get("size") != null and body.size > 1:
+			runAway = true
+			choose_random_position()
+			runningFrom.append(body)
+			
+			print("KILL YOURSELF" + body.name)
 
 
 func _on_SafeArea_body_exited(body):
@@ -325,12 +327,11 @@ func _on_SafeArea_body_exited(body):
 
 
 func _on_Timer_timeout():
-	if size < 3:
+	if size < 3 and !$GrowAnim.is_playing():
 		size += 1
-		$GrowAnim.stop()
 		$GrowAnim.play("Grow")
 		$CollisionShape2D.disabled = false
-		speed = round(150 * (1 + (size - 2) * 0.5))
+		speed = round(STARTSPEED * (1 + (size - 2) * 0.5))
 		$Timer.start()
 
 

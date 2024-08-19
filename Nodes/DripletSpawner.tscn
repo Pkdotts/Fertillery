@@ -8,7 +8,7 @@ collision_mask = 0
 monitoring = false
 monitorable = false
 script = ExtResource( 1 )
-dripDelay = 2.0
+dripDelay = 1.2
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
