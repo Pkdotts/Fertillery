@@ -24,6 +24,7 @@ var targetPosition = Vector2.ZERO
 var runningFrom = []
 var throwSpeed = 0
 var throwDir = Vector2.ZERO
+var queuedEaten = false
 
 onready var anchor = $Anchor
 onready var animationPlayer = $AnimationPlayer

@@ -23,8 +23,14 @@ func idle():
 	$AnimationPlayer.play("Idle")
 
 func _on_Area2D_area_entered(area):
-	yield(get_tree().create_timer(0.1), "timeout")
 	var turnip = area.get_parent().get_parent()
+	
+	if turnip.queuedEaten:
+		return
+	else:
+		turnip.queuedEaten = true
+	
+	yield(get_tree().create_timer(0.1), "timeout")
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("Chew")
 	global.turnipCount = global.turnipCount + 1
