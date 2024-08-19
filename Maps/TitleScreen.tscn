@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/TitleScreen.gd" type="Script" id=1]
 [ext_resource path="res://Maps/Credits.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Sprites/Logo.png" type="Texture" id=3]
+[ext_resource path="res://Fonts/Brickish.tres" type="DynamicFont" id=4]
 
 [node name="TitleScreen" type="Control"]
 script = ExtResource( 1 )
@@ -26,11 +27,21 @@ margin_bottom = 203.0
 text = "credits"
 
 [node name="Results" type="Label" parent="."]
-margin_left = 8.0
-margin_top = 184.0
-margin_right = 93.0
-margin_bottom = 204.0
-align = 1
+margin_left = 14.0
+margin_top = 192.0
+margin_right = 70.0
+margin_bottom = 205.0
+custom_fonts/font = ExtResource( 4 )
+text = "Highscore:"
+
+[node name="ColorRect" type="ColorRect" parent="Results"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -4.0
+margin_right = 35.0
+margin_bottom = 3.0
+color = Color( 0, 0, 0, 0.247059 )
 
 [node name="Credits" parent="." instance=ExtResource( 2 )]
 visible = false

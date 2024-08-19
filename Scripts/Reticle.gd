@@ -28,3 +28,6 @@ func set_mode(modeNum):
 			$Sprite.hide()
 			$Sprite2.show()
 			
+
+func play_sfx():
+	$AudioStreamPlayer.play()

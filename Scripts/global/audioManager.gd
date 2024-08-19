@@ -29,10 +29,10 @@ func add_sfx(stream, name) -> AudioStreamPlayer:
 	sfx_node.stream = stream
 	return sfx_node
 
-func play_sfx(stream, name) -> AudioStreamPlayer:
+func play_sfx(stream, name):
 	var sfx_node: AudioStreamPlayer = add_sfx(stream, name)
 	sfx_node.play()
-	return sfx_node
+	#return sfx_node
 
 func get_sfx(name) -> AudioStreamPlayer:
 	return $Sfx.get_node_or_null(name) as AudioStreamPlayer

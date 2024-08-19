@@ -44,7 +44,6 @@ func _ready():
 
 func start_game():
 	uiManager.reticle.set_mode(0)
-	uiManager.show_reticle()
 	global.currentCamera.set_anchor(global.player)
 	global.player.unpause()
 	if seedSpawner != null:
@@ -82,9 +81,9 @@ func play_intro_cutscene():
 	yield(get_tree().create_timer(2), "timeout")
 	monster.roar()
 	audioManager.play_sfx(screamSFX, "scream")
-	yield(get_tree().create_timer(2), "timeout")
-	monster.idle()
 	yield(get_tree().create_timer(5), "timeout")
+	monster.idle()
+	yield(get_tree().create_timer(2), "timeout")
 	
 	audioManager.play_game_music()
 	uiManager.create_HUD()

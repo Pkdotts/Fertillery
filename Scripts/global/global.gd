@@ -48,9 +48,8 @@ var meterPaused = true
 func _ready():
 	trailPositions.resize(trailSize)
 	increase_win_size(2)
-	
+	uiManager.create_reticle()
 	if get_tree().current_scene is Node2D and get_tree().current_scene.name != "Tutorial":
-		uiManager.create_reticle()
 		uiManager.create_HUD()
 	#audioManager.play_music("", music["gameplay"])
 

@@ -11,7 +11,6 @@ func _ready():
 	#else:
 	$Results.show()
 	$Results.text = "Highscore: " + var2str(global.turnipCount)
-	uiManager.create_reticle()
 	uiManager.reticle.set_mode(1)
 
 
@@ -19,10 +18,12 @@ func _on_Button_pressed():
 	if enabled:
 		emit_signal("pressed_start")
 		hide()
+		uiManager.reticle.play_sfx()
 
 func _on_Button2_pressed():
 	if enabled:
 		$Credits.show()
+		uiManager.reticle.play_sfx()
 
 func hide():
 	enabled = false
