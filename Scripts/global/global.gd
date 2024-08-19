@@ -15,16 +15,6 @@ var music = {
 	"gameplay": "kevinthehonky (1).wav"
 }
 
-const LEVEL_STATS = {
-	1: {
-		"dripDelay": 2,
-		"minDripDelay": 2,
-		"maxDripCount": 10,
-		
-		"initHungerSpeed": 3,
-		"maxHungerSpeed": 100
-	}
-}
 
 
 const randomFollowerOffset = 5
@@ -42,6 +32,9 @@ var turnipsEaten = 0
 var hungerMeter = 0
 var hungerSpeed = 1
 var maxHungerSpeed = 100
+
+var time = 0
+var timer = false
 
 var meterPaused = true
 
@@ -110,8 +103,28 @@ func _physics_process(delta):
 			pause_meter()
 			change_scenes("res://Maps/gameOver.tscn")
 			hungerMeter = 0
-			
-			
+	if timer:
+		time += delta
+
+func start_timer():
+	time = 0
+	timer = true
+
+func stop_timer():
+	timer = false
+
+func get_time():
+	var minutes = str(int(time/60))
+	var seconds = str(int(time) - int(time/60) * 60)
+	var milliseconds = str(int((time - int(time)) * 100))
+	if len(minutes) < 2:
+		minutes = "0" + minutes
+	if len(seconds) < 2:
+		seconds = "0" + seconds
+	if len(milliseconds) < 2:
+		milliseconds = milliseconds + "0"
+	var timer = minutes + ":" + seconds + "." + milliseconds
+	return timer
 
 func _input(event):
 	if event.is_action_pressed("ui_winsize"):

@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/gameOver.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/game_over.png" type="Texture" id=2]
+[ext_resource path="res://Fonts/Fertillery.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Sprites/Time Survived.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/GOSatiation Points.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/GAME OVER TEXT.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/High Score.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Title Screen Button.png" type="Texture" id=8]
 
 [node name="gameOver" type="Control"]
 anchor_right = 1.0
@@ -12,44 +18,64 @@ script = ExtResource( 1 )
 position = Vector2( 192, 108 )
 texture = ExtResource( 2 )
 
-[node name="Label" type="Label" parent="."]
-margin_left = 200.0
-margin_top = 40.0
-margin_right = 363.0
-margin_bottom = 97.0
-text = "game over yeaaa"
+[node name="GameOverText" type="Sprite" parent="."]
+position = Vector2( 272, 32 )
+texture = ExtResource( 6 )
 
-[node name="Button" type="Button" parent="."]
-margin_left = 216.0
-margin_top = 117.0
-margin_right = 340.0
-margin_bottom = 153.0
-text = "restart"
+[node name="GoSatiationPoints" type="Sprite" parent="."]
+position = Vector2( 220, 72 )
+texture = ExtResource( 5 )
 
-[node name="Button2" type="Button" parent="."]
-margin_left = 217.0
+[node name="HighScore" type="Sprite" parent="."]
+position = Vector2( 232, 104 )
+texture = ExtResource( 7 )
+
+[node name="TimeSurvived" type="Sprite" parent="."]
+position = Vector2( 232, 136 )
+texture = ExtResource( 4 )
+
+[node name="SatiationPointsLabel" type="RichTextLabel" parent="."]
+margin_left = 264.0
+margin_top = 67.0
+margin_right = 384.0
+margin_bottom = 83.0
+custom_fonts/normal_font = ExtResource( 3 )
+bbcode_enabled = true
+text = "0"
+scroll_active = false
+
+[node name="HighScoreLabel" type="RichTextLabel" parent="."]
+margin_left = 263.0
+margin_top = 96.0
+margin_right = 399.0
+margin_bottom = 112.0
+custom_fonts/normal_font = ExtResource( 3 )
+bbcode_enabled = true
+text = "0"
+scroll_active = false
+
+[node name="TimeSurvivedLabel" type="RichTextLabel" parent="."]
+margin_left = 263.0
+margin_top = 128.0
+margin_right = 391.0
+margin_bottom = 144.0
+custom_fonts/normal_font = ExtResource( 3 )
+bbcode_enabled = true
+text = "12:43.24"
+scroll_active = false
+
+[node name="TitleScreenButton" type="Sprite" parent="."]
+position = Vector2( 280, 177 )
+texture = ExtResource( 8 )
+
+[node name="TitleButton" type="Button" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 228.0
 margin_top = 159.0
-margin_right = 341.0
-margin_bottom = 195.0
+margin_right = 331.0
+margin_bottom = 194.0
 text = "title screen"
 
-[node name="Results" type="RichTextLabel" parent="."]
-margin_left = 189.0
-margin_top = 71.0
-margin_right = 364.0
-margin_bottom = 85.0
-bbcode_enabled = true
-bbcode_text = "fuck"
-text = "fuck"
-scroll_active = false
-
-[node name="HighScore" type="RichTextLabel" parent="."]
-margin_left = 168.0
-margin_top = 89.0
-margin_right = 376.0
-margin_bottom = 103.0
-bbcode_enabled = true
-scroll_active = false
-
-[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
-[connection signal="pressed" from="Button2" to="." method="_on_Button2_pressed"]
+[connection signal="mouse_entered" from="TitleButton" to="." method="_on_TitleButton_mouse_entered"]
+[connection signal="mouse_exited" from="TitleButton" to="." method="_on_TitleButton_mouse_exited"]
+[connection signal="pressed" from="TitleButton" to="." method="_on_TitleButton_pressed"]

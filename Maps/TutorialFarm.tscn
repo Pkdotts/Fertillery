@@ -163,9 +163,9 @@ shape = SubResource( 8 )
 [node name="Collisions" type="Node2D" parent="."]
 
 [node name="TitleScreen" parent="." instance=ExtResource( 5 )]
-margin_left = -64.0
+margin_left = -58.0
 margin_top = 4.0
-margin_right = -64.0
+margin_right = -58.0
 margin_bottom = 4.0
 
 [node name="Cutscene" parent="." instance=ExtResource( 10 )]

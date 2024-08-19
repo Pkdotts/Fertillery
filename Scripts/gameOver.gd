@@ -8,22 +8,22 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Results.bbcode_text = "[center]Total Turnips fed - " + var2str(global.turnipCount) + "[/center]"
+	$SatiationPointsLabel.bbcode_text = var2str(global.turnipCount)
 	if global.turnipCount > global.highScore:
-		$HighScore.bbcode_text = "[center][wave][rainbow]NEW THigh score - " + var2str(global.turnipCount)
 		global.highScore = global.turnipCount 
+		$HighScoreLabel.bbcode_text = "[rainbow]" + var2str(global.highScore)
 	else:
-		$HighScore.bbcode_text = "[center]THigh score - " + var2str(global.highScore) + "[/center]"
+		$HighScoreLabel.bbcode_text = var2str(global.highScore)
+	$TimeSurvivedLabel.bbcode_text = global.get_time()
+	uiManager.show_reticle()
+	uiManager.reticle.set_mode(1)
+
+func _on_TitleButton_pressed():
+	global.change_scenes("res://Maps/TutorialFarm.tscn")
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _on_TitleButton_mouse_entered():
+	$TitleScreenButton.modulate = Color.yellow
 
-
-func _on_Button_pressed():
-	global.change_scenes("res://Maps/Farm.tscn")
-
-
-func _on_Button2_pressed():
-	global.change_scenes("res://Maps/TitleScreen.tscn")
+func _on_TitleButton_mouse_exited():
+	$TitleScreenButton.modulate = Color.white

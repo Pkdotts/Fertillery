@@ -10,7 +10,7 @@ func _ready():
 	#	$Results.hide()
 	#else:
 	$Results.show()
-	$Results.text = "Highscore: " + var2str(global.turnipCount)
+	$Results.text = var2str(global.turnipCount)
 	uiManager.reticle.set_mode(1)
 
 
