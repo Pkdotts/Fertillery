@@ -13,31 +13,31 @@
 [ext_resource path="res://Nodes/Bin.tscn" type="PackedScene" id=11]
 
 [sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 180, 98 )
+extents = Vector2( 176, 114 )
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 256.25, 212 )
+extents = Vector2( 288, 212 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 24, 72 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 152, 80 )
+extents = Vector2( 160, 80 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 25, 64 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 152.5, 16 )
+extents = Vector2( 176.5, 16 )
 
 [sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 152, 80 )
+extents = Vector2( 176, 80 )
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 24, 68 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 152, 16 )
+extents = Vector2( 160, 16 )
 
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 24, 60 )
@@ -59,13 +59,13 @@ position = Vector2( 112, 212 )
 texture = ExtResource( 9 )
 
 [node name="Hole" parent="BG" instance=ExtResource( 3 )]
-position = Vector2( 176, 288 )
+position = Vector2( 152, 288 )
 newParentPath = NodePath("../../Objects")
 cutscenePath = NodePath("../../Cutscene")
 wait_time = 5
 
 [node name="Bin" parent="BG" instance=ExtResource( 11 )]
-position = Vector2( 1104, 248 )
+position = Vector2( 1080, 240 )
 
 [node name="VoreMonster" parent="." instance=ExtResource( 7 )]
 position = Vector2( 408, -608 )
@@ -76,29 +76,29 @@ position = Vector2( 248, 224 )
 newParentPath = NodePath("../Objects")
 
 [node name="CollisionShape2D" parent="DripletSpawner" index="1"]
-position = Vector2( -44, 82 )
+position = Vector2( -112, 66 )
 shape = SubResource( 9 )
 
 [node name="Objects" type="YSort" parent="."]
 
 [node name="Player" parent="Objects" instance=ExtResource( 1 )]
-position = Vector2( 192, 224 )
+position = Vector2( 64, 224 )
 
 [node name="SeedSpawner" parent="Objects" instance=ExtResource( 4 )]
-position = Vector2( 272, 224 )
+position = Vector2( 232, 208 )
 
 [node name="Reticle" parent="." instance=ExtResource( 5 )]
 
 [node name="Camera" parent="." instance=ExtResource( 2 )]
-position = Vector2( 192, 224 )
+position = Vector2( 128, 224 )
 anchor_path = NodePath("../Objects/Player")
 
 [node name="camarea" parent="." instance=ExtResource( 8 )]
-visible = false
 position = Vector2( 384, 208 )
 
 [node name="CollisionShape2D" parent="camarea" index="0"]
-position = Vector2( -128.25, 0 )
+visible = false
+position = Vector2( -160, 0 )
 shape = SubResource( 1 )
 
 [node name="Collisions" type="Node2D" parent="."]
@@ -113,11 +113,11 @@ position = Vector2( 0, 88 )
 shape = SubResource( 2 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Collisions/StaticBody2D"]
-position = Vector2( -128, -64 )
+position = Vector2( -136, -64 )
 shape = SubResource( 5 )
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Collisions"]
-position = Vector2( -24, 440 )
+position = Vector2( -88, 440 )
 collision_layer = 113
 collision_mask = 113
 
@@ -126,16 +126,16 @@ position = Vector2( 0, -80 )
 shape = SubResource( 3 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Collisions/StaticBody2D2"]
-position = Vector2( 127.5, 0 )
+position = Vector2( 151.5, 0 )
 shape = SubResource( 6 )
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="Collisions"]
-position = Vector2( -8, 144 )
+position = Vector2( -72, 144 )
 collision_layer = 113
 collision_mask = 113
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Collisions/StaticBody2D3"]
-position = Vector2( 112, -64 )
+position = Vector2( 136, -64 )
 shape = SubResource( 10 )
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Collisions/StaticBody2D3"]
@@ -148,7 +148,7 @@ collision_layer = 113
 collision_mask = 113
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Collisions/StaticBody2D4"]
-position = Vector2( -136, -8 )
+position = Vector2( -144, -8 )
 shape = SubResource( 4 )
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="Collisions/StaticBody2D4"]

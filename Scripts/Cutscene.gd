@@ -40,7 +40,6 @@ func check_threshold():
 		play_inhale_cutscene()
 
 func bin_slide_in():
-	
 	var endBinPos = 432
 	if global.player.position.x > 256:
 		bin.position.x = endBinPos + 500
@@ -58,7 +57,7 @@ func play_intro_cutscene():
 	yield(get_tree().create_timer(0.8), "timeout")
 	bin.die()
 	audioManager.play_sfx(explodeSFX, "explosion")
-	yield(get_tree().create_timer(0.8), "timeout")
+	yield(get_tree().create_timer(2), "timeout")
 	monster.roar()
 	audioManager.play_sfx(screamSFX, "scream")
 	yield(get_tree().create_timer(2), "timeout")
