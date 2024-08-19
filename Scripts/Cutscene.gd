@@ -20,6 +20,7 @@ onready var dripletSpawner = get_node_or_null(dripletSpawnerPath)
 export var nextMap = ""
 export var monsterDropPosition = 0
 
+export var monsterAnchorXOffset = -100
 
 
 onready var screamSFX = preload("res://Audio/SFX/fiendroar.wav")
@@ -82,7 +83,7 @@ func play_intro_cutscene():
 func play_inhale_cutscene():
 	global.player.pause()
 	global.currentCamera.set_anchor(monster.cameraZoomPos)
-	global.currentCamera.update_offset(Vector2(-100, 0), 0.05)
+	global.currentCamera.update_offset(Vector2(monsterAnchorXOffset, 0), 0.05)
 	global.pause_meter()
 	yield(get_tree().create_timer(2), "timeout")
 	monster.inhale()

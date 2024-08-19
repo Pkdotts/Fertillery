@@ -94,11 +94,11 @@ texture = ExtResource( 9 )
 
 [node name="VoreMonster" parent="." instance=ExtResource( 7 )]
 position = Vector2( 8, 80 )
-seedSpawnerPath = NodePath("../SeedSpawner")
+seedSpawnerPath = NodePath("../Objects/SeedSpawner")
 
 [node name="DripletSpawner" parent="." instance=ExtResource( 6 )]
 newParentPath = NodePath("../Objects")
-dripDelay = 4.0
+dripDelay = 2.0
 
 [node name="CollisionShape2D" parent="DripletSpawner" index="1"]
 position = Vector2( -508, 180 )
@@ -125,6 +125,9 @@ position = Vector2( -432, 240 )
 
 [node name="Driplet3" parent="Objects" instance=ExtResource( 11 )]
 position = Vector2( -136, 208 )
+
+[node name="SeedSpawner" parent="Objects" instance=ExtResource( 12 )]
+position = Vector2( -472, 88 )
 
 [node name="Reticle" parent="." instance=ExtResource( 5 )]
 
@@ -234,9 +237,6 @@ shape = SubResource( 4 )
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="Collisions/StaticBody2D4"]
 position = Vector2( -8, -92 )
 shape = SubResource( 8 )
-
-[node name="SeedSpawner" parent="." instance=ExtResource( 12 )]
-position = Vector2( -472, 88 )
 
 [editable path="DripletSpawner"]
 [editable path="camarea"]

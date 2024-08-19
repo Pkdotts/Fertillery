@@ -31,7 +31,7 @@ func _on_Area2D_area_entered(area):
 	turnip.die()
 	global.increase_turnip_counter(turnip.size)
 	global.decrease_hunger(turnip.size * 10)
-	global.increase_difficulty()
+	global.increase_difficulty(turnip.size)
 	if seedSpawner != null:
 		seedSpawner.start_creating()
 

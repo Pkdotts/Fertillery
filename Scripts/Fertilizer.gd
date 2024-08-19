@@ -22,7 +22,8 @@ func _physics_process(delta):
 			thrown_state(delta)
 
 func held_state():
-	global_position = global.player.CarryPosition.global_position
+	global_position = global.player.global_position + Vector2(0, 1)
+	anchor.position.y = round(global.player.CarryPosition.position.y)
 	
 	if global.player.direction.x < 0:
 		$Anchor/Sprite.flip_h = true
@@ -64,7 +65,7 @@ func jump_to(newPos, time, height, initHeight = 0):
 		initHeight, height, time/2,
 		Tween.TRANS_QUAD,Tween.EASE_OUT)
 	tween.interpolate_property(anchor, "position:y", 
-		height, anchor.position.y, time/2,
+		height, 0, time/2,
 		Tween.TRANS_QUAD,Tween.EASE_IN, time/2)
 	tween.start()
 	tween.connect("tween_all_completed", self, "land", [], CONNECT_ONESHOT)
@@ -83,13 +84,12 @@ func land():
 	set_collisions(true)
 
 func flip(height, time):
-	#animationPlayer.play("Throw" + str(size))
 	state = States.MIDAIR
 	tween.interpolate_property(anchor, "position:y", 
-		anchor.position.y, height, time/2,
+		0, height, time/2,
 		Tween.TRANS_QUAD,Tween.EASE_OUT)
 	tween.interpolate_property(anchor, "position:y", 
-		height, anchor.position.y, time/2,
+		height, 0, time/2,
 		Tween.TRANS_QUAD,Tween.EASE_IN, time/2)
 	tween.start()
 	

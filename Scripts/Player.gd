@@ -85,7 +85,7 @@ func move(dir, spd, delta):
 			moving = false
 			hold_play("Idle")
 		
-		if animationPlayer.current_animation != "Throw":
+		if animationPlayer.current_animation != "Throw" and animationPlayer.current_animation != "Pickup":
 			if round(oldPos.x) < round(position.x):
 				$Sprite.flip_h = false
 			elif round(oldPos.x) > round(position.x):
@@ -149,7 +149,7 @@ func stop_dashing():
 		$TackleArea/CollisionShape2D.set_deferred("disabled", true)
 
 func hold_play(anim):
-	if animationPlayer.current_animation != "Throw" and state != States.DASHING:
+	if animationPlayer.current_animation != "Throw" and animationPlayer.current_animation != "Pickup" and state != States.DASHING:
 		if carrying:
 			animationPlayer.play(anim + "Hold")
 		else:
@@ -176,3 +176,4 @@ func _on_TackleArea_area_entered(area):
 		set_held_item(parent)
 		stop_dashing()
 		global.currentCamera.shake_camera(2, 0.04, Vector2(1, 0))
+		animationPlayer.play("Pickup")

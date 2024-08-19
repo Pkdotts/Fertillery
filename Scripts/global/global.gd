@@ -37,10 +37,10 @@ var dripCount = 0
 var maxDripCount = 10
 
 const THRESHOLDADDER = 30
-var nextThreshold = 30
+var nextThreshold = 2
 var turnipsEaten = 0
 var hungerMeter = 0
-var hungerSpeed = 2
+var hungerSpeed = 1
 var maxHungerSpeed = 100
 
 var meterPaused = true
@@ -86,8 +86,8 @@ func reset_driplets():
 	dripCount = 0
 	dripletsFollowing.clear()
 
-func increase_difficulty():
-	increase_hunger_speed(0.5)
+func increase_difficulty(amount):
+	increase_hunger_speed(0.1*amount)
 
 func pause_meter():
 	meterPaused = true
@@ -161,9 +161,9 @@ func change_scenes(scene):
 	reset_driplets()
 	uiManager.fade_out(0.3)
 	yield(uiManager.transition, "transition_finished")
-	if !get_tree().get_current_scene() is Control:
-		uiManager.create_HUD()
-	else:
-		uiManager.erase_HUD()
+	#if !get_tree().get_current_scene() is Control and get_tree().get_current_scene :
+	#	uiManager.create_HUD()
+	#else:
+	#	uiManager.erase_HUD()
 	unpause_meter()
 	uiManager.fading = false

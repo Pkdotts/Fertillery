@@ -50,17 +50,18 @@ func _physics_process(delta):
 			thrown_state(delta)
 		States.MIDAIR:
 			midair_state()
-	
-	position = position.round()
 
 func idle_state():
 	animationPlayer.play("Idle" + str(size))
+	position = position.round()
 
 func move_state(delta):
 	move_towards_target()
+	position = position.round()
 
 func held_state():
-	global_position = global.player.CarryPosition.global_position.round()
+	global_position = global.player.global_position + Vector2(0, 1)
+	anchor.position.y = round(global.player.CarryPosition.position.y) + 5
 	if global.player.direction.x < 0:
 		$Anchor/Sprite.flip_h = true
 	elif global.player.direction.x > 0:
@@ -111,7 +112,7 @@ func jump_to(newPos, time, height, initHeight = 0):
 		initHeight, height, time/2,
 		Tween.TRANS_QUAD,Tween.EASE_OUT)
 	tween.interpolate_property(anchor, "position:y", 
-		height, anchor.position.y, time/2,
+		height, 0, time/2,
 		Tween.TRANS_QUAD,Tween.EASE_IN, time/2)
 	tween.start()
 	tween.connect("tween_all_completed", self, "land", [], CONNECT_ONESHOT)

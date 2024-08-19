@@ -53,6 +53,7 @@ holePath = NodePath("../BG/Hole")
 dripletSpawnerPath = NodePath("../DripletSpawner")
 nextMap = "Guts"
 monsterDropPosition = 232
+monsterAnchorXOffset = -50
 
 [node name="BG" type="Node2D" parent="."]
 
@@ -77,7 +78,7 @@ seedSpawnerPath = NodePath("../Objects/SeedSpawner")
 position = Vector2( 248, 224 )
 newParentPath = NodePath("../Objects")
 spawning = false
-dripDelay = 4.5
+dripDelay = 3.0
 
 [node name="CollisionShape2D" parent="DripletSpawner" index="1"]
 position = Vector2( -112, 66 )
@@ -86,7 +87,7 @@ shape = SubResource( 9 )
 [node name="Objects" type="YSort" parent="."]
 
 [node name="Player" parent="Objects" instance=ExtResource( 1 )]
-position = Vector2( 64, 224 )
+position = Vector2( 136, 224 )
 
 [node name="SeedSpawner" parent="Objects" instance=ExtResource( 4 )]
 position = Vector2( 232, 208 )

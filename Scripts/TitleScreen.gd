@@ -17,8 +17,7 @@ func _ready():
 
 
 func _on_Button_pressed():
-	
-	global.change_scenes("res://Maps/Farm.tscn")
+	global.change_scenes("res://Maps/TutorialFarm.tscn")
 
 
 func _on_Button2_pressed():
