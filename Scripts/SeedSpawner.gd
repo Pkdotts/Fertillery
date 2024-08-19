@@ -21,3 +21,4 @@ func create_seed():
 	newParent.call_deferred("add_child", newSeed)
 	yield(get_tree(),"idle_frame")
 	newSeed.throw(-25, newPos, 0.5)
+	$AudioStreamPlayer2D.play(0.01)

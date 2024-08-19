@@ -13,8 +13,10 @@ export var wait_time = 0
 onready var timer = $Timer
 
 var turnipNode = preload("res://Nodes/Turnip.tscn")
-
 var opened = false
+
+onready var plantSFX = preload("res://Audio/SFX/plant.wav")
+onready var turnipGrowSFX = preload("res://Audio/SFX/turnipgrow.wav")
 
 func _ready():
 	open()
@@ -28,6 +30,7 @@ func create_turnip():
 		turnip.position = position
 		newParent.call_deferred("add_child", turnip)
 		timer.start()
+		$AudioStreamPlayer.stream = turnipGrowSFX
 		$AudioStreamPlayer.play()
 		if cutscene != null:
 			turnip.set_tutorial_turnip(cutscene)
@@ -47,6 +50,8 @@ func _on_Area2D_area_entered(area):
 	if opened and parent.get("state") != null and (parent.state != parent.States.HELD and parent.state != parent.States.MIDAIR):
 		parent.die()
 		$AnimationPlayer.play("GrowSprout")
+		$AudioStreamPlayer.stream = plantSFX
+		$AudioStreamPlayer.play()
 
 func _on_Absorber_area_entered(area):
 	var parent = area.get_parent().get_parent()

@@ -177,3 +177,4 @@ func _on_TackleArea_area_entered(area):
 		stop_dashing()
 		global.currentCamera.shake_camera(2, 0.04, Vector2(1, 0))
 		animationPlayer.play("Pickup")
+		$GrabSound.play()

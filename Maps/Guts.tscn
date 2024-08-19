@@ -167,10 +167,6 @@ position = Vector2( -168, 80 )
 material = SubResource( 12 )
 position = Vector2( -400, 136 )
 
-[node name="Turnip2" parent="Objects" instance=ExtResource( 4 )]
-material = SubResource( 12 )
-position = Vector2( -624, 232 )
-
 [node name="Driplet" parent="Objects" instance=ExtResource( 11 )]
 position = Vector2( -680, 136 )
 
@@ -202,6 +198,7 @@ position = Vector2( -456, 80 )
 newParentPath = NodePath("../../BG")
 turnipParentPath = NodePath("../../Objects")
 enabled = true
+wait_time = 50
 
 [node name="CollisionShape2D" parent="HoleGenerators/HoleGenerator3" index="0"]
 position = Vector2( -40, 28 )
@@ -212,6 +209,7 @@ position = Vector2( -688, 112 )
 newParentPath = NodePath("../../BG")
 turnipParentPath = NodePath("../../Objects")
 enabled = true
+wait_time = 50
 
 [node name="CollisionShape2D" parent="HoleGenerators/HoleGenerator4" index="0"]
 position = Vector2( 32, -8 )
@@ -222,6 +220,7 @@ position = Vector2( -520, 200 )
 newParentPath = NodePath("../../BG")
 turnipParentPath = NodePath("../../Objects")
 enabled = true
+wait_time = 50
 
 [node name="CollisionShape2D" parent="HoleGenerators/HoleGenerator5" index="0"]
 position = Vector2( -72, 40 )
@@ -232,6 +231,7 @@ position = Vector2( -224, 208 )
 newParentPath = NodePath("../../BG")
 turnipParentPath = NodePath("../../Objects")
 enabled = true
+wait_time = 50
 
 [node name="CollisionShape2D" parent="HoleGenerators/HoleGenerator2" index="0"]
 position = Vector2( -52, 36 )

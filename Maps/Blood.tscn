@@ -151,7 +151,7 @@ turnipParentPath = NodePath("../../Objects")
 enabled = true
 
 [node name="CollisionShape2D" parent="HoleGenerators/HoleGenerator3" index="0"]
-position = Vector2( -40, 28 )
+position = Vector2( -40, 48 )
 shape = SubResource( 11 )
 
 [node name="HoleGenerator4" parent="HoleGenerators" instance=ExtResource( 3 )]
@@ -161,7 +161,7 @@ turnipParentPath = NodePath("../../Objects")
 enabled = true
 
 [node name="CollisionShape2D" parent="HoleGenerators/HoleGenerator4" index="0"]
-position = Vector2( 32, -8 )
+position = Vector2( 32, 16 )
 shape = SubResource( 14 )
 
 [node name="HoleGenerator5" parent="HoleGenerators" instance=ExtResource( 3 )]
