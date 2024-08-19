@@ -170,7 +170,7 @@ func _on_DashTimer_timeout():
 func _on_TackleArea_area_entered(area):
 	var parent = area.get_parent()
 	print($TackleArea/CollisionShape2D.disabled)
-	if state == States.DASHING and !carrying and parent.has_method("set_held") and parent.state != parent.States.THROWN:
+	if state == States.DASHING and !carrying and parent.has_method("set_held") and parent.state != parent.States.THROWN and parent.name != "Fire":
 		parent.flip(-FLIPHEIGHT, 0.5)
 		set_held_item(parent)
 		stop_dashing()

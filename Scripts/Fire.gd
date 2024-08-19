@@ -4,11 +4,8 @@ extends KinematicBody2D
 signal stopped_shaking
 signal maxGrow
 
-const STARTSPEED = 80
-
-export var speed = 80
-export var size = 1
-
+export var speed = 100
+export var size = 3
 
 
 
@@ -21,14 +18,13 @@ var sfx = {
 	"maxgrow": preload("res://Audio/SFX/maxsize.wav")
 }
 
-var max_size = 6
+var max_size = 3
 var runAway = false
 var targetPosition = Vector2.ZERO
 var runningFrom = []
 var throwSpeed = 0
 var throwDir = Vector2.ZERO
 var queuedEaten = false
-var flash = false
 
 onready var anchor = $Anchor
 onready var animationPlayer = $AnimationPlayer
@@ -36,7 +32,7 @@ onready var tween = $Tween
 
 func _ready():
 	material = material.duplicate()
-	global.turnipCount += 1
+	speed = round(150 * (1 + (size - 2) * 0.5))
 
 func set_tutorial_turnip(cutscene):
 	connect("maxGrow", cutscene, "bin_slide_in", [], CONNECT_ONESHOT)
@@ -44,7 +40,7 @@ func set_tutorial_turnip(cutscene):
 func _physics_process(delta):
 	$Anchor/GrowSprite.flip_h = $Anchor/Sprite.flip_h
 	if size > 1:
-		$Anchor/GrowSprite.frame = $Anchor/Sprite.frame - 4
+		$Anchor/GrowSprite.frame = $Anchor/Sprite.frame - 3
 	match state:
 		States.IDLE:
 			idle_state()
@@ -62,7 +58,8 @@ func idle_state():
 	position = position.round()
 
 func move_state(delta):
-	move_towards_target()
+	if size > 1:
+		move_towards_target()
 
 func held_state():
 	global_position = global.player.global_position + Vector2(0, 1)
@@ -85,10 +82,13 @@ func set_state(newState):
 func grow():
 	$GrowAnim.stop()
 	$GrowAnim.play("Grow")
-	size += 1
-	speed = round(STARTSPEED / (1 + (size - 1) * 0.5))
-	if size == max_size:
-		emit_signal("maxGrow")
+	size -= 1
+	speed = round(150 * (1 + (size - 2) * 0.5))
+	$Timer.start(8.0)
+	if size == 1:
+		$CollisionShape2D.disabled = true
+		
+	
 
 func throw(height, newPos, time, initHeight = 0):
 	jump_to(newPos, time, height, initHeight)
@@ -173,7 +173,6 @@ func shake_sprite(magnitude = 1.0, time = 1.0, direction = Vector2.ONE):
 func die():
 	if global.player.heldItem == self:
 		global.player.set_held_item(null)
-	global.remove_turnip()
 	queue_free()
 
 func land():
@@ -190,12 +189,10 @@ func set_held():
 	$Hitbox/CollisionShape2D.set_deferred("disabled", true)
 
 func _on_Absorber_area_entered(area):
-	if size < max_size:
+	if size > 1:
 		var driplet = area.get_parent().get_parent()
 		if driplet.visible:
 			var sound = sfx["grow"]
-			if size == 5:
-				sound = sfx["maxgrow"]
 			driplet.die(sound)
 			grow()
 
@@ -241,6 +238,11 @@ func move_towards_target():
 	if state == States.HELD or state == States.THROWN or state == States.MIDAIR:
 		return
 	
+	if size < 2:
+		set_state(States.IDLE)
+		targetPosition = position
+		return
+	
 	var direction: Vector2
 	
 	animationPlayer.play("Walk" + str(size))
@@ -259,8 +261,13 @@ func move_towards_target():
 			elif runningFrom.size() == 0:
 				runningTarget = i
 				break
+		if runningTarget.name == "Turnip" and runningTarget.flash != true:
+			direction = self.global_position.direction_to(runningTarget.global_position)
+			#print("MILF DETECTED")
+		else:
+			direction = runningTarget.global_position.direction_to(global_position)
 			
-		direction = runningTarget.global_position.direction_to(global_position)
+		
 		spd = speed * 1.2
 		targetPosition = position + direction * ($FleeArea/CollisionShape2D.shape.radius * 2)  # RUN BITCH
 	
@@ -291,7 +298,8 @@ func _on_FleeArea_body_entered(body):
 		runAway = true
 		choose_random_position()
 		runningFrom.append(body)
-		print(body)
+		
+		print("KILL YOURSELF" + body.name)
 
 
 func _on_SafeArea_body_exited(body):
@@ -303,16 +311,6 @@ func _on_SafeArea_body_exited(body):
 			runAway = false  # stop acting like a pussy
 			choose_random_position()
 			print("all erased")
-
-func hurt():
-	$Flash.play("Flash")
-	flash = true
-	if size > 1:
-		$GrowAnim.stop()
-		$GrowAnim.play("Grow")
-		size -= 1
-		speed = round(150 / (1 + (size - 1) * 0.5))
-	
 
 
 
@@ -326,6 +324,17 @@ func hurt():
 #		print("all erased")
 
 
-func _on_GrowAnim_animation_finished(anim_name):
-	if anim_name == "Flash":
-		flash = false
+func _on_Timer_timeout():
+	if size < 3:
+		size += 1
+		$GrowAnim.stop()
+		$GrowAnim.play("Grow")
+		$CollisionShape2D.disabled = false
+		speed = round(150 * (1 + (size - 2) * 0.5))
+		$Timer.start()
+
+
+
+func _on_killer_body_entered(body):
+	if body.name == "Turnip" and body.flash == false:
+		body.hurt()

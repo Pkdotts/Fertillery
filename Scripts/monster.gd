@@ -29,6 +29,9 @@ func idle():
 func _on_Area2D_area_entered(area):
 	var turnip = area.get_parent().get_parent()
 	
+	if turnip.name == "Fire":
+		return
+	
 	#if turnip somehow enters the area again
 	if turnip.queuedEaten:
 		return
