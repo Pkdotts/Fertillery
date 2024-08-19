@@ -6,7 +6,7 @@
 [ext_resource path="res://Sprites/DripletDrop.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 7.5, 8 )
+extents = Vector2( 14, 14.75 )
 
 [sub_resource type="Animation" id=8]
 resource_name = "Drop"
@@ -292,7 +292,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Anchor/Hitbox"]
-position = Vector2( -0.5, -7 )
+position = Vector2( 0, -8.75 )
 shape = SubResource( 2 )
 disabled = true
 

@@ -4,7 +4,9 @@ extends KinematicBody2D
 signal stopped_shaking
 signal maxGrow
 
-export var speed = 100
+const STARTSPEED = 80
+
+export var speed = 80
 export var size = 1
 
 
@@ -82,7 +84,7 @@ func grow():
 	$GrowAnim.stop()
 	$GrowAnim.play("Grow")
 	size += 1
-	speed = round(150 / (1 + (size - 1) * 0.5))
+	speed = round(STARTSPEED / (1 + (size - 1) * 0.5))
 	if size == max_size:
 		emit_signal("maxGrow")
 

@@ -14,9 +14,13 @@ func _ready():
 	$AnimationPlayer.play("Idle")
 
 func inhale():
+	$AnimationPlayer.play("RoarAnticipation")
+	yield($AnimationPlayer, "animation_finished")
 	$AnimationPlayer.play("Inhale")
 
 func roar():
+	$AnimationPlayer.play("RoarAnticipation")
+	yield($AnimationPlayer, "animation_finished")
 	$AnimationPlayer.play("Roar")
 
 func idle():
