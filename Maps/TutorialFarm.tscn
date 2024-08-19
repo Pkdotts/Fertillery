@@ -73,7 +73,7 @@ wait_time = 5
 position = Vector2( 1080, 240 )
 
 [node name="VoreMonster" parent="." instance=ExtResource( 7 )]
-position = Vector2( 408, -608 )
+position = Vector2( 664, -608 )
 seedSpawnerPath = NodePath("../Objects/SeedSpawner")
 
 [node name="DripletSpawner" parent="." instance=ExtResource( 6 )]

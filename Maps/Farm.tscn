@@ -54,7 +54,7 @@ position = Vector2( 280, 212 )
 texture = ExtResource( 9 )
 
 [node name="VoreMonster" parent="." instance=ExtResource( 7 )]
-position = Vector2( 568, 192 )
+position = Vector2( 816, 192 )
 seedSpawnerPath = NodePath("../Objects/SeedSpawner")
 
 [node name="Objects" type="YSort" parent="."]

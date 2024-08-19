@@ -57,7 +57,6 @@ func idle_state():
 
 func move_state(delta):
 	move_towards_target()
-	position = position.round()
 
 func held_state():
 	global_position = global.player.global_position + Vector2(0, 1)
@@ -207,6 +206,10 @@ func choose_random_position():
 	var offset = Vector2(cos(randomAngle), sin(randomAngle)) * randomRadius
 	targetPosition = self.position + offset
 	
+	$RayCast2D.cast_to = offset
+	
+	if $RayCast2D.get_collider() != null:
+		return
 	
 	var rng = RandomNumberGenerator.new()
 	
@@ -242,12 +245,15 @@ func move_towards_target():
 		var runningTarget = runningFrom[0]
 		#turnip prioritizes running away from walls instead of player
 		for i in runningFrom:
-			runningTarget = i
-			if runningFrom.size() > 1 and runningTarget == global.player:
-				continue
-			else:
+			
+			if runningFrom.size() > 1 and i != global.player:
+				runningTarget = i
 				break
-		direction = (position - runningTarget.position).normalized()
+			elif runningFrom.size() == 0:
+				runningTarget = i
+				break
+			
+		direction = runningTarget.global_position.direction_to(global_position)
 		spd = speed * 1.2
 		targetPosition = position + direction * ($FleeArea/CollisionShape2D.shape.radius * 2)  # RUN BITCH
 	
@@ -272,25 +278,31 @@ func move_towards_target():
 		set_state(States.IDLE)
 		var rng = RandomNumberGenerator.new()
 		$MoveTime.start(rng.randf_range(0.5,2))
-		
-
-
-
-
 
 func _on_FleeArea_body_entered(body):
-	runAway = true
-	choose_random_position()
-	runningFrom.append(body)
-	print(body)
+	if !runningFrom.has(body):
+		runAway = true
+		choose_random_position()
+		runningFrom.append(body)
+		print(body)
 
 
 func _on_SafeArea_body_exited(body):
 	if runningFrom.has(body):
 		runningFrom.erase(body)
-		print("erased")
+		print("erased" + str(body))
 	if runningFrom.size() == 0:
 		runAway = false  # stop acting like a pussy
 		choose_random_position()
 		print("all erased")
 
+
+
+#func _on_FleeArea_body_exited(body):
+#	if runningFrom.has(body):
+#		runningFrom.erase(body)
+#		print("erased" + str(body))
+#	if runningFrom.size() == 0:
+#		runAway = false  # stop acting like a pussy
+#		choose_random_position()
+#		print("all erased")

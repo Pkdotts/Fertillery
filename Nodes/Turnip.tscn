@@ -430,7 +430,7 @@ radius = 53.0377
 radius = 58.0
 
 [sub_resource type="CircleShape2D" id=23]
-radius = 85.0235
+radius = 137.058
 
 [node name="Turnip" type="KinematicBody2D"]
 material = ExtResource( 3 )
@@ -525,6 +525,7 @@ shape = SubResource( 3 )
 [node name="Tween" type="Tween" parent="."]
 
 [node name="WanderRadius" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WanderRadius"]
 modulate = Color( 0.521569, 0, 1, 1 )
@@ -553,7 +554,12 @@ modulate = Color( 0, 1, 0.462745, 1 )
 position = Vector2( 2, -8 )
 shape = SubResource( 23 )
 
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = true
+collision_mask = 32
+
 [connection signal="area_entered" from="Absorber" to="." method="_on_Absorber_area_entered"]
 [connection signal="timeout" from="MoveTime" to="." method="_on_MoveTime_timeout"]
 [connection signal="body_entered" from="FleeArea" to="." method="_on_FleeArea_body_entered"]
+[connection signal="body_exited" from="FleeArea" to="." method="_on_FleeArea_body_exited"]
 [connection signal="body_exited" from="SafeArea" to="." method="_on_SafeArea_body_exited"]

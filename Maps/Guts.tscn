@@ -68,7 +68,7 @@ scale = Vector2( 1.01389, 1 )
 texture = ExtResource( 9 )
 
 [node name="VoreMonster" parent="." instance=ExtResource( 7 )]
-position = Vector2( 8, 80 )
+position = Vector2( 256, 80 )
 seedSpawnerPath = NodePath("../Objects/SeedSpawner")
 
 [node name="DripletSpawner" parent="." instance=ExtResource( 6 )]
