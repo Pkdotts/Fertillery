@@ -17,6 +17,7 @@ onready var hole = get_node_or_null(holePath)
 export var dripletSpawnerPath : NodePath
 onready var dripletSpawner = get_node_or_null(dripletSpawnerPath)
 
+
 export var nextMap = ""
 export var monsterDropPosition = 0
 
@@ -29,18 +30,26 @@ onready var explodeSFX = preload("res://Audio/SFX/cratebreak.wav")
 
 func _ready():
 	global.connect("updateTurnipCounter", self, "check_threshold")
-	uiManager.reticle.set_mode(0)
-	uiManager.show_reticle()
+	
 	if tutorial:
+		global.player.pause()
 		audioManager.play_ambiance_music()
 		if bin != null:
 			bin.connect("ate", self, "play_intro_cutscene")
-		if seedSpawner != null:
-			yield(get_tree().create_timer(1),"timeout")
-			create_seed()
+		
 		if hole != null and dripletSpawner != null:
 			hole.connect("created_turnip", dripletSpawner, "set_spawning", [true], CONNECT_ONESHOT)
-		
+	else:
+		uiManager.show_reticle()
+
+func start_game():
+	uiManager.reticle.set_mode(0)
+	uiManager.show_reticle()
+	global.currentCamera.set_anchor(global.player)
+	global.player.unpause()
+	if seedSpawner != null:
+			yield(get_tree().create_timer(1),"timeout")
+			create_seed()
 
 func create_seed():
 	if seedSpawner != null:
@@ -71,7 +80,7 @@ func play_intro_cutscene():
 	bin.die()
 	audioManager.play_sfx(explodeSFX, "explosion")
 	yield(get_tree().create_timer(2), "timeout")
-	monster.inhale()
+	monster.roar()
 	audioManager.play_sfx(screamSFX, "scream")
 	yield(get_tree().create_timer(2), "timeout")
 	monster.idle()

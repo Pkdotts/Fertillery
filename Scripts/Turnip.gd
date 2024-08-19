@@ -280,7 +280,7 @@ func move_towards_target():
 		$MoveTime.start(rng.randf_range(0.5,2))
 
 func _on_FleeArea_body_entered(body):
-	if !runningFrom.has(body):
+	if !runningFrom.has(body) and body != self:
 		runAway = true
 		choose_random_position()
 		runningFrom.append(body)
@@ -288,13 +288,14 @@ func _on_FleeArea_body_entered(body):
 
 
 func _on_SafeArea_body_exited(body):
-	if runningFrom.has(body):
-		runningFrom.erase(body)
-		print("erased" + str(body))
-	if runningFrom.size() == 0:
-		runAway = false  # stop acting like a pussy
-		choose_random_position()
-		print("all erased")
+	if body != self:
+		if runningFrom.has(body):
+			runningFrom.erase(body)
+			print("erased" + str(body))
+		if runningFrom.size() == 0:
+			runAway = false  # stop acting like a pussy
+			choose_random_position()
+			print("all erased")
 
 
 

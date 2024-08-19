@@ -4,14 +4,18 @@
 [ext_resource path="res://Maps/Credits.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Sprites/Logo.png" type="Texture" id=3]
 
-[node name="Node2D" type="Control"]
+[node name="TitleScreen" type="Control"]
 script = ExtResource( 1 )
 
+[node name="Logo" type="Sprite" parent="."]
+position = Vector2( 192, 84 )
+texture = ExtResource( 3 )
+
 [node name="Button" type="Button" parent="."]
-margin_left = 124.0
-margin_top = 133.0
-margin_right = 248.0
-margin_bottom = 169.0
+margin_left = 136.0
+margin_top = 80.0
+margin_right = 260.0
+margin_bottom = 116.0
 text = "start"
 
 [node name="Button2" type="Button" parent="."]
@@ -22,18 +26,16 @@ margin_bottom = 203.0
 text = "credits"
 
 [node name="Results" type="Label" parent="."]
-margin_left = 144.0
-margin_top = 104.0
-margin_right = 229.0
-margin_bottom = 124.0
+margin_left = 8.0
+margin_top = 184.0
+margin_right = 93.0
+margin_bottom = 204.0
 align = 1
 
 [node name="Credits" parent="." instance=ExtResource( 2 )]
 visible = false
 
-[node name="Logo" type="Sprite" parent="."]
-position = Vector2( 192, 108 )
-texture = ExtResource( 3 )
+[node name="Tween" type="Tween" parent="."]
 
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_Button2_pressed"]

@@ -1,9 +1,10 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Nodes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Nodes/Camera.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Nodes/Hole.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Nodes/SeedSpawner.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Maps/TitleScreen.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Nodes/DripletSpawner.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Nodes/monster.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Nodes/camarea.tscn" type="PackedScene" id=8]
@@ -46,17 +47,6 @@ extents = Vector2( 24, 60 )
 
 [node name="Tutorial" type="Node2D"]
 
-[node name="Cutscene" parent="." instance=ExtResource( 10 )]
-tutorial = true
-monsterPath = NodePath("../VoreMonster")
-binPath = NodePath("../BG/Bin")
-seedSpawnerPath = NodePath("../Objects/SeedSpawner")
-holePath = NodePath("../BG/Hole")
-dripletSpawnerPath = NodePath("../DripletSpawner")
-nextMap = "Guts"
-monsterDropPosition = 232
-monsterAnchorXOffset = -50
-
 [node name="BG" type="Node2D" parent="."]
 
 [node name="BG" type="Sprite" parent="BG"]
@@ -64,7 +54,7 @@ position = Vector2( 112, 212 )
 texture = ExtResource( 9 )
 
 [node name="Hole" parent="BG" instance=ExtResource( 3 )]
-position = Vector2( 136, 280 )
+position = Vector2( 136, 304 )
 newParentPath = NodePath("../../Objects")
 cutscenePath = NodePath("../../Cutscene")
 wait_time = 5
@@ -90,10 +80,10 @@ shape = SubResource( 9 )
 [node name="Objects" type="YSort" parent="."]
 
 [node name="Player" parent="Objects" instance=ExtResource( 1 )]
-position = Vector2( 136, 224 )
+position = Vector2( 136, 208 )
 
 [node name="SeedSpawner" parent="Objects" instance=ExtResource( 4 )]
-position = Vector2( 232, 208 )
+position = Vector2( 272, 175 )
 
 [node name="Sign1" type="Sprite" parent="Objects"]
 position = Vector2( 200, 152 )
@@ -108,8 +98,7 @@ position = Vector2( 72, 152 )
 texture = ExtResource( 14 )
 
 [node name="Camera" parent="." instance=ExtResource( 2 )]
-position = Vector2( 128, 224 )
-anchor_path = NodePath("../Objects/Player")
+position = Vector2( 136, 112 )
 
 [node name="camarea" parent="." instance=ExtResource( 8 )]
 position = Vector2( 384, 208 )
@@ -172,6 +161,25 @@ position = Vector2( -8, -84 )
 shape = SubResource( 8 )
 
 [node name="Collisions" type="Node2D" parent="."]
+
+[node name="TitleScreen" parent="." instance=ExtResource( 5 )]
+margin_left = -64.0
+margin_top = 4.0
+margin_right = -64.0
+margin_bottom = 4.0
+
+[node name="Cutscene" parent="." instance=ExtResource( 10 )]
+tutorial = true
+monsterPath = NodePath("../VoreMonster")
+binPath = NodePath("../BG/Bin")
+seedSpawnerPath = NodePath("../Objects/SeedSpawner")
+holePath = NodePath("../BG/Hole")
+dripletSpawnerPath = NodePath("../DripletSpawner")
+nextMap = "Guts"
+monsterDropPosition = 232
+monsterAnchorXOffset = -50
+
+[connection signal="pressed_start" from="TitleScreen" to="Cutscene" method="start_game"]
 
 [editable path="DripletSpawner"]
 [editable path="camarea"]

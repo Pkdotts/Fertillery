@@ -1,24 +1,33 @@
 extends Control
 
+signal pressed_start
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
+var enabled = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Results.text = "Turnips fed - " + var2str(global.turnipCount)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	#if global.turnipCount == 0:
+	#	$Results.hide()
+	#else:
+	$Results.show()
+	$Results.text = "Highscore: " + var2str(global.turnipCount)
+	uiManager.create_reticle()
+	uiManager.reticle.set_mode(1)
 
 
 func _on_Button_pressed():
-	global.change_scenes("res://Maps/TutorialFarm.tscn")
-
+	if enabled:
+		emit_signal("pressed_start")
+		hide()
 
 func _on_Button2_pressed():
-	$Credits.show()
+	if enabled:
+		$Credits.show()
+
+func hide():
+	enabled = false
+	$Tween.interpolate_property(self, "rect_position:y",
+		rect_position.y, rect_position.y - 400, 0.5,Tween.TRANS_QUART, Tween.EASE_IN)
+	$Tween.start()
+	yield($Tween,"tween_all_completed")
+	hide()
