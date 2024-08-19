@@ -18,7 +18,7 @@ var opened = false
 var seedSpawner = null
 
 onready var plantSFX = preload("res://Audio/SFX/plant.wav")
-onready var turnipGrowSFX = preload("res://Audio/SFX/turnipgrow.wav")
+onready var turnipGrowSFX = preload("res://Audio/SFX/sprout.wav")
 
 
 
@@ -43,8 +43,6 @@ func create_turnip():
 			turnip.set_tutorial_turnip(cutscene)
 			cutscene = null
 		emit_signal("created_turnip")
-		if seedSpawner != null:
-			seedSpawner.start_creating()
 
 func close():
 	opened = false
@@ -68,6 +66,8 @@ func _on_Area2D_area_entered(area):
 		$AnimationPlayer.play("GrowSprout")
 		$AudioStreamPlayer.stream = plantSFX
 		$AudioStreamPlayer.play()
+		if seedSpawner != null:
+			seedSpawner.start_creating()
 
 func _on_Absorber_area_entered(area):
 	var parent = area.get_parent().get_parent()
