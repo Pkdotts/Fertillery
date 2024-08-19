@@ -3,6 +3,7 @@ extends Node
 signal updateTurnipCounter
 signal updateDripDelay(dripDelay)
 signal removedTurnip
+signal gameOver
 
 var winSize = 1
 var winDim = Vector2(384, 216)
@@ -29,7 +30,7 @@ var maxDripCount = 10
 var turnipCount = 0
 var maxTurnipCount = 5
 
-const THRESHOLDADDER = 30
+const THRESHOLDADDER = 50
 const STARTTHRESHOLD = 25
 var nextThreshold = 25
 var turnipsEaten = 0
@@ -111,10 +112,7 @@ func _physics_process(delta):
 			else:
 				hungerMeter += delta * hungerSpeed * 0.7
 		else:
-			uiManager.erase_HUD()
-			pause_meter()
-			change_scenes("res://Maps/gameOver.tscn")
-			hungerMeter = 0
+			emit_signal("gameOver")
 	if timer:
 		time += delta
 

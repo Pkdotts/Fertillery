@@ -30,7 +30,7 @@ onready var explodeSFX = preload("res://Audio/SFX/cratebreak.wav")
 
 func _ready():
 	global.connect("updateTurnipCounter", self, "check_threshold")
-	
+	global.connect("gameOver", self, "play_game_over")
 	if tutorial:
 		global.player.pause()
 		audioManager.play_ambiance_music()
@@ -97,7 +97,6 @@ func play_inhale_cutscene():
 	global.player.pause()
 	uiManager.hide_reticle()
 	global.currentCamera.set_anchor(null)
-	#global.currentCamera.update_offset(Vector2(monsterAnchorXOffset, 0), 0.05)
 	global.currentCamera.move_camera(monsterZoomPos.x + monsterAnchorXOffset, monsterZoomPos.y, 0.5)
 	global.pause_meter()
 	yield(get_tree().create_timer(2), "timeout")
@@ -111,5 +110,18 @@ func play_inhale_cutscene():
 	global.change_scenes("res://Maps/" + nextMap + ".tscn")
 	global.nextThreshold += global.THRESHOLDADDER
 
-func play_game_over_cutscene():
-	pass
+func play_game_over():
+	audioManager.stop_game_music()
+	
+	var monsterZoomPos = monster.cameraZoomPos.global_position
+	global.player.pause()
+	uiManager.hide_reticle()
+	global.currentCamera.set_anchor(null)
+	global.currentCamera.move_camera(monsterZoomPos.x + monsterAnchorXOffset, monsterZoomPos.y, 0.5)
+	global.pause_meter()
+	yield(get_tree().create_timer(2), "timeout")
+	monster.roar()
+	audioManager.play_sfx(screamSFX, "scream")
+	uiManager.erase_HUD()
+	global.change_scenes("res://Maps/gameOver.tscn")
+	global.hungerMeter = 0

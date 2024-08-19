@@ -25,7 +25,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=2]
 resource_name = "GrowSprout"
-length = 2.08333
+length = 2.91667
 step = 0.0833333
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -34,7 +34,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.0833333, 0.166667, 0.25, 0.333333, 1.5, 1.58333, 1.66667, 1.75, 1.83333, 1.91667, 2 ),
+"times": PoolRealArray( 0, 0.0833333, 0.166667, 0.25, 0.333333, 2.33333, 2.41667, 2.5, 2.58333, 2.66667, 2.75, 2.83333 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 1, 2, 3, 4, 5, 4, 2, 3, 2, 3, 2, 3 ]

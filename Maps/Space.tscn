@@ -131,10 +131,10 @@ position = Vector2( -344, 120 )
 position = Vector2( -136, 208 )
 
 [node name="SeedSpawner" parent="Objects" instance=ExtResource( 12 )]
-position = Vector2( -480, 176 )
+position = Vector2( -680, 184 )
 
 [node name="Fertilizer" parent="Objects" instance=ExtResource( 5 )]
-position = Vector2( -512, 192 )
+position = Vector2( -712, 200 )
 
 [node name="Camera" parent="." instance=ExtResource( 2 )]
 position = Vector2( -552, 184 )
