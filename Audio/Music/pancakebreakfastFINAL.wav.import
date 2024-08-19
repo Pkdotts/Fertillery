@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/pancakebreakfastFINAL.wav-a2b52a5b0f681615ea2db9de4af9358c.sample"
+
+[deps]
+
+source_file="res://Audio/Music/pancakebreakfastFINAL.wav"
+dest_files=[ "res://.import/pancakebreakfastFINAL.wav-a2b52a5b0f681615ea2db9de4af9358c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
