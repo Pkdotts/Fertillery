@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/HUD.gd" type="Script" id=1]
 [ext_resource path="res://Nodes/UI/HungerMeter.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Fonts/Brickish.tres" type="DynamicFont" id=3]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -16,15 +17,17 @@ margin_bottom = 40.0
 
 [node name="Desc" type="Label" parent="Control/TurnipsFed"]
 margin_top = 13.0
-margin_right = 77.0
-margin_bottom = 27.0
+margin_right = 72.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 3 )
 text = "turnips fed :"
 
 [node name="Score" type="Label" parent="Control/TurnipsFed"]
-margin_left = 81.0
+margin_left = 76.0
 margin_top = 13.0
-margin_right = 89.0
-margin_bottom = 27.0
+margin_right = 82.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 3 )
 text = "0"
 
 [node name="HungerMeter" parent="Control" instance=ExtResource( 2 )]

@@ -25,6 +25,17 @@ func check_threshold():
 	if global.turnipsEaten >= global.nextThreshold and monster != null:
 		play_inhale_cutscene()
 
+func bin_slide_in():
+	
+	var endBinPos = 432
+	if global.player.position.x > 256:
+		bin.position.x = endBinPos + 500
+	else:
+		bin.position.x = endBinPos - 500
+	$Tween.interpolate_property(bin, "position:x",
+		bin.position.x, endBinPos, 1)
+	$Tween.start()
+
 func play_intro_cutscene():
 	$Tween.interpolate_property(monster, "position:y",
 		monster.position.y, monsterDropPosition, 1)
@@ -35,7 +46,11 @@ func play_intro_cutscene():
 	monster.roar()
 	audioManager.play_sfx(screamSFX, "scream")
 	yield(get_tree().create_timer(2), "timeout")
+	monster.idle()
+	yield(get_tree().create_timer(5), "timeout")
 	
+	audioManager.play_game_music()
+	uiManager.create_HUD()
 	
 
 func play_inhale_cutscene():

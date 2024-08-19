@@ -13,7 +13,7 @@
 [ext_resource path="res://Nodes/Bin.tscn" type="PackedScene" id=11]
 
 [sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 224, 98 )
+extents = Vector2( 180, 98 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 256.25, 212 )
@@ -58,11 +58,13 @@ position = Vector2( 112, 212 )
 texture = ExtResource( 9 )
 
 [node name="Hole" parent="BG" instance=ExtResource( 3 )]
-position = Vector2( 192, 288 )
+position = Vector2( 176, 288 )
 newParentPath = NodePath("../../Objects")
+cutscenePath = NodePath("../../Cutscene")
+wait_time = 5
 
 [node name="Bin" parent="BG" instance=ExtResource( 11 )]
-position = Vector2( 448, 224 )
+position = Vector2( 1104, 248 )
 
 [node name="VoreMonster" parent="." instance=ExtResource( 7 )]
 position = Vector2( 408, -608 )
@@ -73,7 +75,7 @@ position = Vector2( 248, 224 )
 newParentPath = NodePath("../Objects")
 
 [node name="CollisionShape2D" parent="DripletSpawner" index="1"]
-position = Vector2( 0, 82 )
+position = Vector2( -44, 82 )
 shape = SubResource( 9 )
 
 [node name="Objects" type="YSort" parent="."]

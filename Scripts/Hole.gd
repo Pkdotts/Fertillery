@@ -3,6 +3,11 @@ extends Node2D
 export var newParentPath : NodePath
 onready var newParent = get_node_or_null(newParentPath)
 
+export var cutscenePath : NodePath
+onready var cutscene = get_node_or_null(cutscenePath)
+
+export var wait_time = 0
+
 onready var timer = $Timer
 
 var turnipNode = preload("res://Nodes/Turnip.tscn")
@@ -11,6 +16,8 @@ var opened = false
 
 func _ready():
 	open()
+	if wait_time != 0:
+		$Timer.wait_time = wait_time
 
 func create_turnip():
 	close()
@@ -20,6 +27,9 @@ func create_turnip():
 		newParent.call_deferred("add_child", turnip)
 		timer.start()
 		$AudioStreamPlayer.play()
+		if cutscene != null:
+			turnip.set_tutorial_turnip(cutscene)
+			cutscene = null
 
 func close():
 	opened = false

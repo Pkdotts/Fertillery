@@ -36,6 +36,9 @@ func inhale():
 func roar():
 	$AnimationPlayer.play("Roar")
 
+func idle():
+	$AnimationPlayer.play("Idle")
+
 func _on_Area2D_area_entered(area):
 	yield(get_tree().create_timer(0.1), "timeout")
 	var turnip = area.get_parent().get_parent()

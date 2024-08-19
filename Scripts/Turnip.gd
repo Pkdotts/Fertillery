@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 
 signal stopped_shaking
+signal maxGrow
 
 export var speed = 100
 export var size = 1
@@ -30,6 +31,9 @@ onready var tween = $Tween
 
 func _ready():
 	material = material.duplicate()
+
+func set_tutorial_turnip(cutscene):
+	connect("maxGrow", cutscene, "bin_slide_in", [], CONNECT_ONESHOT)
 
 func _physics_process(delta):
 	$Anchor/GrowSprite.flip_h = $Anchor/Sprite.flip_h
@@ -77,6 +81,8 @@ func grow():
 	$GrowAnim.play("Grow")
 	size += 1
 	speed = round(150 / (1 + (size - 1) * 0.5))
+	if size == max_size:
+		emit_signal("maxGrow")
 
 func throw(height, newPos, time, initHeight = 0):
 	jump_to(newPos, time, height, initHeight)
