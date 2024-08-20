@@ -14,7 +14,31 @@
 [ext_resource path="res://Nodes/SeedSpawner.tscn" type="PackedScene" id=12]
 
 [sub_resource type="RectangleShape2D" id=13]
-extents = Vector2( 392, 172 )
+extents = Vector2( 392, 100 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 24, 72 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 156, 180 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 25, 60 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 312.5, 16 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 312, 180 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 24, 68 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 312, 16 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 24, 68 )
 
 [sub_resource type="Shader" id=9]
 code = "shader_type canvas_item;
@@ -50,34 +74,10 @@ extents = Vector2( 108, 60 )
 extents = Vector2( 82, 46 )
 
 [sub_resource type="RectangleShape2D" id=15]
-extents = Vector2( 72, 56 )
+extents = Vector2( 72, 48 )
 
 [sub_resource type="RectangleShape2D" id=16]
-extents = Vector2( 85, 44 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 24, 72 )
-
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 156, 108 )
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 25, 108 )
-
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 312.5, 16 )
-
-[sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 312, 108 )
-
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 24, 92 )
-
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 312, 16 )
-
-[sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 24, 68 )
+extents = Vector2( 98.5, 44 )
 
 [node name="Guts" type="Node2D"]
 
@@ -100,13 +100,67 @@ seedSpawnerPath = NodePath("../Objects/SeedSpawner")
 newParentPath = NodePath("../Objects")
 
 [node name="CollisionShape2D" parent="DripletSpawner" index="1"]
-position = Vector2( -528, 108 )
+position = Vector2( -528, 180 )
 shape = SubResource( 13 )
+
+[node name="Collisions" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Collisions"]
+position = Vector2( 216, 16 )
+collision_layer = 113
+collision_mask = 113
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/StaticBody2D"]
+position = Vector2( 0, 88 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Collisions/StaticBody2D"]
+position = Vector2( -444, -140 )
+shape = SubResource( 5 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Collisions"]
+position = Vector2( -984, 328 )
+collision_layer = 113
+collision_mask = 113
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Collisions/StaticBody2D2"]
+position = Vector2( 0, -76 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Collisions/StaticBody2D2"]
+position = Vector2( 287.5, 0 )
+shape = SubResource( 6 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Collisions"]
+position = Vector2( -968, 16 )
+collision_layer = 113
+collision_mask = 113
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Collisions/StaticBody2D3"]
+position = Vector2( 272, -140 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Collisions/StaticBody2D3"]
+position = Vector2( -16, 108 )
+shape = SubResource( 7 )
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Collisions"]
+position = Vector2( 224, 336 )
+collision_layer = 113
+collision_mask = 113
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Collisions/StaticBody2D4"]
+position = Vector2( -296, -8 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Collisions/StaticBody2D4"]
+position = Vector2( -8, -92 )
+shape = SubResource( 8 )
 
 [node name="Objects" type="YSort" parent="."]
 
 [node name="Player" parent="Objects" instance=ExtResource( 1 )]
-position = Vector2( -816, 32 )
+position = Vector2( -816, 128 )
 
 [node name="Turnip" parent="Objects" instance=ExtResource( 4 )]
 material = SubResource( 12 )
@@ -120,19 +174,19 @@ position = Vector2( -792, 184 )
 position = Vector2( -680, 136 )
 
 [node name="Driplet2" parent="Objects" instance=ExtResource( 11 )]
-position = Vector2( -504, -16 )
+position = Vector2( -288, 152 )
 
 [node name="Driplet3" parent="Objects" instance=ExtResource( 11 )]
 position = Vector2( -136, 208 )
 
 [node name="SeedSpawner" parent="Objects" instance=ExtResource( 12 )]
-position = Vector2( -760, -8 )
+position = Vector2( -648, 104 )
 
 [node name="Fertilizer" parent="Objects" instance=ExtResource( 5 )]
-position = Vector2( -792, 8 )
+position = Vector2( -680, 120 )
 
 [node name="Camera" parent="." instance=ExtResource( 2 )]
-position = Vector2( -816, 32 )
+position = Vector2( -816, 128 )
 anchor_path = NodePath("../Objects/Player")
 
 [node name="camarea" parent="." instance=ExtResource( 8 )]
@@ -163,7 +217,7 @@ seedSpawnerPath = NodePath("../../Objects/SeedSpawner")
 enabled = true
 
 [node name="CollisionShape2D" parent="HoleGenerators/HoleGenerator4" index="0"]
-position = Vector2( 50, -10 )
+position = Vector2( 48, 0 )
 shape = SubResource( 14 )
 
 [node name="HoleGenerator5" parent="HoleGenerators" instance=ExtResource( 3 )]
@@ -174,7 +228,7 @@ seedSpawnerPath = NodePath("../../Objects/SeedSpawner")
 enabled = true
 
 [node name="CollisionShape2D" parent="HoleGenerators/HoleGenerator5" index="0"]
-position = Vector2( -112, 24 )
+position = Vector2( -112, 32 )
 shape = SubResource( 15 )
 
 [node name="HoleGenerator2" parent="HoleGenerators" instance=ExtResource( 3 )]
@@ -185,7 +239,7 @@ seedSpawnerPath = NodePath("../../Objects/SeedSpawner")
 enabled = true
 
 [node name="CollisionShape2D" parent="HoleGenerators/HoleGenerator2" index="0"]
-position = Vector2( -138, 34 )
+position = Vector2( -272, 24 )
 shape = SubResource( 16 )
 
 [node name="HoleGenerator6" parent="HoleGenerators" instance=ExtResource( 3 )]
@@ -196,62 +250,8 @@ seedSpawnerPath = NodePath("../../Objects/SeedSpawner")
 enabled = true
 
 [node name="CollisionShape2D" parent="HoleGenerators/HoleGenerator6" index="0"]
-position = Vector2( -13, -4 )
+position = Vector2( -64, -8 )
 shape = SubResource( 16 )
-
-[node name="Collisions" type="Node2D" parent="."]
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Collisions"]
-position = Vector2( 216, 16 )
-collision_layer = 113
-collision_mask = 113
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/StaticBody2D"]
-position = Vector2( 0, 88 )
-shape = SubResource( 2 )
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Collisions/StaticBody2D"]
-position = Vector2( -444, -212 )
-shape = SubResource( 5 )
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="Collisions"]
-position = Vector2( -984, 328 )
-collision_layer = 113
-collision_mask = 113
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Collisions/StaticBody2D2"]
-position = Vector2( 0, -124 )
-shape = SubResource( 3 )
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Collisions/StaticBody2D2"]
-position = Vector2( 287.5, 0 )
-shape = SubResource( 6 )
-
-[node name="StaticBody2D3" type="StaticBody2D" parent="Collisions"]
-position = Vector2( -968, 16 )
-collision_layer = 113
-collision_mask = 113
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Collisions/StaticBody2D3"]
-position = Vector2( 272, -212 )
-shape = SubResource( 10 )
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Collisions/StaticBody2D3"]
-position = Vector2( -16, -12 )
-shape = SubResource( 7 )
-
-[node name="StaticBody2D4" type="StaticBody2D" parent="Collisions"]
-position = Vector2( 224, 336 )
-collision_layer = 113
-collision_mask = 113
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Collisions/StaticBody2D4"]
-position = Vector2( -296, -8 )
-shape = SubResource( 4 )
-
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="Collisions/StaticBody2D4"]
-position = Vector2( -8, -92 )
-shape = SubResource( 8 )
 
 [editable path="DripletSpawner"]
 [editable path="camarea"]

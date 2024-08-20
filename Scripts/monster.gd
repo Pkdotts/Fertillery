@@ -2,13 +2,9 @@ extends Node2D
 
 export var seedSpawnerPath : NodePath
 onready var seedSpawner = get_node_or_null(seedSpawnerPath)
-
-var fertilizerNode = preload("res://Nodes/Fertilizer.tscn")
-
 onready var cameraZoomPos = $CameraZoom
 
 
-onready var fertilizerPositions = $FertilizerPositions
 
 func _ready():
 	$AnimationPlayer.play("Idle")
