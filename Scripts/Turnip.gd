@@ -62,7 +62,7 @@ func idle_state():
 	animationPlayer.play("Idle" + str(size))
 	position = position.round()
 
-func move_state(delta):
+func move_state(_delta):
 	move_towards_target()
 
 func held_state():

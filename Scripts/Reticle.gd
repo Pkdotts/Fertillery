@@ -7,7 +7,7 @@ func _ready():
 	set_mode(2)
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
-func _process(delta):
+func _process(_delta):
 	var newPosition = get_global_mouse_position()
 	global_position = newPosition
 
@@ -16,7 +16,9 @@ func _input(event):
 		if global.player != null and mode == 0 and visible:
 			var throwPosition = get_global_position()
 			global.player.throw(throwPosition)
-			print(throwPosition)
+			$AnimationPlayer.stop()
+			$AnimationPlayer.play("Click")
+			
 
 func get_global_position():
 	return global_position + global.currentCamera.get_camera_screen_center() - global.winDim/2

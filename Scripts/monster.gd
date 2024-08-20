@@ -36,26 +36,27 @@ func anticIdle():
 	$AnimationPlayer.play("Idle")
 
 func _on_Area2D_area_entered(area):
-	var turnip = area.get_parent().get_parent()
-	
-	if turnip.name == "Fire":
-		return
-	
-	#if turnip somehow enters the area again
-	if turnip.queuedEaten:
-		return
-	else:
-		turnip.queuedEaten = true
-	
-	yield(get_tree().create_timer(0.1), "timeout")
-	$AnimationPlayer.stop()
-	$AnimationPlayer.play("Chew")
-	turnip.die()
-	global.increase_turnip_counter(turnip.size)
-	global.decrease_hunger(turnip.size * 10)
-	global.increase_difficulty(turnip.size)
-	#if seedSpawner != null:
-		#seedSpawner.start_creating()
+	if global.hungerMeter < 100:
+		var turnip = area.get_parent().get_parent()
+		
+		if turnip.name == "Fire":
+			return
+		
+		#if turnip somehow enters the area again
+		if turnip.queuedEaten:
+			return
+		else:
+			turnip.queuedEaten = true
+		
+		yield(get_tree().create_timer(0.1), "timeout")
+		$AnimationPlayer.stop()
+		$AnimationPlayer.play("Chew")
+		turnip.die()
+		global.increase_turnip_counter(turnip.size)
+		global.decrease_hunger(turnip.size * 10)
+		global.increase_difficulty(turnip.size)
+		#if seedSpawner != null:
+			#seedSpawner.start_creating()
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Chew":

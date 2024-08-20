@@ -12,5 +12,5 @@ func fadeout(speed = 1):
 	animPlayer.playback_speed = speed
 	animPlayer.play("FadeOut")
 
-func _on_AnimationPlayer_animation_finished(anim_name):
+func _on_AnimationPlayer_animation_finished(_anim_name):
 	emit_signal("transition_finished")

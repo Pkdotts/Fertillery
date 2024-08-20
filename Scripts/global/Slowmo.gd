@@ -17,7 +17,7 @@ func start_slowmo(speed, length):
 	Engine.time_scale = start_value
 	set_process(true)
 
-func _process(delta):
+func _process(_delta):
 	var current_time = OS.get_ticks_msec() - start_time
 	var value = circl_ease_in(current_time, start_value, endValue, length_ms)
 	if current_time >= length_ms:

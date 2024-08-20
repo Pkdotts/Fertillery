@@ -28,7 +28,7 @@ onready var screamSFX = preload("res://Audio/SFX/fiendroar.wav")
 onready var fallSFX = preload("res://Audio/SFX/fiendfallin.wav")
 onready var explodeSFX = preload("res://Audio/SFX/cratebreak.wav")
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("ui_home") and OS.is_debug_build():
 		play_inhale_cutscene()
 
@@ -56,6 +56,8 @@ func start_game():
 	global.nextThreshold = global.STARTTHRESHOLD
 	global.turnipsEaten = 0
 	global.level = 1
+	global.hungerMeter = 0
+	global.hungerSpeed = 1
 	
 	if global.tutorialCompleted:
 		play_intro_cutscene()

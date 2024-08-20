@@ -12,7 +12,6 @@ onready var newParent = get_node_or_null(newParentPath)
 
 func _ready():
 	set_drip_timer(dripDelay)
-	global.connect("updateDripDelay", self, "set_drip_timer")
 	if spawning:
 		$Timer.start()
 

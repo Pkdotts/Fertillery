@@ -1,7 +1,6 @@
 extends Node
 
 signal updateTurnipCounter
-signal updateDripDelay(dripDelay)
 signal removedTurnip
 signal gameOver
 
@@ -33,7 +32,7 @@ const STARTTHRESHOLD = 25
 var nextThreshold = 25
 var turnipsEaten = 0
 var hungerMeter = 0
-var hungerSpeed = 8
+var hungerSpeed = 1
 var maxHungerSpeed = 8
 var hungerIncrease = 0.06
 
@@ -70,7 +69,7 @@ func set_hunger_speed(speed):
 	hungerSpeed = speed
 
 func remove_driplet(idx = 0):
-	dripletsFollowing.remove(0)
+	dripletsFollowing.remove(idx)
 	for i in dripletsFollowing.size():
 		dripletsFollowing[i].idx = i + 1
 
@@ -127,8 +126,8 @@ func get_time():
 		seconds = "0" + seconds
 	if len(milliseconds) < 2:
 		milliseconds = milliseconds + "0"
-	var timer = minutes + ":" + seconds + "." + milliseconds
-	return timer
+	var timerString = minutes + ":" + seconds + "." + milliseconds
+	return timerString
 
 func _input(event):
 	if event.is_action_pressed("ui_winsize"):
