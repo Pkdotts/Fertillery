@@ -96,6 +96,7 @@ func reset_turnip_count():
 
 func increase_difficulty(amount):
 	increase_hunger_speed(hungerIncrease*amount)
+	print("hunger speed: " + hungerSpeed)
 
 func pause_meter():
 	meterPaused = true

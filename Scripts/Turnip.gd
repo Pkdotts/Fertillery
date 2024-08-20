@@ -291,18 +291,15 @@ func _on_FleeArea_body_entered(body):
 		runAway = true
 		choose_random_position()
 		runningFrom.append(body)
-		print(body)
 
 
 func _on_SafeArea_body_exited(body):
 	if body != self:
 		if runningFrom.has(body):
 			runningFrom.erase(body)
-			print("erased" + str(body))
 		if runningFrom.size() == 0:
 			runAway = false  # stop acting like a pussy
 			choose_random_position()
-			print("all erased")
 
 func hurt():
 	$Flash.play("Flash")
