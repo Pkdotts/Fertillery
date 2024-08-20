@@ -30,6 +30,11 @@ func roar():
 func idle():
 	$AnimationPlayer.play("Idle")
 
+func anticIdle():
+	$AnimationPlayer.play_backwards("RoarAnticipation")
+	yield($AnimationPlayer, "animation_finished")
+	$AnimationPlayer.play("Idle")
+
 func _on_Area2D_area_entered(area):
 	var turnip = area.get_parent().get_parent()
 	

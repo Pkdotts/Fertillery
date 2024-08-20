@@ -211,7 +211,7 @@ enabled = true
 
 [node name="HoleGenerator" parent="HoleGenerators" instance=ExtResource( 3 )]
 position = Vector2( 24, 240 )
-scale = Vector2( 1, 0.5 )
+scale = Vector2( 0.8, 0.5 )
 newParentPath = NodePath("../../BG")
 turnipParentPath = NodePath("../../Objects")
 enabled = true

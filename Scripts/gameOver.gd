@@ -1,12 +1,5 @@
 extends Control
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	$SatiationPointsLabel.bbcode_text = var2str(global.turnipsEaten)
 	if global.turnipsEaten > global.highScore:
@@ -20,10 +13,11 @@ func _ready():
 
 func _on_TitleButton_pressed():
 	global.change_scenes("res://Maps/TutorialFarm.tscn")
-
+	$AudioStreamPlayer.play()
 
 func _on_TitleButton_mouse_entered():
 	$TitleScreenButton.modulate = Color.yellow
+	$AudioStreamPlayer2.play()
 
 func _on_TitleButton_mouse_exited():
 	$TitleScreenButton.modulate = Color.white

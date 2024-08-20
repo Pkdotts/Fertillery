@@ -4,6 +4,8 @@ onready var hungerBar = $HungerBar
 
 const NORMALCOLOR = Color("ad668b")
 const DANGERCOLOR = Color("ca3a51")
+const TRANSLUSCENTCOLOR = Color(1, 1, 1, 0.25)
+
 
 const DANGERZONE = 60
 var initialSize = 0
@@ -22,3 +24,14 @@ func _process(_delta):
 		hungerBar.color = DANGERCOLOR
 	else:
 		hungerBar.color = NORMALCOLOR
+
+
+func _on_Button_mouse_entered():
+	$Tween.interpolate_property(self, "modulate", 
+		modulate, TRANSLUSCENTCOLOR, 0.1)
+	$Tween.start()
+
+func _on_Button_mouse_exited():
+	$Tween.interpolate_property(self, "modulate", 
+		modulate, Color.white, 0.1)
+	$Tween.start()

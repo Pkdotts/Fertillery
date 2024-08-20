@@ -36,16 +36,18 @@ func hide():
 
 
 func _on_Button_mouse_entered():
-	$StartHover.show()
-	$AudioStreamPlayer2D.play()
+	if enabled:
+		$StartHover.show()
+		$AudioStreamPlayer2D.play()
 
 func _on_Button_mouse_exited():
 	$StartHover.hide()
 
 
 func _on_Button2_mouse_entered():
-	$CreditsHover.show()
-	$AudioStreamPlayer2D.play()
+	if enabled:
+		$CreditsHover.show()
+		$AudioStreamPlayer2D.play()
 
 
 func _on_Button2_mouse_exited():

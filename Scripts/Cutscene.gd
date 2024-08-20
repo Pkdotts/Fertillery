@@ -99,7 +99,7 @@ func play_intro_cutscene():
 	monster.roar()
 	audioManager.play_sfx(screamSFX, "scream")
 	yield(get_tree().create_timer(5), "timeout")
-	monster.idle()
+	monster.anticIdle()
 	yield(get_tree().create_timer(2), "timeout")
 	global.start_timer()
 	audioManager.play_game_music()

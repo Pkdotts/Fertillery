@@ -131,10 +131,18 @@ func throw(pos):
 			set_held_item(null)
 			$ThrowSound.play()
 			thrown = true
-		elif global.dripletsFollowing.size() > 0 and global.dripletsFollowing[0].position.distance_to(position) < throwableDistance:
-			global.dripletsFollowing[0].global_position = global.player.global_position
-			global.dripletsFollowing[0].throw(THROWHEIGHT, pos, 0.5, CarryPosition.position.y)
-			thrown = true
+		elif global.dripletsFollowing.size() > 0:
+			var thrownDriplet = null
+			
+			for i in global.dripletsFollowing:
+				if i.position.distance_to(position) < throwableDistance:
+					thrownDriplet = i
+			
+			if thrownDriplet != null:
+			
+				global.dripletsFollowing[0].global_position = global.player.global_position
+				global.dripletsFollowing[0].throw(THROWHEIGHT, pos, 0.5, CarryPosition.position.y)
+				thrown = true
 		
 		if thrown:
 			animationPlayer.stop()
