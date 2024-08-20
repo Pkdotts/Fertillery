@@ -91,10 +91,10 @@ seedSpawnerPath = NodePath("../Objects/SeedSpawner")
 position = Vector2( 208, 240 )
 
 [node name="Fertilizer3" parent="Objects" instance=ExtResource( 4 )]
-position = Vector2( 240, 280 )
+position = Vector2( 168, 288 )
 
 [node name="SeedSpawner" parent="Objects" instance=ExtResource( 11 )]
-position = Vector2( 312, 272 )
+position = Vector2( 200, 272 )
 
 [node name="Turnip" parent="Objects" instance=ExtResource( 5 )]
 material = SubResource( 11 )

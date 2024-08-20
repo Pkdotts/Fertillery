@@ -5,13 +5,14 @@ signal updateDripDelay(dripDelay)
 signal removedTurnip
 signal gameOver
 
+var tutorialCompleted = false
 var winSize = 1
 var winDim = Vector2(384, 216)
 var player = null
 var currentCamera = null
-var level = 1
 var highScore = 0
 var tutorial = true
+
 
 var music = {
 	"gameplay": "kevinthehonky (1).wav"
@@ -52,12 +53,6 @@ func _ready():
 	if get_tree().current_scene is Node2D and get_tree().current_scene.name != "Tutorial":
 		uiManager.create_HUD()
 	#audioManager.play_music("", music["gameplay"])
-
-func increase_level(amt = 1):
-	level += amt
-
-func set_level(lvl):
-	level = lvl
 
 func increase_turnip_counter(num):
 	turnipsEaten += num

@@ -97,6 +97,8 @@ func play_intro_cutscene():
 	
 
 func play_inhale_cutscene():
+	if tutorial:
+		global.tutorialCompleted = true
 	var monsterZoomPos = monster.cameraZoomPos.global_position
 	global.player.pause()
 	uiManager.hide_reticle()
