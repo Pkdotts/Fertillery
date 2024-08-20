@@ -33,8 +33,8 @@ var nextThreshold = 25
 var turnipsEaten = 0
 var hungerMeter = 0
 var hungerSpeed = 1
-var maxHungerSpeed = 8
-var hungerIncrease = 0.06
+var maxHungerSpeed = 12
+var hungerIncrease = 0.015
 
 var time = 0
 var timer = false

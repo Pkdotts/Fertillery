@@ -14,7 +14,7 @@ func _ready():
 	else:
 		var rng = RandomNumberGenerator.new()
 		rng.randomize()
-		$Sprite.texture = global.fiendTex[rng.randi_range(1,11)]
+		$Sprite.texture = global.fiendTex[rng.randi_range(0,10)]
 
 
 func inhale():

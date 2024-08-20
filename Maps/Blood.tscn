@@ -219,7 +219,7 @@ position = Vector2( -136, 208 )
 
 [node name="SeedSpawner" parent="Objects" instance=ExtResource( 12 )]
 position = Vector2( -680, 80 )
-levelAppear = 7
+levelAppear = 6
 attachedSeedPath = NodePath("../Fertilizer")
 
 [node name="Fertilizer" parent="Objects" instance=ExtResource( 5 )]
@@ -227,7 +227,7 @@ position = Vector2( -712, 96 )
 
 [node name="SeedSpawner2" parent="Objects" instance=ExtResource( 12 )]
 position = Vector2( -248, 200 )
-levelAppear = 13
+levelAppear = 12
 attachedSeedPath = NodePath("../Fertilizer2")
 
 [node name="Fertilizer2" parent="Objects" instance=ExtResource( 5 )]
