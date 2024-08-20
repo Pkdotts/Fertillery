@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/TitleScreen.gd" type="Script" id=1]
 [ext_resource path="res://Maps/Credits.tscn" type="PackedScene" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://Sprites/Credits.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/Credits Hover.png" type="Texture" id=9]
 [ext_resource path="res://Audio/SFX/mousehover.wav" type="AudioStream" id=10]
+[ext_resource path="res://Sprites/F4.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/F5.png" type="Texture" id=12]
 
 [node name="TitleScreen" type="Control"]
 script = ExtResource( 1 )
@@ -35,6 +37,14 @@ texture = ExtResource( 8 )
 visible = false
 position = Vector2( 313, 190 )
 texture = ExtResource( 9 )
+
+[node name="F5" type="Sprite" parent="."]
+position = Vector2( 39, 155 )
+texture = ExtResource( 12 )
+
+[node name="F4" type="Sprite" parent="."]
+position = Vector2( 26, 109 )
+texture = ExtResource( 11 )
 
 [node name="Button" type="Button" parent="."]
 modulate = Color( 1, 1, 1, 0 )
