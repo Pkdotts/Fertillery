@@ -11,6 +11,7 @@ var player = null
 var currentCamera = null
 var level = 1
 var highScore = 0
+var tutorial = true
 
 var music = {
 	"gameplay": "kevinthehonky (1).wav"
@@ -105,7 +106,7 @@ func unpause_meter():
 	meterPaused = false
 
 func _physics_process(delta):
-	if !uiManager.fading and !meterPaused:
+	if !uiManager.fading and !meterPaused and !tutorial:
 		if hungerMeter < 100:
 			if hungerMeter < 50:
 				hungerMeter += delta * hungerSpeed

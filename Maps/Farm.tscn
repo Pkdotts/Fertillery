@@ -67,6 +67,9 @@ extents = Vector2( 248, 16 )
 extents = Vector2( 24, 60 )
 
 [node name="Farm" type="Node2D"]
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="Cutscene" parent="." instance=ExtResource( 10 )]
 monsterPath = NodePath("../VoreMonster")

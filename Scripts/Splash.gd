@@ -18,4 +18,4 @@ func _ready():
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):
-	global.change_scenes("res://Maps/TitleScreen.tscn")
+	global.change_scenes("res://Maps/TutorialFarm.tscn")

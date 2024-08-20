@@ -71,6 +71,10 @@ func bin_slide_in():
 	$Tween.start()
 
 func play_intro_cutscene():
+	global.tutorial = false
+	global.hungerMeter = 0
+	if get_tree().get_current_scene().has_node("FLYFLY"):
+		get_tree().get_current_scene().get_node("FLYFLY").play("fly")
 	$Tween.interpolate_property(monster, "position:y",
 		monster.position.y, monsterDropPosition, 1)
 	$Tween.start()
@@ -109,6 +113,12 @@ func play_inhale_cutscene():
 	yield(get_tree().create_timer(1), "timeout")
 	global.change_scenes("res://Maps/" + nextMap + ".tscn")
 	global.nextThreshold += global.THRESHOLDADDER
+	if global.level < 11:
+		monster.get_node("Sprite").set("shader_param/palette_out",load("res://Sprites/Palettes/pal" + var2str(global.level+1) +".png"))
+	else:
+		var rng = RandomNumberGenerator.new()
+		rng.randomize()
+		monster.get_node("Sprite").set("shader_param/palette_out",load("res://Sprites/Palettes/pal" + var2str(rng.randi_range(1,11)) +".png"))
 
 func play_game_over():
 	audioManager.stop_game_music()

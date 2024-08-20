@@ -10,6 +10,7 @@ func _on_Button_pressed():
 
 func _on_Button_mouse_entered():
 	$Back.modulate = Color.yellow
+	$AudioStreamPlayer2D.play()
 
 func _on_Button_mouse_exited():
 	$Back.modulate = Color.white

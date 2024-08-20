@@ -10,8 +10,8 @@ config_version=4
 
 [application]
 
-config/name="GMTK GameJam"
-run/main_scene="res://Maps/TutorialFarm.tscn"
+config/name="Fertilizer"
+run/main_scene="res://Maps/Splash.tscn"
 boot_splash/image="res://Sprites/Misc/pixel.png"
 boot_splash/fullsize=false
 boot_splash/use_filter=false
