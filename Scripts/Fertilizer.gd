@@ -42,6 +42,7 @@ func set_state(newState):
 
 func throw(height, newPos, time, initHeight = 0):
 	emit_signal("thrown")
+	$Anchor/Area2D/CollisionShape2D.set_deferred("disabled", true)
 	jump_to(newPos, time, height, initHeight)
 	calculate_trajectory(newPos, time)
 	yield(get_tree().create_timer(time * 0.9),"timeout")
@@ -98,6 +99,7 @@ func flip(height, time):
 func set_held():
 	state = States.HELD
 	$Hitbox/CollisionShape2D.set_deferred("disabled", true)
+	$Anchor/Area2D/CollisionShape2D.set_deferred("disabled", true)
 	emit_signal("grabbed")
 
 func set_collisions(enabled):

@@ -60,8 +60,10 @@ func set_wait_time(wait):
 	$Timer.wait_time = wait
 
 func _on_Area2D_area_entered(area):
+	
 	var parent = area.get_parent().get_parent()
 	if opened and parent.get("state") != null and (parent.state != parent.States.HELD and parent.state != parent.States.MIDAIR):
+		opened = false
 		parent.die()
 		$AnimationPlayer.play("GrowSprout")
 		$AudioStreamPlayer.stream = plantSFX

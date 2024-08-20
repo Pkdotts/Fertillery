@@ -5,7 +5,7 @@
 [ext_resource path="res://Audio/SFX/sprout.wav" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 24, 20 )
+extents = Vector2( 28, 22 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "Close"

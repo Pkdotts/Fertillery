@@ -91,7 +91,7 @@ position = Vector2( 208, 240 )
 position = Vector2( 240, 280 )
 
 [node name="SeedSpawner" parent="Objects" instance=ExtResource( 11 )]
-position = Vector2( 208, 272 )
+position = Vector2( 312, 272 )
 
 [node name="Turnip" parent="Objects" instance=ExtResource( 5 )]
 material = SubResource( 11 )
@@ -137,7 +137,7 @@ seedSpawnerPath = NodePath("../../Objects/SeedSpawner")
 enabled = true
 
 [node name="HoleGenerator" parent="HoleGenerators" instance=ExtResource( 3 )]
-position = Vector2( -16, 240 )
+position = Vector2( 24, 240 )
 scale = Vector2( 1, 0.5 )
 newParentPath = NodePath("../../BG")
 turnipParentPath = NodePath("../../Objects")
