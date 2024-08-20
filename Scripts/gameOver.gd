@@ -12,6 +12,7 @@ func _ready():
 	uiManager.reticle.set_mode(1)
 
 func _on_TitleButton_pressed():
+	global.level = 1
 	global.change_scenes("res://Maps/TutorialFarm.tscn")
 	$AudioStreamPlayer.play()
 
