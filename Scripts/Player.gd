@@ -4,8 +4,8 @@ signal paused
 
 enum States {MOVING, DASHING} 
 
-const WALKSPEED = 9000
-const DASHSPEED = 20000
+const WALKSPEED = 10000
+const DASHSPEED = 21000
 const DECELERATION = 45000
 const FLIPHEIGHT = 32
 const THROWHEIGHT = -40
