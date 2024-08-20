@@ -4,7 +4,7 @@ var mode = 0
 
 
 func _ready():
-	set_mode(0)
+	set_mode(2)
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 func _process(delta):
@@ -27,7 +27,9 @@ func set_mode(modeNum):
 		1:
 			$Sprite.hide()
 			$Sprite2.show()
-			
+		2:
+			$Sprite.hide()
+			$Sprite2.hide()
 
 func play_sfx():
 	$AudioStreamPlayer.play()
