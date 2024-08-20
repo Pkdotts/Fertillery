@@ -80,13 +80,14 @@ func move(dir, spd, delta):
 		var oldPos = position
 		move_and_slide(dir * spd * delta)
 		
-		if position != oldPos:
+		if position.round() != oldPos.round():
 			moving = true
 			update_party_positions(oldPos, 1)
 			hold_play("Walk")
 		else:
 			moving = false
 			hold_play("Idle")
+			position = position.round()
 		
 		if animationPlayer.current_animation != "Throw" and animationPlayer.current_animation != "Pickup":
 			if round(oldPos.x) < round(position.x):

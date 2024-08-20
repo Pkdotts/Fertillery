@@ -3,7 +3,7 @@ extends KinematicBody2D
 
 enum States {IDLE, FOLLOWING, THROWN, SPAWNING}
 var state = States.IDLE
-var speed = 9000
+var speed = 9500
 var idx = -1
 var throw_height = -40
 var followPositionOffset = Vector2.ZERO
@@ -40,12 +40,21 @@ func follow_state(delta):
 	var difference = position - newPosition
 	if abs(difference.x) > 5 or abs(difference.y) > 5:
 		var direction = global_position.direction_to(newPosition)
+		if abs(round(direction.x)) > abs(round(direction.y)):
+			direction.x = round(direction.x)
+		elif abs(round(direction.y)) > abs(round(direction.x)):
+			direction.y = round(direction.y)
+		else:
+			direction.x = round(direction.x)
+			direction.y = round(direction.y)
+		
 		move_and_slide(direction * speed * delta)
 		$AnimationPlayer.play("Walk")
 	elif global.player.moving and !global.player.paused:
 		$AnimationPlayer.play("Walk")
 	else:
 		$AnimationPlayer.play("Idle")
+		position = position.round()
 	if round(oldPos.x) > round(position.x):
 		$Anchor/Sprite.flip_h = true
 	elif round(oldPos.x) < round(position.x):
