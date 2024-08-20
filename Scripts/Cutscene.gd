@@ -46,6 +46,7 @@ func _ready():
 			hole.connect("created_turnip", dripletSpawner, "set_spawning", [true], CONNECT_ONESHOT)
 	else:
 		uiManager.show_reticle()
+		uiManager.reticle.set_mode(0)
 
 func start_game():
 	uiManager.reticle.set_mode(0)
@@ -78,8 +79,6 @@ func bin_slide_in():
 func play_intro_cutscene():
 	global.tutorial = false
 	global.hungerMeter = 0
-	if get_tree().get_current_scene().has_node("FLYFLY"):
-		get_tree().get_current_scene().get_node("FLYFLY").play("fly")
 	$Tween.interpolate_property(monster, "position:y",
 		monster.position.y, monsterDropPosition, 1)
 	$Tween.start()
@@ -88,6 +87,8 @@ func play_intro_cutscene():
 	yield(get_tree().create_timer(0.8), "timeout")
 	bin.die()
 	audioManager.play_sfx(explodeSFX, "explosion")
+	if get_tree().get_current_scene().has_node("FLYFLY"):
+		get_tree().get_current_scene().get_node("FLYFLY").play("fly")
 	yield(get_tree().create_timer(2), "timeout")
 	monster.roar()
 	audioManager.play_sfx(screamSFX, "scream")
@@ -113,7 +114,17 @@ func play_inhale_cutscene():
 	yield(get_tree().create_timer(2), "timeout")
 	monster.inhale()
 	audioManager.play_sfx(screamSFX, "scream")
-	yield(get_tree().create_timer(2), "timeout")
+	yield(get_tree().create_timer(1), "timeout")
+	$Tween.interpolate_property(global.player, "global_position", 
+		global.player.global_position, monsterZoomPos, 1, 
+		Tween.TRANS_QUART, Tween.EASE_IN)
+	$Tween.interpolate_property(global.player, "scale", 
+		global.player.scale, Vector2(0,0), 1, 
+		Tween.TRANS_QUART, Tween.EASE_IN)
+	$Tween.start()
+	global.player.rotating = true
+	yield(get_tree().create_timer(1), "timeout")
+	global.player.hide()
 	global.currentCamera.update_offset(Vector2(0, 0), 1)
 	global.currentCamera.move_camera(monsterZoomPos.x, monsterZoomPos.y, 1)
 	global.currentCamera.zoom_in(1)

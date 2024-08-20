@@ -43,7 +43,8 @@ func set_tutorial_turnip(cutscene):
 
 func _physics_process(delta):
 	$Anchor/GrowSprite.flip_h = $Anchor/Sprite.flip_h
-	if size > 1:
+	$Anchor/GrowSprite.rotation = $Anchor/Sprite.rotation
+	if size > 1 and $Anchor/Sprite.frame - 4 >= 0:
 		$Anchor/GrowSprite.frame = $Anchor/Sprite.frame - 4
 	match state:
 		States.IDLE:

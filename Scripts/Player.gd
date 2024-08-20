@@ -21,7 +21,7 @@ var throwableDistance = 100
 var paused = false
 var carrying = false
 var state = States.MOVING
-
+var rotating = false
 
 onready var CarryPosition = $CarryPosition
 onready var DashTimer = $DashTimer
@@ -48,7 +48,11 @@ func _physics_process(delta):
 			move_state(delta)
 		States.DASHING:
 			dash_state(delta)
-		
+	if rotating:
+		$Sprite.rotation_degrees += 1000 * delta
+	if heldItem != null:
+		heldItem.scale = self.scale
+		heldItem.get_node("Anchor/Sprite").rotation = $Sprite.rotation
 
 func move_state(delta):
 	controls()

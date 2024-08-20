@@ -14,9 +14,12 @@ func _process(delta):
 func _input(event):
 	if event.is_action_pressed("left_click"):
 		if global.player != null and mode == 0 and visible:
-			var throwPosition = global_position + global.currentCamera.get_camera_screen_center() - global.winDim/2
+			var throwPosition = get_global_position()
 			global.player.throw(throwPosition)
 			print(throwPosition)
+
+func get_global_position():
+	return global_position + global.currentCamera.get_camera_screen_center() - global.winDim/2
 
 func set_mode(modeNum):
 	mode = modeNum

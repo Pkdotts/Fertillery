@@ -15,11 +15,6 @@ var tutorial = true
 var level = 1
 
 
-var music = {
-	"gameplay": "kevinthehonky (1).wav"
-}
-
-
 
 const randomFollowerOffset = 5
 const trailOffset = 10
@@ -35,7 +30,7 @@ var maxTurnipCount = 5
 
 const THRESHOLDADDER = 1
 const STARTTHRESHOLD = 1
-var nextThreshold = 25
+var nextThreshold = 1
 var turnipsEaten = 0
 var hungerMeter = 0
 var hungerSpeed = 1
@@ -171,8 +166,6 @@ func set_win_size(newSizeNum, fullscreen = false):
 			newPos.y = clamp(newPos.y, topLeft.y, bottomRight.y)
 			OS.set_window_size(newSize)
 			OS.set_window_position(newPos)
-
-	global.emit_signal("settings_changed")
 
 func change_scenes(scene):
 	uiManager.fading = true
