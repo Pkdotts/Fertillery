@@ -30,14 +30,14 @@ var maxDripCount = 10
 var turnipCount = 0
 var maxTurnipCount = 5
 
-const THRESHOLDADDER = 50
+const THRESHOLDADDER = 40
 const STARTTHRESHOLD = 25
 var nextThreshold = 25
 var turnipsEaten = 0
 var hungerMeter = 0
 var hungerSpeed = 1
 var maxHungerSpeed = 8
-var hungerIncrease = 0.07
+var hungerIncrease = 0.06
 
 var time = 0
 var timer = false
