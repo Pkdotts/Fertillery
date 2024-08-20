@@ -53,9 +53,14 @@ func start_game():
 	global.currentCamera.set_anchor(global.player)
 	global.player.unpause()
 	global.nextThreshold = global.STARTTHRESHOLD
-	if seedSpawner != null:
+	global.level = 1
+	if global.tutorialCompleted:
+		play_intro_cutscene()
+	else:
+		if seedSpawner != null:
 			yield(get_tree().create_timer(1),"timeout")
 			create_seed()
+		
 
 func create_seed():
 	if seedSpawner != null:
@@ -100,7 +105,7 @@ func play_intro_cutscene():
 	uiManager.create_HUD()
 	seedSpawner.tutorial = false
 	create_seed()
-	
+
 
 func play_inhale_cutscene():
 	if tutorial:
