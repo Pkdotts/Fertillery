@@ -112,6 +112,9 @@ func unpause_meter():
 	meterPaused = false
 
 func _physics_process(delta):
+	if OS.is_debug_build():
+		if Input.is_action_just_pressed("ui_end"):
+			global.change_scenes("res://Maps/gameOver.tscn")
 	if !uiManager.fading and !meterPaused and !tutorial:
 		if hungerMeter < 100:
 			if hungerMeter < 50:
