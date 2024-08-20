@@ -28,6 +28,10 @@ onready var screamSFX = preload("res://Audio/SFX/fiendroar.wav")
 onready var fallSFX = preload("res://Audio/SFX/fiendfallin.wav")
 onready var explodeSFX = preload("res://Audio/SFX/cratebreak.wav")
 
+func _process(delta):
+	if Input.is_action_just_pressed("ui_home") and OS.is_debug_build():
+		play_inhale_cutscene()
+
 func _ready():
 	global.connect("updateTurnipCounter", self, "check_threshold")
 	global.connect("gameOver", self, "play_game_over")
@@ -114,13 +118,9 @@ func play_inhale_cutscene():
 	global.currentCamera.zoom_in(1)
 	yield(get_tree().create_timer(1), "timeout")
 	global.change_scenes("res://Maps/" + nextMap + ".tscn")
+	global.level += 1
 	global.nextThreshold += global.THRESHOLDADDER
-	if global.level < 11:
-		monster.get_node("Sprite").set("shader_param/palette_out",load("res://Sprites/Palettes/pal" + var2str(global.level+1) +".png"))
-	else:
-		var rng = RandomNumberGenerator.new()
-		rng.randomize()
-		monster.get_node("Sprite").set("shader_param/palette_out",load("res://Sprites/Palettes/pal" + var2str(rng.randi_range(1,11)) +".png"))
+	
 
 func play_game_over():
 	audioManager.stop_game_music()

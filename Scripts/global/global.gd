@@ -12,6 +12,7 @@ var player = null
 var currentCamera = null
 var highScore = 0
 var tutorial = true
+var level = 1
 
 
 var music = {
