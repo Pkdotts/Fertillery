@@ -10,7 +10,7 @@ func _ready():
 	$AnimationPlayer.play("Idle")
 	if global.level < 11:
 		
-		$Sprite.material.set_shader_param("palette_out",load("res://Sprites/Palettes/pal" + var2str(global.level+1) +".png"))
+		$Sprite.material.set_shader_param("palette_out",load("res://Sprites/Palettes/pal" + var2str(global.level) +".png"))
 	else:
 		var rng = RandomNumberGenerator.new()
 		rng.randomize()
