@@ -41,6 +41,22 @@ var timer = false
 
 var meterPaused = true
 
+onready var fiendTex = [
+	preload("res://Sprites/Fiend/monster1.png"),
+	preload("res://Sprites/Fiend/monster2.png"),
+	preload("res://Sprites/Fiend/monster3.png"),
+	preload("res://Sprites/Fiend/monster4.png"),
+	preload("res://Sprites/Fiend/monster5.png"),
+	preload("res://Sprites/Fiend/monster6.png"),
+	preload("res://Sprites/Fiend/monster7.png"),
+	preload("res://Sprites/Fiend/monster8.png"),
+	preload("res://Sprites/Fiend/monster9.png"),
+	preload("res://Sprites/Fiend/monster10.png"),
+	preload("res://Sprites/Fiend/monster11.png")
+]
+
+
+
 func _ready():
 	trailPositions.resize(trailSize)
 	increase_win_size(2)

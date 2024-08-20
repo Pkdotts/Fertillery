@@ -8,13 +8,13 @@ onready var cameraZoomPos = $CameraZoom
 
 func _ready():
 	$AnimationPlayer.play("Idle")
-	#if global.level < 11:
-	#	
-	#	$Sprite.material.set_shader_param("palette_out",load("res://Sprites/Palettes/pal" + var2str(global.level) +".png"))
-	#else:
-	#	var rng = RandomNumberGenerator.new()
-	#	rng.randomize()
-	#	$Sprite.material.set_shader_param("palette_out",load("res://Sprites/Palettes/pal" + var2str(rng.randi_range(1,11)) +".png"))
+	if global.level < 11:
+		
+		$Sprite.texture = global.fiendTex[global.level]
+	else:
+		var rng = RandomNumberGenerator.new()
+		rng.randomize()
+		$Sprite.texture = global.fiendTex[rng.randi_range(1,11)]
 
 
 func inhale():
