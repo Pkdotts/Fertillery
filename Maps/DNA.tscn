@@ -133,6 +133,7 @@ position = Vector2( -792, 8 )
 
 [node name="Camera" parent="." instance=ExtResource( 2 )]
 position = Vector2( -816, 32 )
+current = false
 anchor_path = NodePath("../Objects/Player")
 
 [node name="camarea" parent="." instance=ExtResource( 8 )]

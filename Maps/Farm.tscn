@@ -91,7 +91,7 @@ position = Vector2( 208, 240 )
 position = Vector2( 240, 280 )
 
 [node name="SeedSpawner" parent="Objects" instance=ExtResource( 11 )]
-position = Vector2( 272, 264 )
+position = Vector2( 208, 272 )
 
 [node name="Turnip" parent="Objects" instance=ExtResource( 5 )]
 material = SubResource( 11 )
