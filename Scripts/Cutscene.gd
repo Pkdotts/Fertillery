@@ -92,6 +92,7 @@ func play_intro_cutscene():
 	yield(get_tree().create_timer(0.8), "timeout")
 	bin.die()
 	audioManager.play_sfx(explodeSFX, "explosion")
+	global.currentCamera.shake_camera(5.0, 0.4, Vector2(0, 1))
 	if get_tree().get_current_scene().has_node("FLYFLY"):
 		get_tree().get_current_scene().get_node("FLYFLY").play("fly")
 	yield(get_tree().create_timer(2), "timeout")
