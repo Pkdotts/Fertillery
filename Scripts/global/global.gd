@@ -28,12 +28,12 @@ var maxDripCount = 10
 var turnipCount = 0
 var maxTurnipCount = 5
 
-const THRESHOLDADDER = 40
-const STARTTHRESHOLD = 25
-var nextThreshold = 25
+const THRESHOLDADDER = 1
+const STARTTHRESHOLD = 1
+var nextThreshold = 1
 var turnipsEaten = 0
 var hungerMeter = 0
-var hungerSpeed = 1
+var hungerSpeed = 8
 var maxHungerSpeed = 8
 var hungerIncrease = 0.06
 
@@ -133,6 +133,8 @@ func get_time():
 func _input(event):
 	if event.is_action_pressed("ui_winsize"):
 		increase_win_size(1)
+	if event.is_action_pressed("ui_fullscreen"):
+		set_win_size(winSize, !OS.window_fullscreen)
 
 func increase_win_size(amount):
 	var newWinSize = winSize + amount
@@ -210,6 +212,5 @@ func change_scenes(scene):
 	#	uiManager.create_HUD()
 	#else:
 	#	uiManager.erase_HUD()
-	unpause_meter()
 	
 	uiManager.fading = false

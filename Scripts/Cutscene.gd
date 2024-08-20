@@ -47,13 +47,16 @@ func _ready():
 	else:
 		uiManager.show_reticle()
 		uiManager.reticle.set_mode(0)
+		global.unpause_meter()
 
 func start_game():
 	uiManager.reticle.set_mode(0)
 	global.currentCamera.set_anchor(global.player)
 	global.player.unpause()
 	global.nextThreshold = global.STARTTHRESHOLD
+	global.turnipsEaten = 0
 	global.level = 1
+	
 	if global.tutorialCompleted:
 		play_intro_cutscene()
 	else:
@@ -149,9 +152,11 @@ func play_game_over():
 	global.currentCamera.set_anchor(null)
 	global.currentCamera.move_camera(monsterZoomPos.x + monsterAnchorXOffset, monsterZoomPos.y, 0.5)
 	global.pause_meter()
-	yield(get_tree().create_timer(2), "timeout")
+	yield(get_tree().create_timer(1), "timeout")
 	monster.roar()
 	audioManager.play_sfx(screamSFX, "scream")
+	global.currentCamera.shake_camera(5.0, 10, Vector2(0, 1))
+	yield(get_tree().create_timer(5), "timeout")
 	uiManager.erase_HUD()
 	global.change_scenes("res://Maps/gameOver.tscn")
 	global.hungerMeter = 0
