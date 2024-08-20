@@ -23,6 +23,7 @@ func set_attached_seed(newSeed):
 func start_creating():
 	if $AnimationPlayer.is_playing():
 		yield($AnimationPlayer, "animation_finished")
+	$AnimationPlayer.stop()
 	$AnimationPlayer.play("Spawn")
 
 func create_seed():

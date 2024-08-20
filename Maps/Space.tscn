@@ -72,7 +72,7 @@ shader_param/glow_modifier = 0.0
 extents = Vector2( 576.5, 212 )
 
 [sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 46, 38 )
+extents = Vector2( 38, 38 )
 
 [sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 54, 42 )
@@ -142,7 +142,7 @@ shape = SubResource( 13 )
 [node name="Objects" type="YSort" parent="."]
 
 [node name="Player" parent="Objects" instance=ExtResource( 1 )]
-position = Vector2( -624, 160 )
+position = Vector2( -624, 168 )
 
 [node name="Turnip" parent="Objects" instance=ExtResource( 4 )]
 material = SubResource( 12 )
@@ -166,31 +166,30 @@ position = Vector2( -344, 120 )
 position = Vector2( -136, 208 )
 
 [node name="SeedSpawner" parent="Objects" instance=ExtResource( 12 )]
-position = Vector2( -696, 184 )
+position = Vector2( -696, 192 )
 scale = Vector2( -1, 1 )
 attachedSeedPath = NodePath("../Fertilizer")
 
 [node name="Fertilizer" parent="Objects" instance=ExtResource( 5 )]
-position = Vector2( -664, 200 )
+position = Vector2( -664, 208 )
 
 [node name="SeedSpawner2" parent="Objects" instance=ExtResource( 12 )]
-position = Vector2( -624, 96 )
-levelAppear = 13
+position = Vector2( -624, 104 )
 attachedSeedPath = NodePath("../Fertilizer2")
 
 [node name="Fertilizer2" parent="Objects" instance=ExtResource( 5 )]
-position = Vector2( -656, 112 )
+position = Vector2( -656, 120 )
 
 [node name="SeedSpawner3" parent="Objects" instance=ExtResource( 12 )]
-position = Vector2( -552, 184 )
+position = Vector2( -552, 192 )
 levelAppear = 7
 attachedSeedPath = NodePath("../Fertilizer3")
 
 [node name="Fertilizer3" parent="Objects" instance=ExtResource( 5 )]
-position = Vector2( -584, 200 )
+position = Vector2( -584, 208 )
 
 [node name="Camera" parent="." instance=ExtResource( 2 )]
-position = Vector2( -624, 160 )
+position = Vector2( -624, 168 )
 anchor_path = NodePath("../Objects/Player")
 
 [node name="camarea" parent="." instance=ExtResource( 8 )]
@@ -209,7 +208,7 @@ turnipParentPath = NodePath("../../Objects")
 enabled = true
 
 [node name="CollisionShape2D" parent="HoleGenerators/HoleGenerator3" index="0"]
-position = Vector2( -78, 24 )
+position = Vector2( -86, 24 )
 shape = SubResource( 11 )
 
 [node name="HoleGenerator6" parent="HoleGenerators" instance=ExtResource( 3 )]
@@ -219,7 +218,7 @@ turnipParentPath = NodePath("../../Objects")
 enabled = true
 
 [node name="CollisionShape2D" parent="HoleGenerators/HoleGenerator6" index="0"]
-position = Vector2( 132, 18 )
+position = Vector2( 160, 16 )
 shape = SubResource( 11 )
 
 [node name="HoleGenerator4" parent="HoleGenerators" instance=ExtResource( 3 )]
@@ -249,7 +248,7 @@ turnipParentPath = NodePath("../../Objects")
 enabled = true
 
 [node name="CollisionShape2D" parent="HoleGenerators/HoleGenerator2" index="0"]
-position = Vector2( -40, 68 )
+position = Vector2( -15, 88 )
 shape = SubResource( 16 )
 
 [node name="Collisions" type="Node2D" parent="."]

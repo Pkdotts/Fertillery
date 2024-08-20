@@ -71,13 +71,13 @@ extents = Vector2( 24, 68 )
 extents = Vector2( 480.5, 212 )
 
 [sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 68, 52 )
+extents = Vector2( 48, 32 )
 
 [sub_resource type="RectangleShape2D" id=14]
-extents = Vector2( 90, 32 )
+extents = Vector2( 58, 32 )
 
 [sub_resource type="RectangleShape2D" id=15]
-extents = Vector2( 108, 40 )
+extents = Vector2( 100, 40 )
 
 [sub_resource type="RectangleShape2D" id=16]
 extents = Vector2( 72, 44 )
@@ -184,7 +184,7 @@ position = Vector2( -432, 240 )
 position = Vector2( -136, 208 )
 
 [node name="SeedSpawner" parent="Objects" instance=ExtResource( 12 )]
-position = Vector2( -336, 80 )
+position = Vector2( -336, 96 )
 scale = Vector2( -1, 1 )
 attachedSeedPath = NodePath("../Fertilizer")
 
@@ -200,7 +200,7 @@ levelAppear = 12
 attachedSeedPath = NodePath("../Fertilizer3")
 
 [node name="Fertilizer" parent="Objects" instance=ExtResource( 4 )]
-position = Vector2( -304, 96 )
+position = Vector2( -304, 112 )
 
 [node name="Fertilizer2" parent="Objects" instance=ExtResource( 4 )]
 position = Vector2( -584, 168 )
@@ -228,7 +228,7 @@ turnipParentPath = NodePath("../../Objects")
 enabled = true
 
 [node name="CollisionShape2D" parent="HoleGenerators/HoleGenerator3" index="0"]
-position = Vector2( -52, 36 )
+position = Vector2( -72, 16 )
 shape = SubResource( 11 )
 
 [node name="HoleGenerator4" parent="HoleGenerators" instance=ExtResource( 3 )]
@@ -238,7 +238,7 @@ turnipParentPath = NodePath("../../Objects")
 enabled = true
 
 [node name="CollisionShape2D" parent="HoleGenerators/HoleGenerator4" index="0"]
-position = Vector2( 30, -16 )
+position = Vector2( -2, -16 )
 shape = SubResource( 14 )
 
 [node name="HoleGenerator5" parent="HoleGenerators" instance=ExtResource( 3 )]
@@ -248,7 +248,7 @@ turnipParentPath = NodePath("../../Objects")
 enabled = true
 
 [node name="CollisionShape2D" parent="HoleGenerators/HoleGenerator5" index="0"]
-position = Vector2( -76, 32 )
+position = Vector2( -84, 32 )
 shape = SubResource( 15 )
 
 [node name="HoleGenerator2" parent="HoleGenerators" instance=ExtResource( 3 )]

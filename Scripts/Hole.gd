@@ -49,9 +49,11 @@ func close():
 func open():
 	if global.turnipCount >= global.maxTurnipCount:
 		yield(global, "removedTurnip")
-		
-	opened = true
-	$AnimationPlayer.play("Open")
+	if global.turnipCount >= global.maxTurnipCount:
+		open()
+	else:
+		opened = true
+		$AnimationPlayer.play("Open")
 	
 func set_wait_time(wait):
 	wait_time = wait
