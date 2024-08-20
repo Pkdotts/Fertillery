@@ -35,8 +35,9 @@ const STARTTHRESHOLD = 25
 var nextThreshold = 25
 var turnipsEaten = 0
 var hungerMeter = 0
-var hungerSpeed = 1
-var maxHungerSpeed = 50
+var hungerSpeed = 8
+var maxHungerSpeed = 8
+var hungerIncrease = 0.07
 
 var time = 0
 var timer = false
@@ -94,7 +95,7 @@ func reset_turnip_count():
 	turnipCount = 0
 
 func increase_difficulty(amount):
-	increase_hunger_speed(0.1*amount)
+	increase_hunger_speed(hungerIncrease*amount)
 
 func pause_meter():
 	meterPaused = true

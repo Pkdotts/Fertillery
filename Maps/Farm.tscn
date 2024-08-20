@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Nodes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Nodes/Camera.tscn" type="PackedScene" id=2]
@@ -11,7 +11,6 @@
 [ext_resource path="res://Sprites/Maps/stage1.png" type="Texture" id=9]
 [ext_resource path="res://Nodes/Cutscene.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Nodes/SeedSpawner.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Nodes/Fire.tscn" type="PackedScene" id=12]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -34,30 +33,6 @@ resource_local_to_scene = true
 shader = SubResource( 1 )
 shader_param/flash_color = Color( 1, 1, 1, 1 )
 shader_param/glow_color = Color( 0.929412, 0.956863, 0.854902, 1 )
-shader_param/flash_modifier = 0.0
-shader_param/glow_modifier = 0.0
-
-[sub_resource type="Shader" id=13]
-code = "shader_type canvas_item;
-
-uniform vec4 flash_color : hint_color = vec4(1.0);
-uniform vec4 glow_color : hint_color = vec4(1.0);
-uniform float flash_modifier : hint_range(0.0, 1.0) = 0.0;
-uniform float glow_modifier : hint_range(0.0, 1.0) = 0.0;
-
-void fragment() {
-	vec4 color = texture(TEXTURE, UV);
-	color.rgb = color.rgb + glow_color.rgb * glow_modifier;
-	color.rgb = mix(color.rgb, flash_color.rgb, flash_modifier);
-	COLOR = color;
-}
-"
-
-[sub_resource type="ShaderMaterial" id=14]
-resource_local_to_scene = true
-shader = SubResource( 13 )
-shader_param/flash_color = Color( 1, 1, 1, 1 )
-shader_param/glow_color = Color( 1, 1, 1, 1 )
 shader_param/flash_modifier = 0.0
 shader_param/glow_modifier = 0.0
 
@@ -121,10 +96,6 @@ position = Vector2( 272, 264 )
 [node name="Turnip" parent="Objects" instance=ExtResource( 5 )]
 material = SubResource( 11 )
 position = Vector2( -16, 304 )
-
-[node name="Fire" parent="Objects" instance=ExtResource( 12 )]
-material = SubResource( 14 )
-position = Vector2( -67, 363 )
 
 [node name="Camera" parent="." instance=ExtResource( 2 )]
 position = Vector2( 208, 240 )

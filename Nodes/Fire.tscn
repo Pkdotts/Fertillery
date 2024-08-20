@@ -260,10 +260,10 @@ extents = Vector2( 18.5, 11 )
 radius = 110.018
 
 [sub_resource type="CircleShape2D" id=27]
-radius = 58.0
+radius = 78.4092
 
 [sub_resource type="CircleShape2D" id=28]
-radius = 137.0
+radius = 126.254
 
 [node name="Fire" type="KinematicBody2D"]
 material = SubResource( 29 )

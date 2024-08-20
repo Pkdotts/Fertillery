@@ -14,7 +14,7 @@
 [ext_resource path="res://Nodes/SeedSpawner.tscn" type="PackedScene" id=12]
 
 [sub_resource type="RectangleShape2D" id=13]
-extents = Vector2( 392, 112 )
+extents = Vector2( 392, 172 )
 
 [sub_resource type="Shader" id=9]
 code = "shader_type canvas_item;
@@ -100,7 +100,7 @@ seedSpawnerPath = NodePath("../Objects/SeedSpawner")
 newParentPath = NodePath("../Objects")
 
 [node name="CollisionShape2D" parent="DripletSpawner" index="1"]
-position = Vector2( -528, 48 )
+position = Vector2( -528, 108 )
 shape = SubResource( 13 )
 
 [node name="Objects" type="YSort" parent="."]
