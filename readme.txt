@@ -22,14 +22,15 @@ image sources
 https://commons.wikimedia.org/wiki/File:Farm_in_Brighton_Marathon_County_Wisconsin.jpg
 https://commons.wikimedia.org/wiki/File:Nuclear.power.plant.Dukovany.jpg
 https://commons.wikimedia.org/wiki/File:The_WilPhoenix_Offshore_Oil_Rig_(43258021631).jpg
-https://commons.wikimedia.org/wiki/File:Oil_platform_P-51_(Brazil).jpg
 https://commons.wikimedia.org/wiki/File:Mt._Oberlin_vista.jpg
-https://commons.wikimedia.org/wiki/File:Rig_Attaka_by_bloesafir_-_panoramio_-_Bloesafir_Pamanjagau_(1).jpg
 https://commons.wikimedia.org/wiki/File:Harrington_Sewage_Treatment_Plant_003.jpg
 https://commons.wikimedia.org/wiki/File:Beef_cattle_farm,_Rockingham_County_03.jpg
 https://commons.wikimedia.org/wiki/File:Mark_Twain_MET_ap17.96.jpg
 
-all images linked are licensed under the public domain
+all images linked above are licensed under the public domain
+
+https://commons.wikimedia.org/wiki/File:Rig_Attaka_by_bloesafir_-_panoramio_-_Bloesafir_Pamanjagau_(1).jpg - Bloesafir Pamanjagau (https://creativecommons.org/licenses/by/3.0/deed.en)
+https://commons.wikimedia.org/wiki/File:Oil_platform_P-51_(Brazil).jpg -  Agência Brasil (https://creativecommons.org/licenses/by/3.0/br/deed.en)
 
 
 
