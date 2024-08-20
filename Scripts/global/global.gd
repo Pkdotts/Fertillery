@@ -33,8 +33,8 @@ var maxDripCount = 10
 var turnipCount = 0
 var maxTurnipCount = 5
 
-const THRESHOLDADDER = 40
-const STARTTHRESHOLD = 25
+const THRESHOLDADDER = 1
+const STARTTHRESHOLD = 1
 var nextThreshold = 25
 var turnipsEaten = 0
 var hungerMeter = 0
@@ -184,6 +184,7 @@ func change_scenes(scene):
 	get_tree().change_scene(scene)
 	hungerMeter = 0
 	reset_driplets()
+	reset_turnip_count()
 	uiManager.fade_out(0.3)
 	yield(uiManager.transition, "transition_finished")
 	#if !get_tree().get_current_scene() is Control and get_tree().get_current_scene :

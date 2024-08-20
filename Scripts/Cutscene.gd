@@ -36,6 +36,7 @@ func _ready():
 	global.connect("updateTurnipCounter", self, "check_threshold")
 	global.connect("gameOver", self, "play_game_over")
 	if tutorial:
+		seedSpawner.tutorial = true
 		global.player.pause()
 		audioManager.play_ambiance_music()
 		if bin != null:
@@ -96,8 +97,8 @@ func play_intro_cutscene():
 	global.start_timer()
 	audioManager.play_game_music()
 	uiManager.create_HUD()
+	seedSpawner.tutorial = false
 	create_seed()
-	hole.set_seed_spawner(seedSpawner)
 	
 
 func play_inhale_cutscene():

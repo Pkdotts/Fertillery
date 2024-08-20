@@ -15,7 +15,6 @@ onready var timer = $Timer
 var turnipNode = preload("res://Nodes/Turnip.tscn")
 var opened = false
 
-var seedSpawner = null
 
 onready var plantSFX = preload("res://Audio/SFX/plant.wav")
 onready var turnipGrowSFX = preload("res://Audio/SFX/sprout.wav")
@@ -26,9 +25,6 @@ func _ready():
 	open()
 	if wait_time != 0:
 		$Timer.wait_time = wait_time
-
-func set_seed_spawner(elefun):
-	seedSpawner = elefun
 
 func create_turnip():
 	close()
@@ -70,8 +66,6 @@ func _on_Area2D_area_entered(area):
 		$AnimationPlayer.play("GrowSprout")
 		$AudioStreamPlayer.stream = plantSFX
 		$AudioStreamPlayer.play()
-		if seedSpawner != null:
-			seedSpawner.start_creating()
 
 func _on_Absorber_area_entered(area):
 	var parent = area.get_parent().get_parent()

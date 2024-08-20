@@ -113,7 +113,6 @@ shape = SubResource( 13 )
 position = Vector2( -544, 80 )
 newParentPath = NodePath("../../BG")
 turnipParentPath = NodePath("../../Objects")
-seedSpawnerPath = NodePath("../../Objects/SeedSpawner")
 enabled = true
 
 [node name="CollisionShape2D" parent="HoleGenerators/HoleGenerator3" index="0"]
@@ -124,7 +123,6 @@ shape = SubResource( 11 )
 position = Vector2( -64, 224 )
 newParentPath = NodePath("../../BG")
 turnipParentPath = NodePath("../../Objects")
-seedSpawnerPath = NodePath("../../Objects/SeedSpawner")
 enabled = true
 
 [node name="CollisionShape2D" parent="HoleGenerators/HoleGenerator4" index="0"]
@@ -135,7 +133,6 @@ shape = SubResource( 14 )
 position = Vector2( -288, 128 )
 newParentPath = NodePath("../../BG")
 turnipParentPath = NodePath("../../Objects")
-seedSpawnerPath = NodePath("../../Objects/SeedSpawner")
 enabled = true
 
 [node name="CollisionShape2D" parent="HoleGenerators/HoleGenerator6" index="0"]
@@ -146,7 +143,6 @@ shape = SubResource( 17 )
 position = Vector2( -688, 200 )
 newParentPath = NodePath("../../BG")
 turnipParentPath = NodePath("../../Objects")
-seedSpawnerPath = NodePath("../../Objects/SeedSpawner")
 enabled = true
 
 [node name="CollisionShape2D" parent="HoleGenerators/HoleGenerator5" index="0"]
@@ -157,7 +153,6 @@ shape = SubResource( 15 )
 position = Vector2( -392, 200 )
 newParentPath = NodePath("../../BG")
 turnipParentPath = NodePath("../../Objects")
-seedSpawnerPath = NodePath("../../Objects/SeedSpawner")
 enabled = true
 
 [node name="CollisionShape2D" parent="HoleGenerators/HoleGenerator2" index="0"]
@@ -188,9 +183,26 @@ position = Vector2( -136, 208 )
 
 [node name="SeedSpawner" parent="Objects" instance=ExtResource( 12 )]
 position = Vector2( -680, 80 )
+attachedSeedPath = NodePath("../Fertilizer")
 
 [node name="Fertilizer" parent="Objects" instance=ExtResource( 5 )]
 position = Vector2( -712, 96 )
+
+[node name="SeedSpawner2" parent="Objects" instance=ExtResource( 12 )]
+position = Vector2( -248, 200 )
+levelAppear = 13
+attachedSeedPath = NodePath("../Fertilizer2")
+
+[node name="Fertilizer2" parent="Objects" instance=ExtResource( 5 )]
+position = Vector2( -280, 216 )
+
+[node name="SeedSpawner3" parent="Objects" instance=ExtResource( 12 )]
+position = Vector2( -456, 136 )
+levelAppear = 7
+attachedSeedPath = NodePath("../Fertilizer3")
+
+[node name="Fertilizer3" parent="Objects" instance=ExtResource( 5 )]
+position = Vector2( -488, 152 )
 
 [node name="Camera" parent="." instance=ExtResource( 2 )]
 position = Vector2( -768, 104 )
