@@ -7,57 +7,49 @@ const SLOWTIME = 0.3
 const FASTTIME = 0.1
 
 func get_just_pressed_up() -> bool:
-	if Input.is_action_just_pressed("ui_up") \
-	or Input.is_action_just_pressed("ui_lstick_up"):
+	if Input.is_action_just_pressed("ui_up"):
 		return true
 	else:
 		return false
 
 func get_just_pressed_down() -> bool:
-	if Input.is_action_just_pressed("ui_down") \
-	or Input.is_action_just_pressed("ui_lstick_down"):
+	if Input.is_action_just_pressed("ui_down"):
 		return true
 	else:
 		return false
 
 func get_just_pressed_left() -> bool:
-	if Input.is_action_just_pressed("ui_left") \
-	or Input.is_action_just_pressed("ui_lstick_left"):
+	if Input.is_action_just_pressed("ui_left"):
 		return true
 	else:
 		return false
 
 func get_just_pressed_right() -> bool:
-	if Input.is_action_just_pressed("ui_right") \
-	or Input.is_action_just_pressed("ui_lstick_right"):
+	if Input.is_action_just_pressed("ui_right"):
 		return true
 	else:
 		return false
 
 func get_just_released_up() -> bool:
-	if Input.is_action_just_released("ui_up") \
-	or Input.is_action_just_released("ui_lstick_up"):
+	if Input.is_action_just_released("ui_up"):
 		return true
 	else:
 		return false
 
 func get_just_released_down() -> bool:
-	if Input.is_action_just_released("ui_down") \
-	or Input.is_action_just_released("ui_lstick_down"):
+	if Input.is_action_just_released("ui_down"):
 		return true
 	else:
 		return false
 
 func get_just_released_left() -> bool:
-	if Input.is_action_just_released("ui_left") \
-	or Input.is_action_just_released("ui_lstick_left"):
+	if Input.is_action_just_released("ui_left"):
 		return true
 	else:
 		return false
 
 func get_just_released_right() -> bool:
-	if Input.is_action_just_released("ui_right") \
-	or Input.is_action_just_released("ui_lstick_right"):
+	if Input.is_action_just_released("ui_right"):
 		return true
 	else:
 		return false
@@ -106,7 +98,6 @@ func get_controls_vector(discontinued = false) -> Vector2: #use discontinued for
 	
 	#get the direction from all direction input types
 	inputVector = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	inputVector += Input.get_vector("ui_lstick_left", "ui_lstick_right", "ui_lstick_up", "ui_lstick_down")
 	#reduce to unit vectors
 	inputVector = get_vector_sign(inputVector)
 	
@@ -130,11 +121,7 @@ func get_vector_sign(vector2, threshold = 0) -> Vector2:
 	return vector
 
 func consume_all_directions():
-	for a in ["ui_up", "ui_down", "ui_left", "ui_right",\
-	"ui key_up", "ui_key_down", "ui_key_left", "ui_key_right",\
-	"ui_dpad_up", "ui_dpad_down", "ui_dpad_left", "ui_dpad_right",\
-	"ui_lstick_up", "ui_lstick_down", "ui_lstick_left", "ui_lstick_right",\
-	"ui_lstick_up", "ui_lstick_down", "ui_lstick_left", "ui_lstick_right"]:
+	for a in ["ui_up", "ui_down", "ui_left", "ui_right"]:
 		Input.action_release(a)
 	get_tree().set_input_as_handled()
 
