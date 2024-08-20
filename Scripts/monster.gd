@@ -10,7 +10,7 @@ func _ready():
 	$AnimationPlayer.play("Idle")
 	if global.level < 11:
 		
-		$Sprite.texture = global.fiendTex[global.level]
+		$Sprite.texture = global.fiendTex[global.level-1]
 	else:
 		var rng = RandomNumberGenerator.new()
 		rng.randomize()
