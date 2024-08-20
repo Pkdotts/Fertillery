@@ -42,6 +42,8 @@ func create_turnip():
 		if cutscene != null:
 			turnip.set_tutorial_turnip(cutscene)
 			cutscene = null
+		yield(get_tree(), "idle_frame")
+		turnip.spawn()
 		emit_signal("created_turnip")
 
 func close():

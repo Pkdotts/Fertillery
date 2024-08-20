@@ -310,8 +310,9 @@ func hurt():
 		size -= 1
 		speed = round(150 / (1 + (size - 1) * 0.5))
 	
-
-
+func spawn():
+	set_state(States.THROWN)
+	jump_to(global_position, 0.3, -10, 0)
 
 #func _on_FleeArea_body_exited(body):
 #	if runningFrom.has(body):
