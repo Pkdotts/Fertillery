@@ -168,6 +168,8 @@ func set_win_size(newSizeNum, fullscreen = false):
 			OS.set_window_position(newPos)
 
 func change_scenes(scene):
+	
+	
 	uiManager.fading = true
 	if uiManager.transition != null:
 		uiManager.transition.queue_free()
@@ -175,6 +177,22 @@ func change_scenes(scene):
 	uiManager.fade_in(0.3)
 	yield(uiManager.transition, "transition_finished")
 	get_tree().change_scene(scene)
+	
+	var colors = [Color(1, 0, 0, 0.486275),
+		  Color(0, 1, 0, 0.270588),
+		  Color(1, 0.235294, 0, 0.396078),
+		  Color(0.12549, 0, 1, 0.301961),
+		  Color(0, 1, 0.929412, 0.25098),
+		  Color(1, 0.901961, 0.45098, 0.333333)]
+	
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	if level > 5:
+		if get_tree().get_current_scene().has_node("BG"):
+			if get_tree().get_current_scene().get_node("BG").get_node("BG").has_node("ColorRect"):
+				get_tree().get_current_scene().get_node("BG").get_node("BG").get_node("ColorRect").show()
+				get_tree().get_current_scene().get_node("BG").get_node("BG").get_node("ColorRect").color = colors[rng.randi() % colors.size()]
+	
 	hungerMeter = 0
 	reset_driplets()
 	reset_turnip_count()
