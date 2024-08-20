@@ -169,7 +169,7 @@ func set_win_size(newSizeNum, fullscreen = false):
 			OS.set_window_size(newSize)
 			OS.set_window_position(newPos)
 
-func change_scenes(scene):
+func change_scenes(scene,speed=1):
 	
 	var colors = [Color(1, 0, 0, 0.486275),
 		  Color(0, 1, 0, 0.270588),
@@ -182,7 +182,7 @@ func change_scenes(scene):
 	if uiManager.transition != null:
 		uiManager.transition.queue_free()
 		uiManager.transition = null
-	uiManager.fade_in(0.3)
+	uiManager.fade_in(speed)
 	yield(uiManager.transition, "transition_finished")
 	get_tree().change_scene(scene)
 	
