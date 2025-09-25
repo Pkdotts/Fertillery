@@ -6,9 +6,16 @@ About 2 miles east of Sawtell Peak, Idaho, locals like to tell each other storie
 A game made in Godot 3 for the GMTK 2024 Game Jam under 4 days.
 
 ## How to Play
-You are a STOCKY FARMER. Use WASD to move. You can grab/dash to pick items up using SHIFT, RIGHT CLICK, or the SPACEBAR, and toss them towards your reticle using LEFT CLICK. When the game begins, THE DEVICE will dispense FERTILLERY SEEDS. When FERTILLERY SEEDS are thrown into holes in the ground, a small CHURNIP will sprout approximately 2 seconds later. Periodically, DRIPLETS will fall from the sky and follow you in droves. Toss them on top of CHURNIPS to grow them up to 5 times or prematurely sprout them from the soil. The goal of the game is to keep the ever-present FIEND on stage right fed before it gets tired of you and turns the planet into its next chew toy. 
-fullscreen with f5
-maximize window with f4
+You are a STOCKY FARMER. Use WASD to move. 
+You can grab/dash to pick items up using SHIFT, RIGHT CLICK, or the SPACEBAR, and toss them towards your reticle using LEFT CLICK. 
+When the game begins, THE DEVICE will dispense FERTILLERY SEEDS. 
+When FERTILLERY SEEDS are thrown into holes in the ground, a small CHURNIP will sprout approximately 2 seconds later. 
+Periodically, DRIPLETS will fall from the sky and follow you in droves. 
+Toss them on top of CHURNIPS to grow them up to 5 times or prematurely sprout them from the soil. 
+The goal of the game is to keep the ever-present FIEND on stage right fed before it gets tired of you and turns the planet into its next chew toy. 
+
+Fullscreen with F5
+Maximize window with F4
 
 ## Credits
 Pkdotts - Game Design, Programming, Pixel Art
