@@ -2,6 +2,8 @@
 
 About 2 miles east of Sawtell Peak, Idaho, locals like to tell each other stories about a nameless fiend with a labyrinthian circulatory system. Of course, you'd only know this to be true if it deemed you worthy of keeping it satiated. Rumors say it's recently grown a violent taste for Churnips. Naturally, *someone* needs to answer the call.
 
+[PLAY HERE](https://pkdotts.itch.io/fertillery)
+
 ## About
 A game made in Godot 3 for the GMTK 2024 Game Jam under 4 days.
 
